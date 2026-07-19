@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" class="custom-scrollbar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stay Planner & Location Map | NS Luxury Villa Ho, Ghana</title>
+  <link rel="stylesheet" href="./src/style.css">
+</head>
+<body class="bg-luxury-dark text-luxury-cream antialiased selection:bg-luxury-gold selection:text-luxury-dark">
+
+  <!-- Header Placeholder -->
+  <header id="main-header"></header>
+
+  <!-- Title Segment -->
+  <section class="pt-36 pb-12 relative overflow-hidden bg-gradient-to-b from-luxury-accent/30 to-transparent">
+    <div class="max-w-7xl mx-auto px-6 text-center flex flex-col items-center gap-4 relative z-10">
+      <div class="flex items-center gap-3">
+        <span class="w-8 h-[1px] bg-luxury-gold"></span>
+        <span class="text-xs uppercase tracking-[0.25em] text-luxury-gold font-medium font-sans">Curated Invitations</span>
+        <span class="w-8 h-[1px] bg-luxury-gold"></span>
+      </div>
+      <h1 class="font-serif text-4xl md:text-6xl font-bold tracking-tight text-luxury-cream">Inquire & Navigate</h1>
+      <p class="text-xs md:text-sm text-luxury-soft/70 max-w-xl mt-2 leading-relaxed">
+        Map your journey to our gated compound in Ho, Volta Region, Ghana. Use our interactive staying planner below to prepare a customized invitation request directly to our concierge.
+      </p>
+    </div>
+  </section>
+
+  <!-- Split Map & Contact Cards -->
+  <section class="py-12 px-6 max-w-7xl mx-auto relative overflow-hidden">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+      <!-- Custom Artistic Local Map & Directions -->
+      <div class="lg:col-span-6 flex flex-col gap-6">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-[1px] bg-luxury-gold"></span>
+          <span class="text-xs uppercase tracking-luxury text-luxury-gold font-bold">Local Geographical Landmark</span>
+        </div>
+        <h2 class="font-serif text-2xl md:text-4xl font-bold text-luxury-cream leading-tight">The Road to Absolute Serenity</h2>
+        <p class="text-xs text-luxury-soft/80 leading-relaxed">
+          NS Luxury Villa is nestled in the tranquil center of **Ho, Volta Region, Ghana**. To guarantee smooth directions and total security, we utilize the local **DVLA District Office in Ho** as a key navigational landmark. Once you arrive near the DVLA office, a short, secure private route takes you into our gated compound.
+        </p>
+
+        <!-- Artistic Vector Path Map -->
+        <div class="w-full bg-luxury-olive/30 border border-luxury-gold/25 p-5 rounded-sm relative aspect-[4/3] max-w-md mx-auto shadow-2xl">
+          <svg viewBox="0 0 400 300" class="w-full h-full text-luxury-soft/40">
+            <!-- Gentle surrounding contours -->
+            <path d="M 0 50 Q 100 120 200 70 T 400 120" stroke="#C5A880" stroke-width="0.5" fill="none" opacity="0.15" />
+            <path d="M 0 180 Q 120 250 250 170 T 400 240" stroke="#C5A880" stroke-width="0.5" fill="none" opacity="0.1" />
+
+            <!-- Main Ho - Kpando Highway -->
+            <path d="M 20 220 Q 180 200 380 180" stroke="#E6DFD3" stroke-width="2" fill="none" opacity="0.4" />
+            <text x="30" y="240" font-family="Inter" font-size="9" fill="#E6DFD3" opacity="0.5" transform="rotate(-6 30 240)">Ho Main Road</text>
+
+            <!-- Landmark: DVLA Ho -->
+            <g transform="translate(140, 195)">
+              <rect x="-45" y="-15" width="90" height="30" fill="#13281B" stroke="#C5A880" stroke-width="1" rx="2" />
+              <text x="0" y="3" font-family="Inter" font-size="9" fill="#FAF9F6" text-anchor="middle" font-weight="bold">DVLA HO OFFICE</text>
+            </g>
+
+            <!-- Private Pathway Thread -->
+            <path d="M 140 180 Q 180 120 260 100" stroke="#C5A880" stroke-width="2.5" fill="none" stroke-dasharray="4 4" class="animate-pulse" id="map-route-thread" />
+
+            <!-- Gated Compound: NS Luxury Villa -->
+            <g transform="translate(260, 100)">
+              <circle cx="0" cy="0" r="18" fill="#0A120D" stroke="#C5A880" stroke-width="1.5" />
+              <circle cx="0" cy="0" r="22" stroke="#C5A880" stroke-width="0.75" stroke-dasharray="3 3" />
+              <text x="0" y="3" font-family="Playfair Display" font-size="10" fill="#C5A880" text-anchor="middle" font-weight="bold">✦ NS</text>
+            </g>
+            <text x="260" y="140" font-family="Playfair Display" font-size="11" fill="#FAF9F6" text-anchor="middle" font-weight="bold">NS Luxury Villa</text>
+            <text x="260" y="152" font-family="Inter" font-size="8" fill="#C5A880" text-anchor="middle" opacity="0.8">Gated Compound</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Live Stay Booking & Inquiry Form (WhatsApp Receipt Generator) -->
+      <div class="lg:col-span-6 flex flex-col">
+        <div id="planner-card" class="bg-luxury-olive/30 border border-luxury-gold/20 p-8 rounded-sm shadow-2xl flex flex-col gap-6 relative">
+          <div class="flex flex-col gap-1.5">
+            <span class="text-[9px] uppercase tracking-[0.25em] text-luxury-gold font-bold">Interactive Staying Calculator</span>
+            <h3 class="font-serif text-2xl font-bold text-luxury-cream">Stay Invitation Planner</h3>
+            <p class="text-[11px] text-luxury-soft/70">Customize your booking request. Our systems will automatically generate a professional invoice receipt template you can instantly send via WhatsApp.</p>
+          </div>
+
+          <!-- Planner Form -->
+          <form id="stay-planner-form" class="flex flex-col gap-4 text-xs font-sans">
+            <!-- Suite Vibe Selector -->
+            <div class="flex flex-col gap-2">
+              <label class="uppercase tracking-widest text-luxury-soft/80 font-semibold text-[10px]">Accomodation Style</label>
+              <select id="plan-suite" class="bg-luxury-dark/90 border border-luxury-gold/30 p-3 text-luxury-cream rounded-sm focus:outline-none focus:border-luxury-gold transition-colors cursor-pointer">
+                <option value="sanctuary" data-price="250">The Sanctuary Suite (Private Entrance, Full Kitchen) - $250/night</option>
+                <option value="canopy" data-price="220">The Canopy Vista (Next to Rooftop Lounge & Bar) - $220/night</option>
+                <option value="entire" data-price="450">Entire Private Gated Villa (Absolute Exclusive Access) - $450/night</option>
+              </select>
+            </div>
+
+            <!-- Double dates slider or day counts -->
+            <div class="grid grid-cols-2 gap-4">
+              <div class="flex flex-col gap-2">
+                <label class="uppercase tracking-widest text-luxury-soft/80 font-semibold text-[10px]">Nights Count</label>
+                <input type="number" id="plan-nights" min="1" max="30" value="2" class="bg-luxury-dark/90 border border-luxury-gold/30 p-3 text-luxury-cream rounded-sm focus:outline-none focus:border-luxury-gold transition-colors">
+              </div>
+              <div class="flex flex-col gap-2">
+                <label class="uppercase tracking-widest text-luxury-soft/80 font-semibold text-[10px]">Guests Count</label>
+                <input type="number" id="plan-guests" min="1" max="10" value="2" class="bg-luxury-dark/90 border border-luxury-gold/30 p-3 text-luxury-cream rounded-sm focus:outline-none focus:border-luxury-gold transition-colors">
+              </div>
+            </div>
+
+            <!-- Exclusive Amenities Checklist -->
+            <div class="flex flex-col gap-2 mt-2">
+              <label class="uppercase tracking-widest text-luxury-soft/80 font-semibold text-[10px]">Complimentary Premium Requests</label>
+              <div class="grid grid-cols-2 gap-2 text-[10px] text-luxury-soft/90">
+                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="req-pool" checked class="accent-luxury-gold"> Private Pool Entry</label>
+                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="req-starlink" checked class="accent-luxury-gold"> Starlink Ultra WiFi</label>
+                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="req-lounge" class="accent-luxury-gold"> Rooftop Evening Vibe</label>
+                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="req-bar" class="accent-luxury-gold"> Private Bar Setup</label>
+              </div>
+            </div>
+
+            <!-- Calculated Live Invoice -->
+            <div class="border border-luxury-gold/15 bg-luxury-dark/60 p-5 rounded-sm mt-2 flex flex-col gap-2.5">
+              <div class="flex justify-between items-center text-[10px] uppercase tracking-widest text-luxury-soft/60">
+                <span>Estimated Stay Receipt</span>
+                <span class="text-luxury-gold font-bold">NS-2026-T</span>
+              </div>
+              <div class="h-[1px] bg-luxury-gold/10"></div>
+              <div class="flex justify-between text-xs text-luxury-soft/80">
+                <span id="invoice-suite-name">The Sanctuary Suite</span>
+                <span id="invoice-suite-calc">$250 x 2 nights</span>
+              </div>
+              <div class="flex justify-between text-xs text-luxury-soft/80">
+                <span>Extra Amenities requested</span>
+                <span class="text-luxury-gold">FREE</span>
+              </div>
+              <div class="h-[1px] bg-luxury-gold/10"></div>
+              <div class="flex justify-between items-baseline">
+                <span class="text-[10px] uppercase tracking-luxury text-luxury-cream font-bold">Estimated Total</span>
+                <span class="font-serif text-2xl text-luxury-gold font-bold" id="invoice-total">$500</span>
+              </div>
+            </div>
+
+            <!-- Submission Trigger -->
+            <button type="submit" class="w-full bg-luxury-gold text-luxury-dark uppercase tracking-luxury font-bold p-4 hover:bg-luxury-cream transition-all duration-500 rounded-sm mt-2">
+              Generate WhatsApp Invitation
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Google Map Location Container -->
+  <section class="py-16 px-6 max-w-7xl mx-auto relative overflow-hidden">
+    <div class="flex flex-col items-center text-center gap-3 mb-12">
+      <span class="text-xs uppercase tracking-luxury text-luxury-gold font-medium font-sans">Geospatial Coordinates</span>
+      <h2 class="font-serif text-2xl md:text-4xl font-bold text-luxury-cream">Navigate via Google Maps</h2>
+      <p class="text-xs text-luxury-soft/60 mt-1 max-w-md">Our luxury gated compound is officially indexed on Google Maps. Trace our exact coordinates in Ho below.</p>
+    </div>
+
+    <!-- Live Google Map Card -->
+    <div class="w-full border border-luxury-gold/25 p-1 bg-luxury-olive/15 rounded-sm shadow-2xl overflow-hidden aspect-video max-h-[500px]">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.222616!2d0.4425367!3d6.6012216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x102725dc1826b347%3A0xe1dc21674f17dc98!2sNS%20Luxury%20Villa!5e0!3m2!1sen!2sgh!4v1700000000000!5m2!1sen!2sgh"
+        width="100%"
+        height="100%"
+        style="border:0; filter: grayscale(1) contrast(1.1) invert(0.9);"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </section>
+
+  <!-- Footer Placeholder -->
+  <footer id="main-footer"></footer>
+
+  <script type="module" src="./src/main.ts"></script>
+</body>
+</html>
