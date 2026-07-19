@@ -3,6 +3,76 @@
  * Includes high-fidelity dynamic transitions, shared custom headers/footers, and the floating Serenity Audio Player.
  */
 
+/**
+ * Interactive Elite Fluid Cursor Follower
+ * Instantiates a bespoke golden physical circle that elegantly chases the user cursor with natural inertial physics.
+ */
+export function initializeEliteCursor() {
+  // Only initialize on desktop devices to avoid mobile touch layout overlaps
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+
+  const follower = document.createElement('div');
+  follower.id = "elite-cursor-follower";
+  follower.className = "fixed top-0 left-0 w-8 h-8 border border-luxury-gold rounded-full pointer-events-none z-50 transition-transform duration-75 mix-blend-difference -translate-x-1/2 -translate-y-1/2 flex items-center justify-center opacity-0 scale-100";
+
+  // Create a solid center dot inside the tracker circle
+  const dot = document.createElement('span');
+  dot.className = "w-1 h-1 bg-luxury-gold rounded-full block";
+  follower.appendChild(dot);
+  document.body.appendChild(follower);
+
+  let mouseX = 0;
+  let mouseY = 0;
+  let followerX = 0;
+  let followerY = 0;
+  let isMoving = false;
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    if (!isMoving) {
+      isMoving = true;
+      follower.style.opacity = "1";
+    }
+  });
+
+  const updateFollower = () => {
+    // Elegant inertial physics formula (smooth factor 0.1)
+    const dx = mouseX - followerX;
+    const dy = mouseY - followerY;
+    followerX += dx * 0.12;
+    followerY += dy * 0.12;
+
+    follower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0) translate(-50%, -50%)`;
+    requestAnimationFrame(updateFollower);
+  };
+
+  updateFollower();
+
+  // Attach hover expand states on all luxury target triggers
+  const attachTriggers = () => {
+    const targets = document.querySelectorAll('a, button, select, input, [role="button"], .blueprint-block, .gallery-item');
+    targets.forEach(target => {
+      target.addEventListener('mouseenter', () => {
+        follower.classList.add('scale-150', 'bg-luxury-gold/10');
+        follower.classList.remove('border-luxury-gold');
+        follower.style.borderColor = "rgba(250, 249, 246, 0.8)";
+      });
+      target.addEventListener('mouseleave', () => {
+        follower.classList.remove('scale-150', 'bg-luxury-gold/10');
+        follower.classList.add('border-luxury-gold');
+        follower.style.borderColor = "";
+      });
+    });
+  };
+
+  attachTriggers();
+
+  // Re-attach triggers on dynamic navigation or layouts changes
+  const observer = new MutationObserver(attachTriggers);
+  observer.observe(document.body, { childList: true, subtree: true });
+}
+
 // Custom Premium SVG logo markup for luxury branding
 export const NS_LOGO_SVG = `
 <svg class="h-10 w-auto" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,7 +124,7 @@ export function injectHeaderAndFooter() {
             ${getActiveIndicator('index.html')}
           </a>
           <a href="rooms.html" class="${getLinkClass('rooms.html')}">
-            Suites & Suites
+            Suites & Rooms
             ${getActiveIndicator('rooms.html')}
           </a>
           <a href="amenities.html" class="${getLinkClass('amenities.html')}">
@@ -214,107 +284,131 @@ export function injectHeaderAndFooter() {
 export function initializeSerenityPlayer() {
   const playerContainer = document.createElement('div');
   playerContainer.id = "serenity-audio-player";
-  playerContainer.className = "fixed bottom-6 right-6 z-40 bg-luxury-olive/90 backdrop-blur-md border border-luxury-gold/30 p-3.5 rounded-full shadow-2xl flex items-center gap-3 transition-all duration-500 group hover:pr-6 hover:rounded-full";
+  playerContainer.className = "fixed bottom-6 right-6 z-40 bg-luxury-dark/95 backdrop-blur-xl border border-luxury-gold/30 p-4 rounded-3xl shadow-[0_15px_50px_-15px_rgba(197,168,128,0.3)] flex items-center gap-4 transition-all duration-500 max-w-[90vw] md:max-w-md pointer-events-auto select-none";
 
   playerContainer.innerHTML = `
-    <!-- Pulse Waveform -->
-    <div class="relative w-8 h-8 flex items-center justify-center bg-luxury-gold text-luxury-dark rounded-full cursor-pointer transition-transform duration-300 active:scale-95" id="audio-play-button">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+    <!-- Play Trigger circle -->
+    <div class="relative w-12 h-12 flex items-center justify-center bg-luxury-gold text-luxury-dark rounded-full cursor-pointer transition-transform duration-300 active:scale-95 shadow-lg" id="audio-play-button">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" id="audio-play-icon">
+        <path d="M8 5v14l11-7z" />
       </svg>
     </div>
-    <!-- Sound visualizer bars -->
-    <div id="sound-wave-bars" class="hidden items-end gap-0.5 h-6 opacity-80 group-hover:flex">
-      <span class="w-0.5 bg-luxury-gold h-1 animate-bounce" style="animation-duration: 0.8s"></span>
-      <span class="w-0.5 bg-luxury-gold h-2 animate-bounce" style="animation-duration: 1.1s; animation-delay: 0.2s;"></span>
-      <span class="w-0.5 bg-luxury-gold h-3 animate-bounce" style="animation-duration: 0.7s; animation-delay: 0.4s;"></span>
-      <span class="w-0.5 bg-luxury-gold h-1.5 animate-bounce" style="animation-duration: 0.9s; animation-delay: 0.1s;"></span>
-      <span class="w-0.5 bg-luxury-gold h-2.5 animate-bounce" style="animation-duration: 1.3s; animation-delay: 0.3s;"></span>
-    </div>
-    <div class="hidden flex-col group-hover:flex">
-      <span class="text-[10px] uppercase font-semibold tracking-wider text-luxury-gold leading-none">Serenity Sound</span>
-      <span class="text-[8px] uppercase tracking-widest text-luxury-soft/60 mt-0.5" id="sound-status">Play Ambient</span>
+
+    <!-- Interface controls -->
+    <div class="flex flex-col gap-1.5 min-w-[140px] md:min-w-[180px]">
+      <div class="flex items-center justify-between gap-2">
+        <span class="text-[10px] uppercase font-bold tracking-widest text-luxury-gold">Serenity Soundscape</span>
+        <!-- Active Sound visualizer bars -->
+        <div id="sound-wave-bars" class="hidden items-end gap-0.5 h-3 opacity-90">
+          <span class="w-0.5 bg-luxury-gold h-1 animate-bounce" style="animation-duration: 0.8s"></span>
+          <span class="w-0.5 bg-luxury-gold h-2 animate-bounce" style="animation-duration: 1.1s; animation-delay: 0.2s;"></span>
+          <span class="w-0.5 bg-luxury-gold h-3 animate-bounce" style="animation-duration: 0.7s; animation-delay: 0.4s;"></span>
+          <span class="w-0.5 bg-luxury-gold h-1.5 animate-bounce" style="animation-duration: 0.9s; animation-delay: 0.1s;"></span>
+        </div>
+      </div>
+
+      <!-- Mode selector toggles -->
+      <div class="flex items-center gap-2 bg-luxury-olive/50 border border-luxury-gold/15 p-1 rounded-sm text-[8px] uppercase tracking-widest font-bold">
+        <button id="sound-mode-rain" class="flex-1 py-1 px-1.5 bg-luxury-gold text-luxury-dark rounded-xs text-center transition-all duration-300">Volta Rain</button>
+        <button id="sound-mode-breeze" class="flex-1 py-1 px-1.5 text-luxury-soft/60 hover:text-luxury-cream text-center transition-all duration-300">Forest Drone</button>
+      </div>
+
+      <!-- Sophisticated micro slider -->
+      <div class="flex items-center gap-2 mt-1">
+        <span class="text-[8px] text-luxury-soft/50">VOL</span>
+        <input type="range" id="sound-volume" min="0" max="1" step="0.05" value="0.25" class="w-full h-0.5 bg-luxury-gold/20 appearance-none cursor-pointer accent-luxury-gold">
+      </div>
     </div>
   `;
 
   document.body.appendChild(playerContainer);
 
   const playBtn = document.getElementById('audio-play-button');
+  const playIcon = document.getElementById('audio-play-icon');
   const waveBars = document.getElementById('sound-wave-bars');
-  const soundStatus = document.getElementById('sound-status');
+  const modeRain = document.getElementById('sound-mode-rain');
+  const modeBreeze = document.getElementById('sound-mode-breeze');
+  const volSlider = document.getElementById('sound-volume') as HTMLInputElement | null;
 
   let audioContext: AudioContext | null = null;
   let windOscillator: OscillatorNode | null = null;
+  let noiseNode: AudioBufferSourceNode | null = null;
   let gainNode: GainNode | null = null;
+  let filterNode: BiquadFilterNode | null = null;
+
   let isPlaying = false;
+  let activeMode: 'rain' | 'breeze' = 'rain';
+
+  const synthesizeRainBuffer = (ctx: AudioContext) => {
+    const bufferSize = 2 * ctx.sampleRate;
+    const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const output = noiseBuffer.getChannelData(0);
+
+    let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+    for (let i = 0; i < bufferSize; i++) {
+      const white = Math.random() * 2 - 1;
+      b0 = 0.99886 * b0 + white * 0.0555179;
+      b1 = 0.99332 * b1 + white * 0.0750759;
+      b2 = 0.96900 * b2 + white * 0.1538520;
+      b3 = 0.86650 * b3 + white * 0.3104856;
+      b4 = 0.55000 * b4 + white * 0.5329522;
+      b5 = -0.7616 * b5 - white * 0.0168980;
+      output[i] = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362;
+      output[i] *= 0.11; // rescue ears
+      b6 = white * 0.115926;
+    }
+    return noiseBuffer;
+  };
 
   const startAmbientSound = () => {
     try {
       audioContext = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
       gainNode = audioContext.createGain();
+
+      const savedVol = volSlider ? parseFloat(volSlider.value) : 0.25;
       gainNode.gain.setValueAtTime(0, audioContext.currentTime);
 
-      // Synthesize a soothing rustling forest sound (Pink Noise + Lowpass + Modulation)
-      const bufferSize = 2 * audioContext.sampleRate;
-      const noiseBuffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
-      const output = noiseBuffer.getChannelData(0);
+      if (activeMode === 'rain') {
+        const buffer = synthesizeRainBuffer(audioContext);
+        noiseNode = audioContext.createBufferSource();
+        noiseNode.buffer = buffer;
+        noiseNode.loop = true;
 
-      let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
-      for (let i = 0; i < bufferSize; i++) {
-        const white = Math.random() * 2 - 1;
-        b0 = 0.99886 * b0 + white * 0.0555179;
-        b1 = 0.99332 * b1 + white * 0.0750759;
-        b2 = 0.96900 * b2 + white * 0.1538520;
-        b3 = 0.86650 * b3 + white * 0.3104856;
-        b4 = 0.55000 * b4 + white * 0.5329522;
-        b5 = -0.7616 * b5 - white * 0.0168980;
-        output[i] = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362;
-        output[i] *= 0.11; // rescue ears
-        b6 = white * 0.115926;
+        filterNode = audioContext.createBiquadFilter();
+        filterNode.type = 'lowpass';
+        filterNode.frequency.setValueAtTime(450, audioContext.currentTime);
+
+        noiseNode.connect(filterNode);
+        filterNode.connect(gainNode);
+        noiseNode.start(0);
+      } else {
+        // Drone breeze mode
+        windOscillator = audioContext.createOscillator();
+        windOscillator.type = 'sine';
+        windOscillator.frequency.setValueAtTime(75, audioContext.currentTime);
+
+        filterNode = audioContext.createBiquadFilter();
+        filterNode.type = 'bandpass';
+        filterNode.Q.setValueAtTime(6, audioContext.currentTime);
+        filterNode.frequency.setValueAtTime(120, audioContext.currentTime);
+
+        const lfo = audioContext.createOscillator();
+        lfo.frequency.setValueAtTime(0.08, audioContext.currentTime);
+        const lfoGain = audioContext.createGain();
+        lfoGain.gain.setValueAtTime(45, audioContext.currentTime);
+
+        lfo.connect(lfoGain);
+        lfoGain.connect(filterNode.frequency);
+
+        windOscillator.connect(filterNode);
+        filterNode.connect(gainNode);
+
+        windOscillator.start(0);
+        lfo.start(0);
       }
 
-      const noiseNode = audioContext.createBufferSource();
-      noiseNode.buffer = noiseBuffer;
-      noiseNode.loop = true;
-
-      const rainFilter = audioContext.createBiquadFilter();
-      rainFilter.type = 'lowpass';
-      rainFilter.frequency.setValueAtTime(450, audioContext.currentTime);
-
-      noiseNode.connect(rainFilter);
-      rainFilter.connect(gainNode);
-
-      // Synthesize slow, waving ambient drone
-      windOscillator = audioContext.createOscillator();
-      windOscillator.type = 'sine';
-      windOscillator.frequency.setValueAtTime(85, audioContext.currentTime); // very low tranquil sound
-
-      const windFilter = audioContext.createBiquadFilter();
-      windFilter.type = 'bandpass';
-      windFilter.Q.setValueAtTime(4, audioContext.currentTime);
-      windFilter.frequency.setValueAtTime(110, audioContext.currentTime);
-
-      // Modulate low frequency
-      const lfo = audioContext.createOscillator();
-      lfo.frequency.setValueAtTime(0.12, audioContext.currentTime); // slow waves
-      const lfoGain = audioContext.createGain();
-      lfoGain.gain.setValueAtTime(40, audioContext.currentTime);
-
-      lfo.connect(lfoGain);
-      lfoGain.connect(windFilter.frequency);
-
-      windOscillator.connect(windFilter);
-      windFilter.connect(gainNode);
-
       gainNode.connect(audioContext.destination);
-
-      // Start notes
-      noiseNode.start(0);
-      windOscillator.start(0);
-      lfo.start(0);
-
-      // Gracefully transition volume
-      gainNode.gain.linearRampToValueAtTime(0.25, audioContext.currentTime + 3);
+      gainNode.gain.linearRampToValueAtTime(savedVol, audioContext.currentTime + 2.0);
     } catch (err) {
       console.warn("AudioContext not supported on this device.", err);
     }
@@ -323,37 +417,74 @@ export function initializeSerenityPlayer() {
   const stopAmbientSound = () => {
     if (gainNode && audioContext) {
       const cur = audioContext.currentTime;
-      gainNode.gain.linearRampToValueAtTime(0, cur + 1);
+      gainNode.gain.linearRampToValueAtTime(0, cur + 0.6);
+      const prevNoise = noiseNode;
+      const prevOsc = windOscillator;
+      const prevCtx = audioContext;
+
       setTimeout(() => {
-        if (windOscillator) windOscillator.stop();
-        if (audioContext) audioContext.close();
-      }, 1100);
+        try {
+          if (prevNoise) prevNoise.stop();
+          if (prevOsc) prevOsc.stop();
+          if (prevCtx && prevCtx.state !== 'closed') prevCtx.close();
+        } catch (e) {}
+      }, 700);
+
+      noiseNode = null;
+      windOscillator = null;
+      audioContext = null;
     }
   };
 
-  if (playBtn) {
+  const handleModeChange = (mode: 'rain' | 'breeze') => {
+    if (activeMode === mode) return;
+    activeMode = mode;
+
+    if (mode === 'rain') {
+      modeRain?.classList.add('bg-luxury-gold', 'text-luxury-dark');
+      modeRain?.classList.remove('text-luxury-soft/60');
+      modeBreeze?.classList.add('text-luxury-soft/60');
+      modeBreeze?.classList.remove('bg-luxury-gold', 'text-luxury-dark');
+    } else {
+      modeBreeze?.classList.add('bg-luxury-gold', 'text-luxury-dark');
+      modeBreeze?.classList.remove('text-luxury-soft/60');
+      modeRain?.classList.add('text-luxury-soft/60');
+      modeRain?.classList.remove('bg-luxury-gold', 'text-luxury-dark');
+    }
+
+    if (isPlaying) {
+      stopAmbientSound();
+      setTimeout(() => {
+        if (isPlaying) startAmbientSound();
+      }, 800);
+    }
+  };
+
+  if (modeRain) modeRain.addEventListener('click', () => handleModeChange('rain'));
+  if (modeBreeze) modeBreeze.addEventListener('click', () => handleModeChange('breeze'));
+
+  if (volSlider) {
+    volSlider.addEventListener('input', (e) => {
+      const v = parseFloat((e.target as HTMLInputElement).value);
+      if (gainNode && audioContext) {
+        gainNode.gain.setValueAtTime(v, audioContext.currentTime);
+      }
+    });
+  }
+
+  if (playBtn && playIcon) {
     playBtn.addEventListener('click', () => {
       isPlaying = !isPlaying;
       if (isPlaying) {
         startAmbientSound();
         waveBars?.classList.remove('hidden');
         waveBars?.classList.add('flex');
-        if (soundStatus) soundStatus.innerText = "Playing Volta Rain";
-        playBtn.innerHTML = `
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-        `;
+        playIcon.innerHTML = `<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>`;
       } else {
         stopAmbientSound();
         waveBars?.classList.remove('flex');
         waveBars?.classList.add('hidden');
-        if (soundStatus) soundStatus.innerText = "Audio Muted";
-        playBtn.innerHTML = `
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-          </svg>
-        `;
+        playIcon.innerHTML = `<path d="M8 5v14l11-7z" />`;
       }
     });
   }

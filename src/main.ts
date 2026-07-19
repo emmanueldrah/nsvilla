@@ -1,9 +1,10 @@
-import { injectHeaderAndFooter, initializeSerenityPlayer } from './components';
+import { injectHeaderAndFooter, initializeSerenityPlayer, initializeEliteCursor } from './components';
 
 // Initialize global elements on document load
 document.addEventListener('DOMContentLoaded', () => {
   injectHeaderAndFooter();
   initializeSerenityPlayer();
+  initializeEliteCursor();
 
   // Run page-specific logic dynamically based on elements present
   initHourglassSlider();
@@ -425,6 +426,10 @@ function initStayPlanner() {
 
   const invoiceSuite = document.getElementById('invoice-suite-name');
   const invoiceCalc = document.getElementById('invoice-suite-calc');
+  const invoiceTaxLevy = document.getElementById('invoice-tax-levy');
+  const invoiceEcoTax = document.getElementById('invoice-eco-tax');
+  const invoiceDiscountRow = document.getElementById('invoice-discount-row');
+  const invoiceDiscount = document.getElementById('invoice-discount');
   const invoiceTotal = document.getElementById('invoice-total');
 
   if (!form || !selectSuite || !inputNights || !invoiceSuite || !invoiceCalc || !invoiceTotal) return;
@@ -432,21 +437,44 @@ function initStayPlanner() {
   const calculateTotal = () => {
     const selectedOption = selectSuite.options[selectSuite.selectedIndex];
     const rate = parseFloat(selectedOption.getAttribute('data-price') || '0');
-    const nights = parseInt(inputNights.value) || 1;
+    const nights = Math.max(1, parseInt(inputNights.value) || 1);
     const suiteName = selectedOption.text.split('(')[0].trim();
 
-    const total = rate * nights;
+    const baseCost = rate * nights;
+
+    // Luxury 1.5% Volta Tourism Levy
+    const levy = baseCost * 0.015;
+
+    // Discretionary Eco Tax ($5 flat fee)
+    const ecoTax = 5.00;
+
+    // Apply special 5% Multi-night discount for bookings of 4 or more nights
+    let discount = 0;
+    if (nights >= 4) {
+      discount = baseCost * 0.05;
+      if (invoiceDiscountRow && invoiceDiscount) {
+        invoiceDiscountRow.classList.remove('hidden');
+        invoiceDiscount.innerText = `-$${discount.toFixed(2)}`;
+      }
+    } else {
+      if (invoiceDiscountRow) invoiceDiscountRow.classList.add('hidden');
+    }
+
+    const finalTotal = baseCost + levy + ecoTax - discount;
 
     if (invoiceSuite) invoiceSuite.innerText = suiteName;
     if (invoiceCalc) invoiceCalc.innerText = `$${rate} x ${nights} night${nights > 1 ? 's' : ''}`;
-    if (invoiceTotal) invoiceTotal.innerText = `$${total}`;
+    if (invoiceTaxLevy) invoiceTaxLevy.innerText = `$${levy.toFixed(2)}`;
+    if (invoiceEcoTax) invoiceEcoTax.innerText = `$${ecoTax.toFixed(2)}`;
+    if (invoiceTotal) invoiceTotal.innerText = `$${finalTotal.toFixed(2)}`;
 
-    return { suiteName, rate, nights, total };
+    return { suiteName, rate, nights, total: finalTotal };
   };
 
   // Recalculate on input events
   selectSuite.addEventListener('change', calculateTotal);
   inputNights.addEventListener('input', calculateTotal);
+  inputNights.addEventListener('change', calculateTotal);
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -454,15 +482,15 @@ function initStayPlanner() {
     const guests = inputGuests ? inputGuests.value : '2';
 
     // Collect requested complementary features
-    const rPool = (document.getElementById('req-pool') as HTMLInputElement)?.checked ? '✓ Swimming Pool' : '';
-    const rStarlink = (document.getElementById('req-starlink') as HTMLInputElement)?.checked ? '✓ Starlink WiFi' : '';
-    const rLounge = (document.getElementById('req-lounge') as HTMLInputElement)?.checked ? '✓ Rooftop Lounge' : '';
-    const rBar = (document.getElementById('req-bar') as HTMLInputElement)?.checked ? '✓ Private Bar' : '';
+    const rPool = (document.getElementById('req-pool') as HTMLInputElement)?.checked ? '✓ Swimming Pool Access' : '';
+    const rStarlink = (document.getElementById('req-starlink') as HTMLInputElement)?.checked ? '✓ Starlink WiFi Access' : '';
+    const rLounge = (document.getElementById('req-lounge') as HTMLInputElement)?.checked ? '✓ Rooftop Lounge Access' : '';
+    const rBar = (document.getElementById('req-bar') as HTMLInputElement)?.checked ? '✓ Private Bar Setup' : '';
 
     const extras = [rPool, rStarlink, rLounge, rBar].filter(Boolean).join('\n');
 
     // Build perfect luxury message
-    const rawMsg = `Hello NS Luxury Villa Concierge!\n\nI would like to request an exclusive stay invitation for:\n\n🏠 Suite: *${data.suiteName}*\n🌙 Stay duration: *${data.nights} Night${data.nights > 1 ? 's' : ''}*\n👥 Guests count: *${guests} Guests*\n💵 Est. Total: *$${data.total}*\n\nSpecial Complementary Requests:\n${extras || 'None'}\n\nPlease confirm availability for these details. Thank you!`;
+    const rawMsg = `Hello NS Luxury Villa Concierge!\n\nI would like to request an exclusive stay invitation for:\n\n🏠 Suite Style: *${data.suiteName}*\n🌙 Stay duration: *${data.nights} Night${data.nights > 1 ? 's' : ''}*\n👥 Guests count: *${guests} Guests*\n💵 Est. Total: *$${data.total.toFixed(2)}* (Inclusive of Tourism Levy & Eco Surcharges)\n\nSpecial Complementary Requests:\n${extras || 'None'}\n\nPlease confirm availability for these details. Thank you!`;
     const encoded = encodeURIComponent(rawMsg);
 
     // Redirect to direct WhatsApp concierge desk (+233 55 000 0000)
