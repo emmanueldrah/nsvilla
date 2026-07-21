@@ -11,97 +11,100 @@
   <!-- Header Placeholder -->
   <header id="main-header"></header>
 
-  <!-- Title Segment -->
-  <section class="pt-36 pb-12 relative overflow-hidden bg-gradient-to-b from-luxury-accent/30 to-transparent">
-    <div class="max-w-7xl mx-auto px-6 text-center flex flex-col items-center gap-4 relative z-10">
-      <div class="flex items-center gap-3">
-        <span class="w-8 h-[1px] bg-luxury-gold"></span>
-        <span class="text-xs uppercase tracking-[0.25em] text-luxury-gold font-medium font-sans">The Curated Lens</span>
-        <span class="w-8 h-[1px] bg-luxury-gold"></span>
+  <!-- Title Segment (Editorial Magazine Style) -->
+  <section class="pt-40 pb-16 relative overflow-hidden bg-gradient-to-b from-luxury-accent/20 to-transparent">
+    <div class="max-w-7xl mx-auto px-8 text-left flex flex-col gap-6 relative z-10">
+      <div class="flex items-center gap-4">
+        <span class="w-16 h-[1px] bg-luxury-gold/50"></span>
+        <span class="text-[10px] uppercase tracking-luxury-ultra text-luxury-gold font-medium font-sans">THE CURATED LENS</span>
       </div>
-      <h1 class="font-serif text-4xl md:text-6xl font-bold tracking-tight text-luxury-cream">Curated Gallery</h1>
-      <p class="text-xs md:text-sm text-luxury-soft/70 max-w-xl mt-2 leading-relaxed">
-        Step inside our gated sanctuary. Filter by experience and view the high-fidelity spaces designed specifically for slow living, luxury wellness, and extreme discretion.
+      <h1 class="text-editorial-h1 leading-[1.05] tracking-tight">
+        Atmosphere, light <br>
+        <span class="italic font-light text-luxury-soft font-serif">& silent details.</span>
+      </h1>
+      <p class="text-editorial-lead max-w-xl text-luxury-soft/80 font-light mt-2">
+        A photographic index recording our private sanctuary. Toggle categories to filter spatial layers, capturing the fluid transition between morning poolside reflections and night skies.
       </p>
     </div>
   </section>
 
-  <!-- Gallery Filters -->
-  <section class="py-6 px-6 max-w-7xl mx-auto relative z-10">
-    <div class="flex flex-wrap gap-4 justify-center text-xs uppercase tracking-widest font-semibold" id="gallery-filters">
-      <button data-filter="all" class="filter-btn px-6 py-2 border-b border-luxury-gold text-luxury-gold transition-colors duration-300">All Spaces</button>
-      <button data-filter="pool" class="filter-btn px-6 py-2 border-b border-transparent text-luxury-soft/60 hover:text-luxury-gold transition-colors duration-300">Poolside</button>
-      <button data-filter="rooms" class="filter-btn px-6 py-2 border-b border-transparent text-luxury-soft/60 hover:text-luxury-gold transition-colors duration-300">Interiors & Suites</button>
-      <button data-filter="rooftop" class="filter-btn px-6 py-2 border-b border-transparent text-luxury-soft/60 hover:text-luxury-gold transition-colors duration-300">Rooftop & Bar</button>
-      <button data-filter="surroundings" class="filter-btn px-6 py-2 border-b border-transparent text-luxury-soft/60 hover:text-luxury-gold transition-colors duration-300">Green Sanctuary</button>
+  <!-- Gallery Filters (Asymmetric Minimalist Buttons) -->
+  <section class="py-8 px-8 max-w-7xl mx-auto relative z-10">
+    <div class="flex flex-wrap gap-6 justify-start text-[10px] uppercase tracking-luxury font-semibold" id="gallery-filters">
+      <button data-filter="all" class="filter-btn pb-2.5 border-b border-luxury-gold text-luxury-gold transition-colors duration-500">All Spaces</button>
+      <button data-filter="pool" class="filter-btn pb-2.5 border-b border-transparent text-luxury-soft/60 hover:text-luxury-gold transition-colors duration-500">Poolside</button>
+      <button data-filter="rooms" class="filter-btn pb-2.5 border-b border-transparent text-luxury-soft/60 hover:text-luxury-gold transition-colors duration-500">Interiors</button>
+      <button data-filter="rooftop" class="filter-btn pb-2.5 border-b border-transparent text-luxury-soft/60 hover:text-luxury-gold transition-colors duration-500">Rooftop & Bar</button>
+      <button data-filter="surroundings" class="filter-btn pb-2.5 border-b border-transparent text-luxury-soft/60 hover:text-luxury-gold transition-colors duration-500">Greenery</button>
     </div>
   </section>
 
-  <!-- Asymmetric Filterable Gallery Grid -->
-  <section class="py-12 px-6 max-w-7xl mx-auto relative overflow-hidden reveal-on-scroll">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="gallery-grid">
-      <!-- Image 1 -->
-      <div class="gallery-item aspect-square border border-luxury-gold/15 p-1.5 bg-luxury-olive/10 group cursor-pointer overflow-hidden rounded-sm relative" data-category="pool" data-img-src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=1200&q=90">
-        <div class="w-full h-full overflow-hidden relative">
-          <img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=600&q=80" alt="Swimming Pool Sunset" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
-          <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
-            <span class="text-[9px] uppercase tracking-widest text-luxury-gold">Poolside Deck</span>
-            <span class="font-serif text-lg text-luxury-cream">Luminous Sunset Dive</span>
+  <!-- Asymmetric Editorial Gallery Grid (Irregular, organic masonry heights to maintain visual rhythm) -->
+  <section class="py-12 px-8 max-w-7xl mx-auto relative overflow-hidden reveal-on-scroll">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12" id="gallery-grid">
+
+      <!-- Image 1 (Portrait Frame) -->
+      <div class="gallery-item aspect-[3/4] border border-luxury-gold/5 p-2 bg-luxury-dark group cursor-pointer overflow-hidden rounded-none relative shadow-premium" data-category="pool" data-img-src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=1200&q=90">
+        <div class="w-full h-full overflow-hidden relative img-zoom-container">
+          <img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=800&q=80" alt="Swimming Pool Sunset" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-end p-8">
+            <span class="text-[8px] uppercase tracking-luxury text-luxury-gold">Poolside Deck</span>
+            <span class="font-serif text-xl text-luxury-cream mt-1 font-light">Luminous Sunset Dive</span>
           </div>
         </div>
       </div>
 
-      <!-- Image 2 -->
-      <div class="gallery-item aspect-square border border-luxury-gold/15 p-1.5 bg-luxury-olive/10 group cursor-pointer overflow-hidden rounded-sm relative" data-category="rooms" data-img-src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=90">
-        <div class="w-full h-full overflow-hidden relative">
-          <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=600&q=80" alt="Bespoke Suite Bedroom" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
-          <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
-            <span class="text-[9px] uppercase tracking-widest text-luxury-gold">Suite Interior</span>
-            <span class="font-serif text-lg text-luxury-cream">Signature Bedroom Retreat</span>
+      <!-- Image 2 (Landscape Frame - High Contrast) -->
+      <div class="gallery-item aspect-square border border-luxury-gold/5 p-2 bg-luxury-dark group cursor-pointer overflow-hidden rounded-none relative shadow-premium" data-category="rooms" data-img-src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=90">
+        <div class="w-full h-full overflow-hidden relative img-zoom-container">
+          <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=800&q=80" alt="Bespoke Suite Bedroom" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-end p-8">
+            <span class="text-[8px] uppercase tracking-luxury text-luxury-gold">Suite Interior</span>
+            <span class="font-serif text-xl text-luxury-cream mt-1 font-light">Signature Bedroom Retreat</span>
           </div>
         </div>
       </div>
 
-      <!-- Image 3 -->
-      <div class="gallery-item aspect-square border border-luxury-gold/15 p-1.5 bg-luxury-olive/10 group cursor-pointer overflow-hidden rounded-sm relative" data-category="rooftop" data-img-src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1200&q=90">
-        <div class="w-full h-full overflow-hidden relative">
-          <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=600&q=80" alt="Lounge Private Bar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
-          <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
-            <span class="text-[9px] uppercase tracking-widest text-luxury-gold">Private Bar</span>
-            <span class="font-serif text-lg text-luxury-cream">Custom Craft Cocktails</span>
+      <!-- Image 3 (Vertical Frame with Top Padding) -->
+      <div class="gallery-item aspect-[3/4] border border-luxury-gold/5 p-2 bg-luxury-dark group cursor-pointer overflow-hidden rounded-none relative shadow-premium lg:mt-12" data-category="rooftop" data-img-src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1200&q=90">
+        <div class="w-full h-full overflow-hidden relative img-zoom-container">
+          <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=800&q=80" alt="Lounge Private Bar" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-end p-8">
+            <span class="text-[8px] uppercase tracking-luxury text-luxury-gold">Private Bar</span>
+            <span class="font-serif text-xl text-luxury-cream mt-1 font-light">Custom Craft Cocktails</span>
           </div>
         </div>
       </div>
 
-      <!-- Image 4 -->
-      <div class="gallery-item aspect-square border border-luxury-gold/15 p-1.5 bg-luxury-olive/10 group cursor-pointer overflow-hidden rounded-sm relative" data-category="rooftop" data-img-src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=90">
-        <div class="w-full h-full overflow-hidden relative">
-          <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=600&q=80" alt="Rooftop View Night" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
-          <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
-            <span class="text-[9px] uppercase tracking-widest text-luxury-gold">Rooftop Lounge</span>
-            <span class="font-serif text-lg text-luxury-cream">Open Air Sky deck</span>
+      <!-- Image 4 (Square Frame) -->
+      <div class="gallery-item aspect-square border border-luxury-gold/5 p-2 bg-luxury-dark group cursor-pointer overflow-hidden rounded-none relative shadow-premium" data-category="rooftop" data-img-src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=90">
+        <div class="w-full h-full overflow-hidden relative img-zoom-container">
+          <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80" alt="Rooftop View Night" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-end p-8">
+            <span class="text-[8px] uppercase tracking-luxury text-luxury-gold">Rooftop Lounge</span>
+            <span class="font-serif text-xl text-luxury-cream mt-1 font-light">Open Air Sky Deck</span>
           </div>
         </div>
       </div>
 
-      <!-- Image 5 -->
-      <div class="gallery-item aspect-square border border-luxury-gold/15 p-1.5 bg-luxury-olive/10 group cursor-pointer overflow-hidden rounded-sm relative" data-category="surroundings" data-img-src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=90">
-        <div class="w-full h-full overflow-hidden relative">
-          <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=600&q=80" alt="Sanctuary Landscaped Garden" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
-          <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
-            <span class="text-[9px] uppercase tracking-widest text-luxury-gold">Surroundings</span>
-            <span class="font-serif text-lg text-luxury-cream">Lush Fenced Grounds</span>
+      <!-- Image 5 (Panoramic Rectangle Frame) -->
+      <div class="gallery-item aspect-[16/10] border border-luxury-gold/5 p-2 bg-luxury-dark group cursor-pointer overflow-hidden rounded-none relative shadow-premium md:col-span-2" data-category="surroundings" data-img-src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=90">
+        <div class="w-full h-full overflow-hidden relative img-zoom-container">
+          <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1000&q=80" alt="Sanctuary Landscaped Garden" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-end p-8">
+            <span class="text-[8px] uppercase tracking-luxury text-luxury-gold">SURROUNDINGS</span>
+            <span class="font-serif text-xl text-luxury-cream mt-1 font-light">Lush Fenced Grounds</span>
           </div>
         </div>
       </div>
 
-      <!-- Image 6 -->
-      <div class="gallery-item aspect-square border border-luxury-gold/15 p-1.5 bg-luxury-olive/10 group cursor-pointer overflow-hidden rounded-sm relative" data-category="rooms" data-img-src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=90">
-        <div class="w-full h-full overflow-hidden relative">
-          <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80" alt="Apartment Living Room" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
-          <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
-            <span class="text-[9px] uppercase tracking-widest text-luxury-gold">Living Area</span>
-            <span class="font-serif text-lg text-luxury-cream">Sun-lit Lounge Comfort</span>
+      <!-- Image 6 (Square Frame) -->
+      <div class="gallery-item aspect-square border border-luxury-gold/5 p-2 bg-luxury-dark group cursor-pointer overflow-hidden rounded-none relative shadow-premium" data-category="rooms" data-img-src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=90">
+        <div class="w-full h-full overflow-hidden relative img-zoom-container">
+          <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80" alt="Apartment Living Room" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-end p-8">
+            <span class="text-[8px] uppercase tracking-luxury text-luxury-gold">Living Area</span>
+            <span class="font-serif text-xl text-luxury-cream mt-1 font-light">Sun-lit Lounge Comfort</span>
           </div>
         </div>
       </div>
@@ -109,34 +112,34 @@
   </section>
 
   <!-- High-Fidelity Custom Lightbox Overlay -->
-  <div id="gallery-lightbox" class="fixed inset-0 bg-luxury-dark/98 backdrop-blur-2xl z-50 flex items-center justify-center p-4 select-none hidden opacity-0 transition-opacity duration-500">
+  <div id="gallery-lightbox" class="fixed inset-0 bg-luxury-dark/98 backdrop-blur-2xl z-50 flex items-center justify-center p-6 select-none hidden opacity-0 transition-opacity duration-500">
     <!-- Close button -->
-    <button id="lightbox-close" class="absolute top-6 right-6 w-12 h-12 flex items-center justify-center rounded-full border border-luxury-gold/20 text-luxury-gold hover:text-luxury-cream hover:border-luxury-gold/50 transition-colors cursor-pointer" aria-label="Close Lightbox">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
+    <button id="lightbox-close" class="absolute top-8 right-8 w-11 h-11 flex items-center justify-center rounded-none border border-luxury-gold/20 text-luxury-gold hover:text-luxury-cream hover:border-luxury-gold/50 transition-colors cursor-pointer" aria-label="Close Lightbox">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
     <!-- Previous button -->
-    <button id="lightbox-prev" class="absolute left-6 w-12 h-12 flex items-center justify-center rounded-full border border-luxury-gold/20 text-luxury-gold hover:text-luxury-cream hover:border-luxury-gold/50 transition-colors cursor-pointer" aria-label="Previous Slide">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7" />
+    <button id="lightbox-prev" class="absolute left-8 w-11 h-11 flex items-center justify-center rounded-none border border-luxury-gold/20 text-luxury-gold hover:text-luxury-cream hover:border-luxury-gold/50 transition-colors cursor-pointer" aria-label="Previous Slide">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 19l-7-7 7-7" />
       </svg>
     </button>
     <!-- Next button -->
-    <button id="lightbox-next" class="absolute right-6 w-12 h-12 flex items-center justify-center rounded-full border border-luxury-gold/20 text-luxury-gold hover:text-luxury-cream hover:border-luxury-gold/50 transition-colors cursor-pointer" aria-label="Next Slide">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
+    <button id="lightbox-next" class="absolute right-8 w-11 h-11 flex items-center justify-center rounded-none border border-luxury-gold/20 text-luxury-gold hover:text-luxury-cream hover:border-luxury-gold/50 transition-colors cursor-pointer" aria-label="Next Slide">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5l7 7-7 7" />
       </svg>
     </button>
 
     <!-- Main Content Container -->
-    <div class="max-w-5xl max-h-[80vh] w-full flex flex-col justify-center items-center gap-4">
-      <div class="relative max-w-full max-h-[70vh] border border-luxury-gold/20 p-2 bg-luxury-dark/60 rounded-sm shadow-2xl overflow-hidden">
-        <img id="lightbox-main-img" src="" alt="Lightbox View" class="max-w-full max-h-[65vh] object-contain select-none transition-transform duration-500 ease-out cursor-zoom-in">
+    <div class="max-w-5xl max-h-[80vh] w-full flex flex-col justify-center items-center gap-6">
+      <div class="relative max-w-full max-h-[70vh] border border-luxury-gold/10 p-2 bg-luxury-dark/80 rounded-none shadow-premium overflow-hidden">
+        <img id="lightbox-main-img" src="" alt="Lightbox View" class="max-w-full max-h-[60vh] object-contain select-none transition-transform duration-500 ease-out cursor-zoom-in">
       </div>
-      <div class="flex flex-col items-center gap-1">
-        <span id="lightbox-caption-cat" class="text-[9px] uppercase tracking-widest text-luxury-gold font-medium"></span>
-        <h4 id="lightbox-caption-title" class="font-serif text-lg text-luxury-cream text-center"></h4>
+      <div class="flex flex-col items-center gap-1.5">
+        <span id="lightbox-caption-cat" class="text-[8px] uppercase tracking-luxury text-luxury-gold font-semibold"></span>
+        <h4 id="lightbox-caption-title" class="font-serif text-xl text-luxury-cream text-center font-light"></h4>
       </div>
     </div>
   </div>

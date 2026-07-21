@@ -11,152 +11,149 @@
   <!-- Header Placeholder -->
   <header id="main-header"></header>
 
-  <!-- Title Section -->
-  <section class="pt-36 pb-12 relative overflow-hidden bg-gradient-to-b from-luxury-accent/30 to-transparent">
-    <div class="max-w-7xl mx-auto px-6 text-center flex flex-col items-center gap-4 relative z-10">
-      <div class="flex items-center gap-3">
-        <span class="w-8 h-[1px] bg-luxury-gold"></span>
-        <span class="text-xs uppercase tracking-[0.25em] text-luxury-gold font-medium font-sans">Modern Sanctuary</span>
-        <span class="w-8 h-[1px] bg-luxury-gold"></span>
+  <!-- Title Section (Editorial Magazine Style) -->
+  <section class="pt-40 pb-16 relative overflow-hidden bg-gradient-to-b from-luxury-accent/20 to-transparent">
+    <div class="max-w-7xl mx-auto px-8 text-left flex flex-col gap-6 relative z-10">
+      <div class="flex items-center gap-4">
+        <span class="w-16 h-[1px] bg-luxury-gold/50"></span>
+        <span class="text-[10px] uppercase tracking-luxury-ultra text-luxury-gold font-medium font-sans">SPACE & GEOMETRY</span>
       </div>
-      <h1 class="font-serif text-4xl md:text-6xl font-bold tracking-tight text-luxury-cream">Suites & Specifications</h1>
-      <p class="text-xs md:text-sm text-luxury-soft/70 max-w-xl mt-2 leading-relaxed">
-        A precise overview of our fully furnished apartments. Expertly configured with separate utilities, en-suite bathrooms, high-speed Starlink, and unmatched security.
+      <h1 class="text-editorial-h1 leading-[1.05] tracking-tight">
+        Elegant scale. <br>
+        <span class="italic font-light text-luxury-soft font-serif">Absolute independence.</span>
+      </h1>
+      <p class="text-editorial-lead max-w-xl text-luxury-soft/80 font-light mt-2">
+        A precise details portfolio of our independent, fully furnished apartments. Each residence is configured with individual utility structures, private entrances, en-suite baths, and dedicated Starlink broadband coverage.
       </p>
     </div>
   </section>
 
   <!-- Interactive 2D Blueprint & Specs Overview -->
-  <section class="py-16 relative overflow-hidden reveal-on-scroll">
-    <div class="max-w-7xl mx-auto px-6">
+  <section class="py-24 relative overflow-hidden reveal-on-scroll">
+    <div class="max-w-7xl mx-auto px-8">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
         <!-- Interactive Layout Vector Box -->
-        <div class="lg:col-span-6 flex flex-col gap-6">
-          <div class="flex items-center gap-3">
-            <span class="w-8 h-[1px] bg-luxury-gold"></span>
-            <span class="text-xs uppercase tracking-luxury text-luxury-gold font-semibold">Interactive Spatial Map</span>
+        <div class="lg:col-span-6 flex flex-col gap-8">
+          <div class="flex items-center gap-4">
+            <span class="w-12 h-[1px] bg-luxury-gold/50"></span>
+            <span class="text-[10px] uppercase tracking-luxury-wide text-luxury-gold font-semibold">INTERACTIVE BLUEPRINT</span>
           </div>
-          <h2 class="font-serif text-2xl md:text-3xl font-bold text-luxury-cream">Architectural Integration</h2>
-          <p class="text-xs text-luxury-soft/80 leading-relaxed">
-            Hover over or select different sections of the villa blueprint layout below to explore real-time features and spatial descriptions.
+          <h2 class="text-editorial-h2 text-luxury-cream">Architectural Integration</h2>
+          <p class="text-xs text-luxury-soft/80 leading-relaxed font-light">
+            Tap or hover over any section of our custom structural line drawing below to view dimensions, utilities, and specific design layouts in real time.
           </p>
 
           <!-- The Custom SVG Blueprint -->
-          <div class="w-full bg-luxury-olive/40 border border-luxury-gold/20 p-6 rounded-sm relative aspect-square max-w-md mx-auto">
-            <svg viewBox="0 0 400 400" fill="none" class="w-full h-full text-luxury-soft/30 hover:text-luxury-gold/50 transition-colors duration-500">
+          <div class="w-full bg-luxury-olive/30 border border-luxury-gold/10 p-8 rounded-none relative aspect-square max-w-md mx-auto shadow-premium">
+            <svg viewBox="0 0 400 400" fill="none" class="w-full h-full text-luxury-soft/20 hover:text-luxury-gold/30 transition-colors duration-500">
               <!-- Outer border -->
-              <rect x="10" y="10" width="380" height="380" rx="4" stroke="#C5A880" stroke-width="1.5" stroke-dasharray="2 2" />
+              <rect x="10" y="10" width="380" height="380" stroke="#D4AF37" stroke-width="1" stroke-dasharray="3 3" />
 
               <!-- Suite A -->
               <g class="cursor-pointer blueprint-block group" id="bp-suite-a">
-                <rect x="30" y="30" width="160" height="150" fill="#13281B" fill-opacity="0.3" stroke="#C5A880" stroke-width="1" class="group-hover:fill-luxury-gold/10 transition-colors duration-300" />
-                <text x="50" y="110" font-family="Playfair Display" font-size="14" fill="#FAF9F6" font-weight="bold">The Sanctuary Suite</text>
-                <text x="50" y="130" font-family="Inter" font-size="10" fill="#E6DFD3" opacity="0.7">Fully Furnished · Gated</text>
+                <rect x="30" y="30" width="160" height="150" fill="#111D15" fill-opacity="0.2" stroke="#D4AF37" stroke-width="0.75" class="group-hover:fill-luxury-gold/5 transition-all duration-300" />
+                <text x="50" y="105" font-family="Playfair Display" font-size="12" fill="#FAF9F5" font-weight="300" letter-spacing="0.05em">The Sanctuary Suite</text>
+                <text x="50" y="125" font-family="Inter" font-size="8" fill="#D2C9B9" letter-spacing="0.1em" opacity="0.6">LEVEL 1 · PRIVATE ENTRY</text>
               </g>
 
               <!-- Suite B -->
               <g class="cursor-pointer blueprint-block group" id="bp-suite-b">
-                <rect x="210" y="30" width="160" height="150" fill="#13281B" fill-opacity="0.3" stroke="#C5A880" stroke-width="1" class="group-hover:fill-luxury-gold/10 transition-colors duration-300" />
-                <text x="230" y="110" font-family="Playfair Display" font-size="14" fill="#FAF9F6" font-weight="bold">The Canopy Vista</text>
-                <text x="230" y="130" font-family="Inter" font-size="10" fill="#E6DFD3" opacity="0.7">Rooftop & Bar Access</text>
+                <rect x="210" y="30" width="160" height="150" fill="#111D15" fill-opacity="0.2" stroke="#D4AF37" stroke-width="0.75" class="group-hover:fill-luxury-gold/5 transition-all duration-300" />
+                <text x="230" y="105" font-family="Playfair Display" font-size="12" fill="#FAF9F5" font-weight="300" letter-spacing="0.05em">The Canopy Vista</text>
+                <text x="230" y="125" font-family="Inter" font-size="8" fill="#D2C9B9" letter-spacing="0.1em" opacity="0.6">LEVEL 2 · ROOFTOP DECK</text>
               </g>
 
               <!-- Shared Pool Deck -->
               <g class="cursor-pointer blueprint-block group" id="bp-pool-deck">
-                <rect x="30" y="200" width="340" height="170" fill="#0E1F15" fill-opacity="0.5" stroke="#C5A880" stroke-width="1.5" class="group-hover:fill-luxury-gold/10 transition-colors duration-300" />
+                <rect x="30" y="200" width="340" height="170" fill="#0C1611" fill-opacity="0.4" stroke="#D4AF37" stroke-width="1" class="group-hover:fill-luxury-gold/5 transition-all duration-300" />
                 <!-- Water details -->
-                <circle cx="200" cy="285" r="45" stroke="#C5A880" stroke-width="1" stroke-dasharray="4 4" class="animate-spin" style="animation-duration: 25s; transform-origin: 200px 285px;" />
-                <text x="145" y="280" font-family="Playfair Display" font-size="16" fill="#C5A880" font-weight="bold">Luxury Swimming Pool</text>
-                <text x="148" y="300" font-family="Inter" font-size="10" fill="#E6DFD3" opacity="0.7">Outdoor Private Lounge & Bar</text>
+                <circle cx="200" cy="285" r="40" stroke="#D4AF37" stroke-width="0.75" stroke-dasharray="3 3" />
+                <text x="135" y="280" font-family="Playfair Display" font-size="14" fill="#D4AF37" font-weight="300" letter-spacing="0.05em">Luxury Swimming Pool</text>
+                <text x="138" y="298" font-family="Inter" font-size="8" fill="#FAF9F5" letter-spacing="0.1em" opacity="0.6">GATED PRIVATE POOLSIDE</text>
               </g>
             </svg>
           </div>
         </div>
 
-        <!-- Live Details Drawer Column -->
+        <!-- Live Details Drawer Column (Minimalist, No Cookie Cutter Cards) -->
         <div class="lg:col-span-6 flex flex-col justify-center">
-          <div id="bp-info-card" class="bg-luxury-olive/30 border border-luxury-gold/25 p-8 rounded-sm shadow-2xl flex flex-col gap-5 min-h-[320px] justify-center transition-all duration-500">
-            <span class="text-[9px] uppercase tracking-[0.25em] text-luxury-gold font-bold">Interactive Floorplan Spec</span>
-            <h3 class="font-serif text-2xl font-bold text-luxury-cream">Choose a zone to inspect</h3>
-            <p class="text-xs text-luxury-soft/80 leading-relaxed">
-              Hover over or tap any part of the interactive SVG layout map on the left. You'll instantly see its exact dimensions, furnishing metrics, utilities details, and connectivity coverage.
+          <div id="bp-info-card" class="bg-luxury-olive/20 border border-luxury-gold/10 p-10 rounded-none shadow-premium flex flex-col gap-6 min-h-[350px] justify-center transition-all duration-700">
+            <span class="text-[9px] uppercase tracking-luxury-wide text-luxury-gold font-bold">SPATIAL SPECIFICATION</span>
+            <h3 class="font-serif text-3xl font-light text-luxury-cream">Select a structural sector</h3>
+            <p class="text-xs text-luxury-soft/80 leading-relaxed font-light">
+              Interact with our blueprint diagram on the left. Selected sectors instantly output architectural configurations, private security parameters, and independent utility integrations.
             </p>
-            <div class="flex items-center gap-2 text-xs text-luxury-gold/60">
-              <span>✦ Real-Time Spatial Verification</span>
-            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Suites Grid & Staggered Cards -->
-  <section class="py-24 relative overflow-hidden bg-luxury-accent/15 reveal-on-scroll">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="flex flex-col items-center text-center gap-3 mb-16">
-        <span class="text-xs uppercase tracking-luxury text-luxury-gold font-medium">Bespoke Spaces</span>
-        <h2 class="font-serif text-3xl md:text-5xl font-bold text-luxury-cream">Our Signature Accommodations</h2>
+  <!-- Suites Grid & Staggered Editorial Cards (No AI Template Style Cards) -->
+  <section class="py-32 relative overflow-hidden bg-luxury-accent/5 reveal-on-scroll">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="flex flex-col gap-4 mb-24 text-left">
+        <span class="text-[10px] uppercase tracking-luxury text-luxury-gold font-medium">SELECTED RESIDENCES</span>
+        <h2 class="text-editorial-h2 text-luxury-cream">Signature Accommodations</h2>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <!-- Suite 1 Card -->
-        <div class="flex flex-col gap-6 group">
-          <div class="aspect-[16/10] overflow-hidden rounded-sm border border-luxury-gold/20 relative p-1 bg-luxury-dark shadow-2xl">
-            <div class="w-full h-full overflow-hidden relative">
-              <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=800&q=80" alt="The Sanctuary Suite Interior" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
-              <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark/80 via-transparent to-transparent"></div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+        <!-- Suite 1 Editorial -->
+        <div class="flex flex-col gap-8 group">
+          <div class="aspect-[16/10] overflow-hidden rounded-none border border-luxury-gold/5 relative p-1.5 bg-luxury-dark shadow-premium">
+            <div class="w-full h-full overflow-hidden relative img-zoom-container">
+              <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80" alt="The Sanctuary Suite Interior" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark/60 via-transparent to-transparent"></div>
             </div>
             <!-- Features overlay tags -->
-            <div class="absolute top-4 right-4 flex gap-2">
-              <span class="px-3 py-1 bg-luxury-olive/90 border border-luxury-gold/30 text-[9px] uppercase tracking-widest text-luxury-gold rounded-sm">Pool Access</span>
-              <span class="px-3 py-1 bg-luxury-olive/90 border border-luxury-gold/30 text-[9px] uppercase tracking-widest text-luxury-gold rounded-sm">Kitchen</span>
+            <div class="absolute top-6 right-6 flex gap-2.5">
+              <span class="px-3.5 py-1.5 bg-luxury-olive border border-luxury-gold/15 text-[8px] uppercase tracking-luxury text-luxury-gold font-semibold">Gated Pool Entrance</span>
             </div>
           </div>
 
-          <div class="flex flex-col gap-2.5">
+          <div class="flex flex-col gap-4">
             <div class="flex justify-between items-baseline">
-              <h3 class="font-serif text-2xl font-bold text-luxury-cream group-hover:text-luxury-gold transition-colors duration-300">The Sanctuary Suite</h3>
-              <span class="text-xs uppercase tracking-widest text-luxury-gold font-sans font-semibold">Premium Level</span>
+              <h3 class="font-serif text-3xl font-light text-luxury-cream group-hover:text-luxury-gold transition-colors duration-500">The Sanctuary Suite</h3>
+              <span class="text-[9px] uppercase tracking-luxury text-luxury-gold font-semibold">First Tier</span>
             </div>
-            <p class="text-xs text-luxury-soft/80 leading-relaxed">
-              Exquisitely finished master suite featuring private entry, separate utility settings, a fully equipped modern kitchen, spacious living room, separate master bathroom, and high-speed Starlink WiFi connections.
+            <p class="text-xs text-luxury-soft/80 leading-relaxed font-light">
+              Completely independent residence configured with private gated entryways, full-capacity modern kitchen and bar setting, en-suite stone bathroom, individual power grid controls, and dedicated high-speed Starlink broadband network.
             </p>
 
-            <div class="grid grid-cols-3 gap-4 border-t border-b border-luxury-gold/10 py-3 mt-2 text-[10px] uppercase tracking-wider text-luxury-soft/70">
-              <div>Capacity: <strong class="text-luxury-gold block font-serif text-xs mt-1">2 - 4 Guests</strong></div>
-              <div>Bathrooms: <strong class="text-luxury-gold block font-serif text-xs mt-1">En-Suite Premium</strong></div>
-              <div>Utilities: <strong class="text-luxury-gold block font-serif text-xs mt-1">Independent</strong></div>
+            <div class="grid grid-cols-3 gap-6 border-t border-b border-luxury-gold/10 py-5 mt-4 text-[9px] uppercase tracking-luxury text-luxury-soft/60">
+              <div>CAPACITY <strong class="text-luxury-cream block font-serif text-sm mt-1 font-normal">2 - 4 Guests</strong></div>
+              <div>BATHROOM <strong class="text-luxury-cream block font-serif text-sm mt-1 font-normal">En-Suite</strong></div>
+              <div>UTILITY <strong class="text-luxury-cream block font-serif text-sm mt-1 font-normal">Independent</strong></div>
             </div>
           </div>
         </div>
 
-        <!-- Suite 2 Card -->
-        <div class="flex flex-col gap-6 group">
-          <div class="aspect-[16/10] overflow-hidden rounded-sm border border-luxury-gold/20 relative p-1 bg-luxury-dark shadow-2xl">
-            <div class="w-full h-full overflow-hidden relative">
-              <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80" alt="The Canopy Suite Interior" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
-              <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark/80 via-transparent to-transparent"></div>
+        <!-- Suite 2 Editorial -->
+        <div class="flex flex-col gap-8 group mt-12 lg:mt-0">
+          <div class="aspect-[16/10] overflow-hidden rounded-none border border-luxury-gold/5 relative p-1.5 bg-luxury-dark shadow-premium">
+            <div class="w-full h-full overflow-hidden relative img-zoom-container">
+              <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80" alt="The Canopy Suite Interior" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark/60 via-transparent to-transparent"></div>
             </div>
             <!-- Features overlay tags -->
-            <div class="absolute top-4 right-4 flex gap-2">
-              <span class="px-3 py-1 bg-luxury-olive/90 border border-luxury-gold/30 text-[9px] uppercase tracking-widest text-luxury-gold rounded-sm">Rooftop View</span>
-              <span class="px-3 py-1 bg-luxury-olive/90 border border-luxury-gold/30 text-[9px] uppercase tracking-widest text-luxury-gold rounded-sm">Starlink 5G</span>
+            <div class="absolute top-6 right-6 flex gap-2.5">
+              <span class="px-3.5 py-1.5 bg-luxury-olive border border-luxury-gold/15 text-[8px] uppercase tracking-luxury text-luxury-gold font-semibold">Sky Terrace Adjacent</span>
             </div>
           </div>
 
-          <div class="flex flex-col gap-2.5">
+          <div class="flex flex-col gap-4">
             <div class="flex justify-between items-baseline">
-              <h3 class="font-serif text-2xl font-bold text-luxury-cream group-hover:text-luxury-gold transition-colors duration-300">The Canopy Vista</h3>
-              <span class="text-xs uppercase tracking-widest text-luxury-gold font-sans font-semibold">Elevated Deck</span>
+              <h3 class="font-serif text-3xl font-light text-luxury-cream group-hover:text-luxury-gold transition-colors duration-500">The Canopy Vista</h3>
+              <span class="text-[9px] uppercase tracking-luxury text-luxury-gold font-semibold">Elevated Tier</span>
             </div>
-            <p class="text-xs text-luxury-soft/80 leading-relaxed">
-              Positioned on the upper level next to the stunning rooftop deck and private bar space. A perfect sanctuary of modern design, featuring a large screen TV, bright luxury furnishings, independent water access, and 24/7 safety.
+            <p class="text-xs text-luxury-soft/80 leading-relaxed font-light">
+              Uniting high-altitude light-filled views with cozy wooden architectural finishes. Positioned directly alongside our rooftop relaxation deck and custom beverage bar with sweeping views of the Ho landscape.
             </p>
 
-            <div class="grid grid-cols-3 gap-4 border-t border-b border-luxury-gold/10 py-3 mt-2 text-[10px] uppercase tracking-wider text-luxury-soft/70">
-              <div>Capacity: <strong class="text-luxury-gold block font-serif text-xs mt-1">2 Guests</strong></div>
-              <div>Attraction: <strong class="text-luxury-gold block font-serif text-xs mt-1">Rooftop / Bar</strong></div>
-              <div>Surveillance: <strong class="text-luxury-gold block font-serif text-xs mt-1">24/7 CCTV</strong></div>
+            <div class="grid grid-cols-3 gap-6 border-t border-b border-luxury-gold/10 py-5 mt-4 text-[9px] uppercase tracking-luxury text-luxury-soft/60">
+              <div>CAPACITY <strong class="text-luxury-cream block font-serif text-sm mt-1 font-normal">2 Guests</strong></div>
+              <div>DECK ACCESS <strong class="text-luxury-cream block font-serif text-sm mt-1 font-normal">Rooftop</strong></div>
+              <div>CONNECTIVITY <strong class="text-luxury-cream block font-serif text-sm mt-1 font-normal">Starlink 5G</strong></div>
             </div>
           </div>
         </div>
@@ -165,15 +162,15 @@
   </section>
 
   <!-- CTA Reservation Banner -->
-  <section class="py-20 relative overflow-hidden bg-luxury-olive text-center">
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-luxury-accent/50 via-transparent to-transparent pointer-events-none"></div>
-    <div class="max-w-xl mx-auto px-6 relative z-10 flex flex-col items-center gap-6">
-      <h2 class="font-serif text-3xl font-bold text-luxury-cream">Reserve Your Private Stay</h2>
-      <p class="text-xs text-luxury-soft/80 leading-relaxed">
-        Let our concierge customize your itinerary at NS Luxury Villa. Fill out our stay calculator or inquire immediately.
+  <section class="py-32 relative overflow-hidden bg-luxury-olive text-center">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-luxury-accent/40 via-transparent to-transparent pointer-events-none"></div>
+    <div class="max-w-2xl mx-auto px-8 relative z-10 flex flex-col items-center gap-8">
+      <h2 class="text-editorial-h2 text-luxury-cream">Initiate Your Reservation</h2>
+      <p class="text-xs text-luxury-soft/70 leading-relaxed font-light max-w-lg">
+        Allow our concierge to secure and prepare your private Ho itinerary. Calculate reservation rates or inquire immediately on WhatsApp.
       </p>
-      <a href="contact.html" class="px-8 py-4 bg-luxury-gold text-luxury-dark font-semibold text-xs uppercase tracking-luxury hover:bg-luxury-cream transition-all duration-500 rounded-sm">
-        Stay Planning & Calculator
+      <a href="contact.html" class="px-10 py-5 bg-luxury-gold text-luxury-dark font-semibold text-[10px] uppercase tracking-luxury-wide hover:bg-luxury-cream transition-all duration-700 rounded-none shadow-premium">
+        Calculate Rates & Inquire
       </a>
     </div>
   </section>

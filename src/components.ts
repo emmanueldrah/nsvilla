@@ -13,11 +13,11 @@ export function initializeEliteCursor() {
 
   const follower = document.createElement('div');
   follower.id = "elite-cursor-follower";
-  follower.className = "fixed top-0 left-0 w-8 h-8 border border-luxury-gold rounded-full pointer-events-none z-50 transition-transform duration-75 mix-blend-difference -translate-x-1/2 -translate-y-1/2 flex items-center justify-center opacity-0 scale-100";
+  follower.className = "fixed top-0 left-0 w-6 h-6 border border-luxury-gold rounded-full pointer-events-none z-50 transition-transform duration-75 mix-blend-difference -translate-x-1/2 -translate-y-1/2 flex items-center justify-center opacity-0 scale-100";
 
   // Create a solid center dot inside the tracker circle
   const dot = document.createElement('span');
-  dot.className = "w-1 h-1 bg-luxury-gold rounded-full block";
+  dot.className = "w-0.5 h-0.5 bg-luxury-gold rounded-full block";
   follower.appendChild(dot);
   document.body.appendChild(follower);
 
@@ -40,8 +40,8 @@ export function initializeEliteCursor() {
     // Elegant inertial physics formula (smooth factor 0.1)
     const dx = mouseX - followerX;
     const dy = mouseY - followerY;
-    followerX += dx * 0.12;
-    followerY += dy * 0.12;
+    followerX += dx * 0.1;
+    followerY += dy * 0.1;
 
     follower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0) translate(-50%, -50%)`;
     requestAnimationFrame(updateFollower);
@@ -54,12 +54,12 @@ export function initializeEliteCursor() {
     const targets = document.querySelectorAll('a, button, select, input, [role="button"], .blueprint-block, .gallery-item');
     targets.forEach(target => {
       target.addEventListener('mouseenter', () => {
-        follower.classList.add('scale-150', 'bg-luxury-gold/10');
+        follower.classList.add('scale-150', 'bg-luxury-gold/5');
         follower.classList.remove('border-luxury-gold');
-        follower.style.borderColor = "rgba(250, 249, 246, 0.8)";
+        follower.style.borderColor = "rgba(250, 249, 245, 0.9)";
       });
       target.addEventListener('mouseleave', () => {
-        follower.classList.remove('scale-150', 'bg-luxury-gold/10');
+        follower.classList.remove('scale-150', 'bg-luxury-gold/5');
         follower.classList.add('border-luxury-gold');
         follower.style.borderColor = "";
       });
@@ -75,15 +75,12 @@ export function initializeEliteCursor() {
 
 // Custom Premium SVG logo markup for luxury branding
 export const NS_LOGO_SVG = `
-<svg class="h-10 w-auto" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="60" cy="60" r="54" stroke="#C5A880" stroke-width="1.5" stroke-dasharray="4 4" class="animate-spin" style="animation-duration: 40s; transform-origin: 60px 60px;"/>
-  <circle cx="60" cy="60" r="48" stroke="#C5A880" stroke-width="1"/>
+<svg class="h-8 w-auto" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="60" cy="60" r="54" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="4 4" class="animate-spin" style="animation-duration: 60s; transform-origin: 60px 60px;"/>
+  <circle cx="60" cy="60" r="48" stroke="#D4AF37" stroke-width="1"/>
   <!-- Elegant Monogram -->
-  <path d="M42 80V40L58 64V40H62V80L46 56V80H42Z" fill="#C5A880" />
-  <path d="M68 74C68 77.5 71.5 79 75 79C79.5 79 82 76 82 72.5C82 66.5 70 68 70 61C70 57.5 73.5 55 77 55C81 55 83.5 57 84 60.5H80C79.5 58.5 78 57.5 76.5 57.5C73.5 57.5 74 61.5 77.5 62C81.5 62.5 86 65 86 71.5C86 76.5 81.5 81.5 75 81.5C70.5 81.5 68 79.5 68 74Z" fill="#C5A880" />
-  <!-- Accent diamonds -->
-  <path d="M60 18L63 21L60 24L57 21L60 18Z" fill="#C5A880"/>
-  <path d="M60 96L63 99L60 102L57 99L60 96Z" fill="#C5A880"/>
+  <path d="M42 80V40L58 64V40H62V80L46 56V80H42Z" fill="#D4AF37" />
+  <path d="M68 74C68 77.5 71.5 79 75 79C79.5 79 82 76 82 72.5C82 66.5 70 68 70 61C70 57.5 73.5 55 77 55C81 55 83.5 57 84 60.5H80C79.5 58.5 78 57.5 76.5 57.5C73.5 57.5 74 61.5 77.5 62C81.5 62.5 86 65 86 71.5C86 76.5 81.5 81.5 75 81.5C70.5 81.5 68 79.5 68 74Z" fill="#D4AF37" />
 </svg>
 `;
 
@@ -94,26 +91,26 @@ export function injectHeaderAndFooter() {
 
   const getLinkClass = (path: string) => {
     const isCurrent = currentPath.endsWith(path) || (path === '/' && (currentPath.endsWith('index.html') || currentPath === '/'));
-    return `text-xs uppercase tracking-luxury transition-all duration-300 relative py-2 ${
+    return `text-[10px] uppercase tracking-luxury-wide transition-all duration-500 relative py-2 ${
       isCurrent ? 'text-luxury-gold font-medium' : 'text-luxury-soft/80 hover:text-luxury-gold'
     }`;
   };
 
   const getActiveIndicator = (path: string) => {
     const isCurrent = currentPath.endsWith(path) || (path === '/' && (currentPath.endsWith('index.html') || currentPath === '/'));
-    return isCurrent ? '<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-luxury-gold rounded-full"></span>' : '';
+    return isCurrent ? '<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[3px] h-[3px] bg-luxury-gold rounded-full"></span>' : '';
   };
 
   if (headerContainer) {
-    headerContainer.className = "fixed top-0 left-0 w-full z-50 transition-all duration-500 bg-luxury-dark/90 backdrop-blur-md border-b border-luxury-gold/10";
+    headerContainer.className = "fixed top-0 left-0 w-full z-50 transition-all duration-700 bg-luxury-dark/85 backdrop-blur-md border-b border-luxury-gold/5";
     headerContainer.innerHTML = `
-      <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+      <div class="max-w-7xl mx-auto px-8 h-24 flex items-center justify-between">
         <!-- Logo -->
-        <a href="/" class="flex items-center gap-3 group">
+        <a href="index.html" class="flex items-center gap-3.5 group">
           ${NS_LOGO_SVG}
           <div class="flex flex-col">
-            <span class="font-serif text-xl tracking-widest text-luxury-gold font-semibold group-hover:text-luxury-cream transition-colors duration-300">NS LUXURY</span>
-            <span class="text-[9px] uppercase tracking-[0.25em] text-luxury-soft/60">VILLA · HO</span>
+            <span class="font-serif text-lg tracking-widest text-luxury-gold font-light group-hover:text-luxury-cream transition-colors duration-500">NS LUXURY</span>
+            <span class="text-[8px] uppercase tracking-luxury-ultra text-luxury-soft/50">VILLA · HO</span>
           </div>
         </a>
 
@@ -143,29 +140,29 @@ export function injectHeaderAndFooter() {
 
         <!-- CTA Direct WhatsApp -->
         <div class="hidden lg:block">
-          <a href="https://wa.me/233550000000?text=Hello%20NS%20Luxury%20Villa,%20I'm%20interested%20in%20planning%20a%20luxury%20stay!" target="_blank" class="px-6 py-3 border border-luxury-gold/40 text-xs tracking-widest uppercase text-luxury-gold hover:bg-luxury-gold hover:text-luxury-dark transition-all duration-500 rounded-sm">
-            Book Stay
+          <a href="https://wa.me/233550000000?text=Hello%20NS%20Luxury%20Villa,%20I%20wish%20to%20plan%20a%20sanctuary%20stay." target="_blank" class="px-6 py-3 border border-luxury-gold/20 text-[10px] tracking-luxury-wide uppercase text-luxury-gold hover:bg-luxury-gold hover:text-luxury-dark hover:border-transparent transition-all duration-500 rounded-none">
+            Reserve Suite
           </a>
         </div>
 
         <!-- Mobile Menu Trigger -->
         <button id="mobile-menu-toggle" class="md:hidden flex flex-col justify-center items-end gap-1.5 w-8 h-8 group focus:outline-none" aria-label="Toggle Navigation">
-          <span class="w-8 h-0.5 bg-luxury-gold group-hover:bg-luxury-cream transition-all duration-300"></span>
-          <span class="w-6 h-0.5 bg-luxury-gold group-hover:bg-luxury-cream transition-all duration-300"></span>
-          <span class="w-7 h-0.5 bg-luxury-gold group-hover:bg-luxury-cream transition-all duration-300"></span>
+          <span class="w-6 h-[1px] bg-luxury-gold group-hover:bg-luxury-cream transition-all duration-300"></span>
+          <span class="w-4 h-[1px] bg-luxury-gold group-hover:bg-luxury-cream transition-all duration-300"></span>
+          <span class="w-5 h-[1px] bg-luxury-gold group-hover:bg-luxury-cream transition-all duration-300"></span>
         </button>
       </div>
 
       <!-- Mobile Dropdown Overlay Menu -->
-      <div id="mobile-dropdown" class="fixed inset-0 top-24 bg-luxury-dark/98 backdrop-blur-xl z-40 hidden opacity-0 flex flex-col justify-center items-center gap-8 transition-all duration-500 border-t border-luxury-gold/10">
-        <a href="index.html" class="font-serif text-2xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all">Overview</a>
-        <a href="rooms.html" class="font-serif text-2xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all">Suites & Rooms</a>
-        <a href="amenities.html" class="font-serif text-2xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all">Amenities</a>
-        <a href="gallery.html" class="font-serif text-2xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all">Gallery</a>
-        <a href="contact.html" class="font-serif text-2xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all">Inquire & Map</a>
+      <div id="mobile-dropdown" class="fixed inset-0 top-24 bg-luxury-dark/98 backdrop-blur-2xl z-40 hidden opacity-0 flex flex-col justify-center items-center gap-10 transition-all duration-500 border-t border-luxury-gold/5">
+        <a href="index.html" class="font-serif text-3xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all duration-500">Overview</a>
+        <a href="rooms.html" class="font-serif text-3xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all duration-500">Suites & Rooms</a>
+        <a href="amenities.html" class="font-serif text-3xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all duration-500">Amenities</a>
+        <a href="gallery.html" class="font-serif text-3xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all duration-500">Gallery</a>
+        <a href="contact.html" class="font-serif text-3xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all duration-500">Inquire & Map</a>
 
-        <a href="https://wa.me/233550000000" target="_blank" class="mt-4 px-8 py-3 bg-luxury-gold text-luxury-dark font-medium tracking-luxury text-sm rounded-sm">
-          WhatsApp Inquiry
+        <a href="https://wa.me/233550000000" target="_blank" class="mt-4 px-8 py-4 border border-luxury-gold/40 text-luxury-gold font-medium tracking-luxury text-xs hover:bg-luxury-gold hover:text-luxury-dark transition-all duration-500">
+          WhatsApp Concierge
         </a>
       </div>
     `;
@@ -184,9 +181,9 @@ export function injectHeaderAndFooter() {
           }, 50);
           // animate toggle button to close cross
           const lines = menuToggle.children;
-          (lines[0] as HTMLElement).style.transform = 'translateY(8px) rotate(45deg)';
+          (lines[0] as HTMLElement).style.transform = 'translateY(5px) rotate(45deg)';
           (lines[1] as HTMLElement).style.opacity = '0';
-          (lines[2] as HTMLElement).style.transform = 'translateY(-8px) rotate(-45deg)';
+          (lines[2] as HTMLElement).style.transform = 'translateY(-5px) rotate(-45deg)';
         } else {
           mobileDropdown.classList.remove('opacity-100');
           setTimeout(() => {
@@ -213,65 +210,52 @@ export function injectHeaderAndFooter() {
   }
 
   if (footerContainer) {
-    footerContainer.className = "bg-luxury-olive border-t border-luxury-gold/15 py-16 px-6 mt-20 relative overflow-hidden";
+    footerContainer.className = "bg-luxury-olive/40 border-t border-luxury-gold/5 py-24 px-8 relative overflow-hidden";
     footerContainer.innerHTML = `
-      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-luxury-accent/40 via-transparent to-transparent pointer-events-none"></div>
-      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-16 relative z-10">
         <!-- Brand Segment -->
-        <div class="flex flex-col gap-4">
-          <div class="flex items-center gap-3">
+        <div class="flex flex-col gap-6 md:col-span-2">
+          <div class="flex items-center gap-3.5">
             ${NS_LOGO_SVG}
             <div class="flex flex-col">
-              <span class="font-serif text-xl tracking-widest text-luxury-gold font-semibold">NS LUXURY</span>
-              <span class="text-[9px] uppercase tracking-[0.25em] text-luxury-soft/60">VILLA · HO</span>
+              <span class="font-serif text-xl tracking-widest text-luxury-gold font-light">NS LUXURY VILLA</span>
+              <span class="text-[8px] uppercase tracking-luxury-ultra text-luxury-soft/50">HO · VOLTA REGION</span>
             </div>
           </div>
-          <p class="text-xs text-luxury-soft/70 leading-relaxed max-w-xs mt-2">
-            A private, secure, and serene gated oasis in the heart of Ho, Volta Region, Ghana. A perfect integration of modern luxury, custom pool, cozy private bar, rooftop lounge, and high-speed Starlink.
+          <p class="text-xs text-luxury-soft/70 leading-relaxed max-w-sm">
+            Tucked elegantly near the Mount Adaklu range in Ho, Volta Region. We host travelers seeking absolute security, high-speed connection, and quiet botanical isolation.
           </p>
         </div>
 
         <!-- Links -->
-        <div class="flex flex-col gap-4">
-          <h4 class="font-serif text-sm uppercase tracking-luxury text-luxury-gold">Navigate</h4>
-          <ul class="flex flex-col gap-2.5 text-xs text-luxury-soft/80">
-            <li><a href="index.html" class="hover:text-luxury-gold transition-colors">Overview</a></li>
-            <li><a href="rooms.html" class="hover:text-luxury-gold transition-colors">Suites & Rooms</a></li>
-            <li><a href="amenities.html" class="hover:text-luxury-gold transition-colors">Premium Amenities</a></li>
-            <li><a href="gallery.html" class="hover:text-luxury-gold transition-colors">Curated Gallery</a></li>
-            <li><a href="contact.html" class="hover:text-luxury-gold transition-colors">Inquire & Map</a></li>
-          </ul>
-        </div>
-
-        <!-- Amenities Brief -->
-        <div class="flex flex-col gap-4">
-          <h4 class="font-serif text-sm uppercase tracking-luxury text-luxury-gold">Features</h4>
-          <ul class="flex flex-col gap-2.5 text-xs text-luxury-soft/80">
-            <li>✦ Pristine Swimming Pool</li>
-            <li>✦ Intimate Private Lounge Bar</li>
-            <li>✦ Panorama Rooftop Space</li>
-            <li>✦ Secure Gated Compound (CCTV)</li>
-            <li>✦ Starlink High-Speed WiFi</li>
+        <div class="flex flex-col gap-5">
+          <h4 class="text-[10px] uppercase tracking-luxury text-luxury-gold font-semibold">Sanctuary Pages</h4>
+          <ul class="flex flex-col gap-3.5 text-xs text-luxury-soft/70">
+            <li><a href="index.html" class="hover:text-luxury-gold transition-colors duration-300">Overview</a></li>
+            <li><a href="rooms.html" class="hover:text-luxury-gold transition-colors duration-300">Suites & Spaces</a></li>
+            <li><a href="amenities.html" class="hover:text-luxury-gold transition-colors duration-300">Premium Amenities</a></li>
+            <li><a href="gallery.html" class="hover:text-luxury-gold transition-colors duration-300">The Curated Lens</a></li>
+            <li><a href="contact.html" class="hover:text-luxury-gold transition-colors duration-300">Inquire & Navigate</a></li>
           </ul>
         </div>
 
         <!-- Contact/Directions -->
-        <div class="flex flex-col gap-4">
-          <h4 class="font-serif text-sm uppercase tracking-luxury text-luxury-gold">Location & Contact</h4>
-          <p class="text-xs text-luxury-soft/80 leading-relaxed">
+        <div class="flex flex-col gap-5">
+          <h4 class="text-[10px] uppercase tracking-luxury text-luxury-gold font-semibold">Geospatial</h4>
+          <p class="text-xs text-luxury-soft/70 leading-relaxed">
             Ho, Volta Region, Ghana<br>
-            <span class="text-[10px] text-luxury-gold/80 block mt-1">📍 Near Ho DVLA District Office</span>
+            <span class="text-[9px] text-luxury-gold/80 block mt-1 tracking-widest uppercase">📍 Near DVLA District Office</span>
           </p>
-          <div class="flex flex-col gap-2.5 mt-2">
-            <a href="tel:+233550000000" class="text-xs text-luxury-gold hover:text-luxury-cream transition-colors">📞 +233 55 000 0000</a>
-            <a href="mailto:stay@nsluxuryvilla.com" class="text-xs text-luxury-gold hover:text-luxury-cream transition-colors">✉ stay@nsluxuryvilla.com</a>
+          <div class="flex flex-col gap-3 mt-1">
+            <a href="tel:+233550000000" class="text-xs text-luxury-soft/80 hover:text-luxury-gold transition-colors duration-300">📞 +233 55 000 0000</a>
+            <a href="mailto:stay@nsluxuryvilla.com" class="text-xs text-luxury-soft/80 hover:text-luxury-gold transition-colors duration-300">✉ stay@nsluxuryvilla.com</a>
           </div>
         </div>
       </div>
 
-      <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-luxury-gold/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-luxury-soft/40 uppercase tracking-widest relative z-10">
-        <span>© 2026 NS LUXURY VILLA, HO. ALL RIGHTS RESERVED.</span>
-        <span>Crafted for Serenity & Discretion</span>
+      <div class="max-w-7xl mx-auto mt-20 pt-8 border-t border-luxury-gold/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[9px] text-luxury-soft/40 uppercase tracking-luxury-wide relative z-10">
+        <span>© 2026 NS LUXURY VILLA. ALL RIGHTS RESERVED.</span>
+        <span>Meticulously Handcrafted for Slow Living</span>
       </div>
     `;
   }
@@ -284,39 +268,39 @@ export function injectHeaderAndFooter() {
 export function initializeSerenityPlayer() {
   const playerContainer = document.createElement('div');
   playerContainer.id = "serenity-audio-player";
-  playerContainer.className = "fixed bottom-6 right-6 z-40 bg-luxury-dark/95 backdrop-blur-xl border border-luxury-gold/30 p-4 rounded-3xl shadow-[0_15px_50px_-15px_rgba(197,168,128,0.3)] flex items-center gap-4 transition-all duration-500 max-w-[90vw] md:max-w-md pointer-events-auto select-none";
+  playerContainer.className = "fixed bottom-8 right-8 z-40 bg-luxury-dark/95 backdrop-blur-xl border border-luxury-gold/10 p-5 rounded-none shadow-premium flex items-center gap-5 transition-all duration-500 max-w-[90vw] md:max-w-md pointer-events-auto select-none";
 
   playerContainer.innerHTML = `
     <!-- Play Trigger circle -->
-    <div class="relative w-12 h-12 flex items-center justify-center bg-luxury-gold text-luxury-dark rounded-full cursor-pointer transition-transform duration-300 active:scale-95 shadow-lg" id="audio-play-button">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" id="audio-play-icon">
+    <div class="relative w-11 h-11 flex items-center justify-center bg-luxury-gold text-luxury-dark rounded-none cursor-pointer transition-transform duration-300 active:scale-95 shadow-md" id="audio-play-button">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" id="audio-play-icon">
         <path d="M8 5v14l11-7z" />
       </svg>
     </div>
 
     <!-- Interface controls -->
-    <div class="flex flex-col gap-1.5 min-w-[140px] md:min-w-[180px]">
+    <div class="flex flex-col gap-2 min-w-[150px] md:min-w-[190px]">
       <div class="flex items-center justify-between gap-2">
-        <span class="text-[10px] uppercase font-bold tracking-widest text-luxury-gold">Serenity Soundscape</span>
+        <span class="text-[9px] uppercase font-bold tracking-luxury text-luxury-gold">Sensory Ambience</span>
         <!-- Active Sound visualizer bars -->
-        <div id="sound-wave-bars" class="hidden items-end gap-0.5 h-3 opacity-90">
-          <span class="w-0.5 bg-luxury-gold h-1 animate-bounce" style="animation-duration: 0.8s"></span>
-          <span class="w-0.5 bg-luxury-gold h-2 animate-bounce" style="animation-duration: 1.1s; animation-delay: 0.2s;"></span>
-          <span class="w-0.5 bg-luxury-gold h-3 animate-bounce" style="animation-duration: 0.7s; animation-delay: 0.4s;"></span>
-          <span class="w-0.5 bg-luxury-gold h-1.5 animate-bounce" style="animation-duration: 0.9s; animation-delay: 0.1s;"></span>
+        <div id="sound-wave-bars" class="hidden items-end gap-[3px] h-3 opacity-90">
+          <span class="w-[1px] bg-luxury-gold h-1 animate-bounce" style="animation-duration: 0.8s"></span>
+          <span class="w-[1px] bg-luxury-gold h-2.5 animate-bounce" style="animation-duration: 1.1s; animation-delay: 0.2s;"></span>
+          <span class="w-[1px] bg-luxury-gold h-3 animate-bounce" style="animation-duration: 0.7s; animation-delay: 0.4s;"></span>
+          <span class="w-[1px] bg-luxury-gold h-1.5 animate-bounce" style="animation-duration: 0.9s; animation-delay: 0.1s;"></span>
         </div>
       </div>
 
       <!-- Mode selector toggles -->
-      <div class="flex items-center gap-2 bg-luxury-olive/50 border border-luxury-gold/15 p-1 rounded-sm text-[8px] uppercase tracking-widest font-bold">
-        <button id="sound-mode-rain" class="flex-1 py-1 px-1.5 bg-luxury-gold text-luxury-dark rounded-xs text-center transition-all duration-300">Volta Rain</button>
-        <button id="sound-mode-breeze" class="flex-1 py-1 px-1.5 text-luxury-soft/60 hover:text-luxury-cream text-center transition-all duration-300">Forest Drone</button>
+      <div class="flex items-center gap-1.5 bg-luxury-olive/30 border border-luxury-gold/5 p-1 text-[8px] uppercase tracking-luxury font-bold">
+        <button id="sound-mode-rain" class="flex-1 py-1 px-1 bg-luxury-gold text-luxury-dark text-center transition-all duration-500">Volta Rain</button>
+        <button id="sound-mode-breeze" class="flex-1 py-1 px-1 text-luxury-soft/60 hover:text-luxury-cream text-center transition-all duration-500">Forest Drone</button>
       </div>
 
       <!-- Sophisticated micro slider -->
-      <div class="flex items-center gap-2 mt-1">
-        <span class="text-[8px] text-luxury-soft/50">VOL</span>
-        <input type="range" id="sound-volume" min="0" max="1" step="0.05" value="0.25" class="w-full h-0.5 bg-luxury-gold/20 appearance-none cursor-pointer accent-luxury-gold">
+      <div class="flex items-center gap-2 mt-0.5">
+        <span class="text-[8px] text-luxury-soft/40 uppercase tracking-widest">VOL</span>
+        <input type="range" id="sound-volume" min="0" max="1" step="0.05" value="0.25" class="w-full h-[1px] bg-luxury-gold/20 appearance-none cursor-pointer accent-luxury-gold">
       </div>
     </div>
   `;

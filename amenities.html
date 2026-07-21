@@ -11,155 +11,142 @@
   <!-- Header Placeholder -->
   <header id="main-header"></header>
 
-  <!-- Title Segment -->
-  <section class="pt-36 pb-12 relative overflow-hidden bg-gradient-to-b from-luxury-accent/30 to-transparent">
-    <div class="max-w-7xl mx-auto px-6 text-center flex flex-col items-center gap-4 relative z-10">
-      <div class="flex items-center gap-3">
-        <span class="w-8 h-[1px] bg-luxury-gold"></span>
-        <span class="text-xs uppercase tracking-[0.25em] text-luxury-gold font-medium font-sans">Bespoke Living</span>
-        <span class="w-8 h-[1px] bg-luxury-gold"></span>
+  <!-- Title Segment (Magazine Style) -->
+  <section class="pt-40 pb-16 relative overflow-hidden bg-gradient-to-b from-luxury-accent/20 to-transparent">
+    <div class="max-w-7xl mx-auto px-8 text-left flex flex-col gap-6 relative z-10">
+      <div class="flex items-center gap-4">
+        <span class="w-16 h-[1px] bg-luxury-gold/50"></span>
+        <span class="text-[10px] uppercase tracking-luxury-ultra text-luxury-gold font-medium font-sans">SANCTUARY COMFORT</span>
       </div>
-      <h1 class="font-serif text-4xl md:text-6xl font-bold tracking-tight text-luxury-cream">Premium Amenities</h1>
-      <p class="text-xs md:text-sm text-luxury-soft/70 max-w-xl mt-2 leading-relaxed">
-        A precise details overview of our premier features, including our beautiful swimming pool, private lounge bar, rooftop relaxation deck, and Starlink 5G network.
+      <h1 class="text-editorial-h1 leading-[1.05] tracking-tight">
+        A symphony of <br>
+        <span class="italic font-light text-luxury-soft font-serif">sensory details.</span>
+      </h1>
+      <p class="text-editorial-lead max-w-xl text-luxury-soft/80 font-light mt-2">
+        A dedicated details index mapping the physical features of our gated compound. Designed to deliver complete peace of mind, high-bandwidth connection, and botanical recreation.
       </p>
     </div>
   </section>
 
-  <!-- Interactive Sensory Columns (The Grid of 4 Monoliths) -->
-  <section class="py-16 px-6 max-w-7xl mx-auto relative overflow-hidden reveal-on-scroll">
-    <div class="flex flex-col items-center text-center gap-3 mb-12">
-      <span class="text-xs uppercase tracking-luxury text-luxury-gold font-medium">Interactive Grid</span>
-      <h2 class="font-serif text-2xl md:text-4xl font-bold text-luxury-cream">Bespoke Experiences</h2>
-      <p class="text-xs text-luxury-soft/60 mt-1 max-w-md">Hover over any column monolith below to dynamically expand and preview its luxurious features.</p>
+  <!-- Asymmetrical Editorial Showcase (Replacing the cookie-cutter grid) -->
+  <section class="py-24 px-8 max-w-7xl mx-auto relative overflow-hidden reveal-on-scroll">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+      <!-- Item 1: Swimming Pool (Asymmetrical Left Offset Frame) -->
+      <div class="lg:col-span-7 flex flex-col gap-6 order-1">
+        <div class="aspect-[16/10] overflow-hidden bg-luxury-dark border border-luxury-gold/5 p-1.5 shadow-premium img-zoom-container">
+          <img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=1200&q=80" alt="Swimming Pool Sunset" class="w-full h-full object-cover">
+        </div>
+      </div>
+      <div class="lg:col-span-5 flex flex-col gap-5 order-2">
+        <span class="text-[9px] uppercase tracking-luxury text-luxury-gold font-semibold">AMENITY ONE</span>
+        <h3 class="font-serif text-3xl font-light text-luxury-cream">Luminous Swimming Pool</h3>
+        <p class="text-xs text-luxury-soft/80 leading-relaxed font-light">
+          Positioned as the physical center of the estate. The swimming pool is clear, sparkling, and completely shielded from outside visibility by deep, high-walled concrete gates. Enjoy morning laps or relaxing cocktails in total discretion.
+        </p>
+      </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 min-h-[500px]" id="sensory-columns">
-      <!-- Monolith 1: Pool -->
-      <div class="sensory-column bg-luxury-olive/30 border border-luxury-gold/15 p-8 flex flex-col justify-end relative overflow-hidden group rounded-sm transition-all duration-500 hover:bg-luxury-olive/50 hover:border-luxury-gold/40 cursor-pointer min-h-[400px]">
-        <!-- Gradient Background overlay -->
-        <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark/95 via-luxury-dark/40 to-transparent z-0"></div>
-        <div class="absolute inset-0 opacity-20 bg-cover bg-center mix-blend-overlay group-hover:scale-105 transition-transform duration-1000" style="background-image: url('https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=600&q=80')"></div>
-
-        <div class="relative z-10 flex flex-col gap-3">
-          <span class="text-xs text-luxury-gold tracking-widest font-serif block">✦ FEATURE 01</span>
-          <h3 class="font-serif text-2xl font-bold text-luxury-cream group-hover:text-luxury-gold transition-colors duration-300">Pristine Swimming Pool</h3>
-          <p class="text-xs text-luxury-soft/70 leading-relaxed max-h-0 opacity-0 overflow-hidden group-hover:max-h-[150px] group-hover:opacity-100 transition-all duration-700">
-            A beautiful, sparkling swimming pool right in the heart of our compound. Perfect for refreshing morning laps or lounging peacefully during beautiful Volta afternoons.
-          </p>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center mt-32">
+      <!-- Item 2: Private Lounge Bar (Asymmetrical Right Offset Frame) -->
+      <div class="lg:col-span-5 flex flex-col gap-5 order-2 lg:order-1">
+        <span class="text-[9px] uppercase tracking-luxury text-luxury-gold font-semibold">AMENITY TWO</span>
+        <h3 class="font-serif text-3xl font-light text-luxury-cream">Intimate Beverage Lounge</h3>
+        <p class="text-xs text-luxury-soft/80 leading-relaxed font-light">
+          A beautifully designed interior bar lounge space tailored for quiet socializing. Enjoy high-capacity refrigerators, custom counter woodwork, and ambient dimmers that match different vibes under the Volta stars.
+        </p>
+      </div>
+      <div class="lg:col-span-7 flex flex-col gap-6 order-1 lg:order-2">
+        <div class="aspect-[16/10] overflow-hidden bg-luxury-dark border border-luxury-gold/5 p-1.5 shadow-premium img-zoom-container">
+          <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1200&q=80" alt="Intimate Lounge Bar" class="w-full h-full object-cover">
         </div>
       </div>
+    </div>
 
-      <!-- Monolith 2: Private Bar -->
-      <div class="sensory-column bg-luxury-olive/30 border border-luxury-gold/15 p-8 flex flex-col justify-end relative overflow-hidden group rounded-sm transition-all duration-500 hover:bg-luxury-olive/50 hover:border-luxury-gold/40 cursor-pointer min-h-[400px]">
-        <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark/95 via-luxury-dark/40 to-transparent z-0"></div>
-        <div class="absolute inset-0 opacity-20 bg-cover bg-center mix-blend-overlay group-hover:scale-105 transition-transform duration-1000" style="background-image: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=600&q=80')"></div>
-
-        <div class="relative z-10 flex flex-col gap-3">
-          <span class="text-xs text-luxury-gold tracking-widest font-serif block">✦ FEATURE 02</span>
-          <h3 class="font-serif text-2xl font-bold text-luxury-cream group-hover:text-luxury-gold transition-colors duration-300">Intimate Private Bar</h3>
-          <p class="text-xs text-luxury-soft/70 leading-relaxed max-h-0 opacity-0 overflow-hidden group-hover:max-h-[150px] group-hover:opacity-100 transition-all duration-700">
-            Unwind in our custom-built lounge bar. Expertly designed for cozy socializing, serving high-end craft beverages and refreshing juices under Ho’s starry sky.
-          </p>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center mt-32">
+      <!-- Item 3: Sky Deck Lounge -->
+      <div class="lg:col-span-7 flex flex-col gap-6 order-1">
+        <div class="aspect-[16/10] overflow-hidden bg-luxury-dark border border-luxury-gold/5 p-1.5 shadow-premium img-zoom-container">
+          <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=80" alt="Rooftop Night Sky Deck" class="w-full h-full object-cover">
         </div>
       </div>
-
-      <!-- Monolith 3: Rooftop Lounge -->
-      <div class="sensory-column bg-luxury-olive/30 border border-luxury-gold/15 p-8 flex flex-col justify-end relative overflow-hidden group rounded-sm transition-all duration-500 hover:bg-luxury-olive/50 hover:border-luxury-gold/40 cursor-pointer min-h-[400px]">
-        <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark/95 via-luxury-dark/40 to-transparent z-0"></div>
-        <div class="absolute inset-0 opacity-20 bg-cover bg-center mix-blend-overlay group-hover:scale-105 transition-transform duration-1000" style="background-image: url('https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=600&q=80')"></div>
-
-        <div class="relative z-10 flex flex-col gap-3">
-          <span class="text-xs text-luxury-gold tracking-widest font-serif block">✦ FEATURE 03</span>
-          <h3 class="font-serif text-2xl font-bold text-luxury-cream group-hover:text-luxury-gold transition-colors duration-300">Rooftop Sky Lounge</h3>
-          <p class="text-xs text-luxury-soft/70 leading-relaxed max-h-0 opacity-0 overflow-hidden group-hover:max-h-[150px] group-hover:opacity-100 transition-all duration-700">
-            A premium rooftop terrace space with clear views of the beautiful Ho landscape. Designed for relaxation, deep conversations, stargazing, and viewing magical Volta Region sunsets.
-          </p>
-        </div>
-      </div>
-
-      <!-- Monolith 4: Starlink WiFi -->
-      <div class="sensory-column bg-luxury-olive/30 border border-luxury-gold/15 p-8 flex flex-col justify-end relative overflow-hidden group rounded-sm transition-all duration-500 hover:bg-luxury-olive/50 hover:border-luxury-gold/40 cursor-pointer min-h-[400px]">
-        <div class="absolute inset-0 bg-gradient-to-t from-luxury-dark/95 via-luxury-dark/40 to-transparent z-0"></div>
-        <div class="absolute inset-0 opacity-20 bg-cover bg-center mix-blend-overlay group-hover:scale-105 transition-transform duration-1000" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80')"></div>
-
-        <div class="relative z-10 flex flex-col gap-3">
-          <span class="text-xs text-luxury-gold tracking-widest font-serif block">✦ FEATURE 04</span>
-          <h3 class="font-serif text-2xl font-bold text-luxury-cream group-hover:text-luxury-gold transition-colors duration-300">Starlink 5G Connection</h3>
-          <p class="text-xs text-luxury-soft/70 leading-relaxed max-h-0 opacity-0 overflow-hidden group-hover:max-h-[150px] group-hover:opacity-100 transition-all duration-700">
-            High-speed, premium Starlink broadband throughout the property. Delivering low latency and high bandwidth so you stay securely connected with colleagues, family, or work streams.
-          </p>
-        </div>
+      <div class="lg:col-span-5 flex flex-col gap-5 order-2">
+        <span class="text-[9px] uppercase tracking-luxury text-luxury-gold font-semibold">AMENITY THREE</span>
+        <h3 class="font-serif text-3xl font-light text-luxury-cream">Panoramic Rooftop Terrace</h3>
+        <p class="text-xs text-luxury-soft/80 leading-relaxed font-light">
+          Ascend to our upper sky patio space. Enjoy deep breezes from the surrounding Volta hills, customized comfortable lounge chairs, and an unbeatable spot for evening star gazing or sunset viewing.
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- Interactive Starlink Constellation Feature -->
-  <section class="py-20 bg-luxury-dark border-t border-b border-luxury-gold/10 relative overflow-hidden reveal-on-scroll">
-    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+  <!-- Interactive Starlink Constellation Feature (Sophisticated Canvas Constellation) -->
+  <section class="py-32 bg-luxury-dark border-t border-b border-luxury-gold/5 relative overflow-hidden reveal-on-scroll">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
       <!-- Left side copy -->
       <div class="lg:col-span-6 flex flex-col gap-6">
-        <div class="flex items-center gap-3">
-          <span class="w-8 h-[1px] bg-luxury-gold"></span>
-          <span class="text-xs uppercase tracking-luxury text-luxury-gold font-bold">Uncompromised Speed</span>
+        <div class="flex items-center gap-4">
+          <span class="w-12 h-[1px] bg-luxury-gold/50"></span>
+          <span class="text-[10px] uppercase tracking-luxury text-luxury-gold font-bold">UNCOMPROMISED VELOCITY</span>
         </div>
-        <h2 class="font-serif text-3xl md:text-4xl font-bold text-luxury-cream">Starlink Connected</h2>
-        <p class="text-xs md:text-sm text-luxury-soft/80 leading-relaxed">
-          At NS Luxury Villa, low latency is part of our design. Enjoy seamless high-definition streaming, smooth zoom conferences, and flawless online gaming powered by premium Starlink. Coverage reaches the master bedroom, the pool deck, and the rooftop lounge.
+        <h2 class="text-editorial-h2 text-luxury-cream">Starlink Connected</h2>
+        <p class="text-xs md:text-sm text-luxury-soft/80 leading-relaxed font-light">
+          Low latency is deeply woven into our design parameters. Experience seamless low-latency video conferences, flawless high-definition remote streaming, and continuous online file sync powered by high-capacity Starlink satellite dishes.
         </p>
-        <div class="flex items-center gap-6 mt-2">
+        <div class="flex items-center gap-8 mt-4 border-t border-luxury-gold/10 pt-8">
           <div class="flex flex-col">
-            <span class="font-serif text-3xl text-luxury-gold font-bold">350+</span>
-            <span class="text-[9px] uppercase tracking-widest text-luxury-soft/60">Mbps Download</span>
+            <span class="font-serif text-4xl text-luxury-gold font-light">350+</span>
+            <span class="text-[8px] uppercase tracking-luxury text-luxury-soft/60 block mt-1">Mbps Download</span>
           </div>
-          <div class="w-[1px] h-10 bg-luxury-gold/20"></div>
+          <div class="w-[1px] h-10 bg-luxury-gold/15"></div>
           <div class="flex flex-col">
-            <span class="font-serif text-3xl text-luxury-gold font-bold">~25ms</span>
-            <span class="text-[9px] uppercase tracking-widest text-luxury-soft/60">Average Latency</span>
+            <span class="font-serif text-4xl text-luxury-gold font-light">~25ms</span>
+            <span class="text-[8px] uppercase tracking-luxury text-luxury-soft/60 block mt-1">Ground Latency</span>
           </div>
         </div>
       </div>
 
       <!-- Right side Canvas Interactive Constellation visualizer -->
-      <div class="lg:col-span-6 relative aspect-video border border-luxury-gold/15 bg-luxury-olive/15 p-1 rounded-sm overflow-hidden flex items-center justify-center">
+      <div class="lg:col-span-6 relative aspect-video border border-luxury-gold/10 bg-luxury-olive/10 p-1.5 shadow-premium overflow-hidden flex items-center justify-center">
         <!-- Interactive Canvas Background -->
         <canvas id="starlink-canvas" class="absolute inset-0 w-full h-full cursor-pointer"></canvas>
-        <div class="relative z-10 flex flex-col items-center gap-1.5 text-center pointer-events-none">
-          <span class="text-[10px] uppercase tracking-[0.25em] text-luxury-gold">Satellite Visualizer</span>
-          <span class="text-xs text-luxury-cream/80">Move mouse to bend orbits</span>
+        <div class="relative z-10 flex flex-col items-center gap-2 text-center pointer-events-none select-none">
+          <span class="text-[9px] uppercase tracking-luxury-wide text-luxury-gold font-semibold">COSMIC ORBIT ENGINE</span>
+          <span class="text-[10px] text-luxury-cream/50 tracking-widest uppercase">Glide mouse to warp magnetic nodes</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Security & Serenity Segment -->
-  <section class="py-24 relative overflow-hidden reveal-on-scroll">
-    <div class="max-w-5xl mx-auto px-6 text-center flex flex-col items-center gap-8">
-      <div class="flex items-center gap-3">
-        <span class="w-8 h-[1px] bg-luxury-gold"></span>
-        <span class="text-xs uppercase tracking-luxury text-luxury-gold font-bold">Safety & Gated Seclusion</span>
-        <span class="w-8 h-[1px] bg-luxury-gold"></span>
+  <!-- Gated Discretion Security Segment -->
+  <section class="py-32 relative overflow-hidden reveal-on-scroll">
+    <div class="max-w-5xl mx-auto px-8 text-center flex flex-col items-center gap-8">
+      <div class="flex items-center gap-4">
+        <span class="w-12 h-[1px] bg-luxury-gold/50"></span>
+        <span class="text-[10px] uppercase tracking-luxury text-luxury-gold font-bold">SECURE SECLUSION</span>
+        <span class="w-12 h-[1px] bg-luxury-gold/50"></span>
       </div>
-      <h2 class="font-serif text-3xl md:text-5xl font-bold text-luxury-cream">Your Discretion, Secured</h2>
-      <p class="text-xs md:text-sm text-luxury-soft/80 leading-relaxed max-w-2xl">
-        Our premium compound is completely fenced, gated, and fortified with professional 24/7 CCTV surveillance cameras covering entry areas and perimeter lines. Sleep with absolute peace of mind knowing your privacy is maintained with elite precision.
+      <h2 class="text-editorial-h2 text-luxury-cream">Your discretion, secured</h2>
+      <p class="text-xs md:text-sm text-luxury-soft/80 leading-relaxed max-w-2xl font-light">
+        Our premium compound is completely enclosed, gated, and secured with modern 24/7 high-definition CCTV monitoring of all boundary limits. Enjoy your private retreat with the reassurance of elite, non-intrusive safety setups.
       </p>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 w-full mt-6 text-[10px] uppercase tracking-widest font-semibold text-luxury-soft">
-        <div class="p-6 border border-luxury-gold/10 bg-luxury-olive/10 rounded-sm">
-          <span class="text-luxury-gold font-serif text-xl block mb-2">🔒</span>
-          Secure Gated
+
+      <!-- Minimalist specs grids (No standard card blocks) -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 w-full mt-12 text-[10px] uppercase tracking-luxury-wide font-semibold text-luxury-soft/80">
+        <div class="p-8 border border-luxury-gold/10 bg-luxury-olive/20 rounded-none shadow-premium">
+          <span class="text-luxury-gold font-serif text-2xl block mb-3 font-light">✦</span>
+          Gated Perimeter
         </div>
-        <div class="p-6 border border-luxury-gold/10 bg-luxury-olive/10 rounded-sm">
-          <span class="text-luxury-gold font-serif text-xl block mb-2">📹</span>
-          24/7 CCTV
+        <div class="p-8 border border-luxury-gold/10 bg-luxury-olive/20 rounded-none shadow-premium">
+          <span class="text-luxury-gold font-serif text-2xl block mb-3 font-light">✦</span>
+          24/7 CCTV Camera Lines
         </div>
-        <div class="p-6 border border-luxury-gold/10 bg-luxury-olive/10 rounded-sm">
-          <span class="text-luxury-gold font-serif text-xl block mb-2">🌿</span>
-          Lush Landscaped
+        <div class="p-8 border border-luxury-gold/10 bg-luxury-olive/20 rounded-none shadow-premium">
+          <span class="text-luxury-gold font-serif text-2xl block mb-3 font-light">✦</span>
+          Botanical Garden Grounds
         </div>
-        <div class="p-6 border border-luxury-gold/10 bg-luxury-olive/10 rounded-sm">
-          <span class="text-luxury-gold font-serif text-xl block mb-2">⚡</span>
-          Independent Power
+        <div class="p-8 border border-luxury-gold/10 bg-luxury-olive/20 rounded-none shadow-premium">
+          <span class="text-luxury-gold font-serif text-2xl block mb-3 font-light">✦</span>
+          Independent Utility Systems
         </div>
       </div>
     </div>

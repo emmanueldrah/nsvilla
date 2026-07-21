@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@200;300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,59 +6,104 @@
 
 /* Custom premium transitions & custom utility classes */
 .custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
+  width: 4px; /* Even thinner and more subtle */
 }
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: #0A120D;
+  background: #080C0A;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #C5A880;
-  border-radius: 3px;
+  background: #D4AF37;
+  border-radius: 2px;
 }
 
 body {
-  background-color: #0A120D;
-  color: #FAF9F6;
+  background-color: #080C0A;
+  color: #FAF9F5;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
+  letter-spacing: -0.01em;
 }
 
-/* Dynamic overlay gold line animation */
-.gold-line {
-  position: relative;
+/* Elegant, non-disruptive modern micro-focus scrollbar or selection */
+::selection {
+  background-color: #D4AF37;
+  color: #080C0A;
 }
-.gold-line::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0%;
-  height: 1px;
-  background-color: #C5A880;
-  transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+
+/* Clean, modern typography structures */
+.text-editorial-h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 6.5vw, 6rem);
+  line-height: 1.05;
+  font-weight: 300;
+  letter-spacing: -0.02em;
 }
-.gold-line:hover::after {
-  width: 100%;
+
+.text-editorial-h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4.5vw, 3.75rem);
+  line-height: 1.15;
+  font-weight: 400;
+  letter-spacing: -0.01e;
+}
+
+.text-editorial-lead {
+  font-size: clamp(1rem, 1.25vw, 1.25rem);
+  line-height: 1.8;
+  font-weight: 300;
+  color: #D2C9B9;
+}
+
+.text-editorial-caption {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  color: #D4AF37;
+  font-weight: 500;
 }
 
 /* Mask transitions for image parallax hover */
 .img-zoom-container {
   overflow: hidden;
+  position: relative;
 }
 .img-zoom-container img {
-  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
 }
 .img-zoom-container:hover img {
-  transform: scale(1.08);
+  transform: scale(1.05);
 }
 
 /* Cinematic reveal states */
 .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(40px);
+  transition: opacity 1.6s cubic-bezier(0.16, 1, 0.3, 1), transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
 }
 .reveal-on-scroll.active {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Custom Cursor Styling - Restructured to look premium and not generic */
+#elite-cursor-follower {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+/* Eliminate AI-style heavy box shadows or thick borders */
+.shadow-premium {
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.85);
+}
+
+/* Asymmetric grid layout alignments */
+.editorial-offset-up {
+  transform: translateY(-40px);
+}
+@media (max-width: 1024px) {
+  .editorial-offset-up {
+    transform: none;
+  }
 }
