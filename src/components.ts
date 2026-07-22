@@ -102,20 +102,20 @@ export function injectHeaderAndFooter() {
   };
 
   if (headerContainer) {
-    headerContainer.className = "fixed top-0 left-0 w-full z-50 transition-all duration-700 bg-luxury-dark/85 backdrop-blur-md border-b border-luxury-gold/5";
+    headerContainer.className = "fixed top-0 left-0 w-full z-50 transition-all duration-700 bg-luxury-dark/95 backdrop-blur-md border-b border-luxury-gold/5";
     headerContainer.innerHTML = `
-      <div class="max-w-7xl mx-auto px-8 h-24 flex items-center justify-between">
+      <div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 sm:h-24 flex items-center justify-between transition-all duration-500" id="header-inner">
         <!-- Logo -->
-        <a href="index.html" class="flex items-center gap-3.5 group">
+        <a href="index.html" class="flex items-center gap-2.5 sm:gap-3.5 group whitespace-nowrap">
           ${NS_LOGO_SVG}
           <div class="flex flex-col">
-            <span class="font-serif text-lg tracking-widest text-luxury-gold font-light group-hover:text-luxury-cream transition-colors duration-500">NS LUXURY</span>
-            <span class="text-[8px] uppercase tracking-luxury-ultra text-luxury-soft/50">VILLA · HO</span>
+            <span class="font-serif text-base sm:text-lg tracking-widest text-luxury-gold font-light group-hover:text-luxury-cream transition-colors duration-500">NS LUXURY</span>
+            <span class="text-[7px] sm:text-[8px] uppercase tracking-luxury-ultra text-luxury-soft/50">VILLA · HO</span>
           </div>
         </a>
 
         <!-- Desktop Navigation -->
-        <nav class="hidden md:flex items-center gap-10">
+        <nav class="hidden md:flex items-center gap-6 lg:gap-10">
           <a href="index.html" class="${getLinkClass('index.html')}">
             Overview
             ${getActiveIndicator('index.html')}
@@ -146,20 +146,20 @@ export function injectHeaderAndFooter() {
         </div>
 
         <!-- Mobile Menu Trigger -->
-        <button id="mobile-menu-toggle" class="md:hidden flex flex-col justify-center items-end gap-1.5 w-8 h-8 group focus:outline-none" aria-label="Toggle Navigation">
-          <span class="w-6 h-[1px] bg-luxury-gold group-hover:bg-luxury-cream transition-all duration-300"></span>
-          <span class="w-4 h-[1px] bg-luxury-gold group-hover:bg-luxury-cream transition-all duration-300"></span>
-          <span class="w-5 h-[1px] bg-luxury-gold group-hover:bg-luxury-cream transition-all duration-300"></span>
+        <button id="mobile-menu-toggle" class="md:hidden flex flex-col justify-center items-end gap-1.5 w-8 h-8 group focus:outline-none z-50" aria-label="Toggle Navigation">
+          <span class="w-6 h-[1px] bg-luxury-gold group-hover:bg-luxury-cream transition-all duration-300 origin-center"></span>
+          <span class="w-4 h-[1px] bg-luxury-gold group-hover:bg-luxury-cream transition-all duration-300 origin-center"></span>
+          <span class="w-5 h-[1px] bg-luxury-gold group-hover:bg-luxury-cream transition-all duration-300 origin-center"></span>
         </button>
       </div>
 
       <!-- Mobile Dropdown Overlay Menu -->
-      <div id="mobile-dropdown" class="fixed inset-0 top-24 bg-luxury-dark/98 backdrop-blur-2xl z-40 hidden opacity-0 flex flex-col justify-center items-center gap-10 transition-all duration-500 border-t border-luxury-gold/5">
-        <a href="index.html" class="font-serif text-3xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all duration-500">Overview</a>
-        <a href="rooms.html" class="font-serif text-3xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all duration-500">Suites & Rooms</a>
-        <a href="amenities.html" class="font-serif text-3xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all duration-500">Amenities</a>
-        <a href="gallery.html" class="font-serif text-3xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all duration-500">Gallery</a>
-        <a href="contact.html" class="font-serif text-3xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all duration-500">Inquire & Map</a>
+      <div id="mobile-dropdown" class="fixed inset-0 top-20 sm:top-24 bg-luxury-dark/98 backdrop-blur-2xl z-40 hidden opacity-0 flex flex-col justify-center items-center gap-8 sm:gap-10 transition-all duration-500 border-t border-luxury-gold/5">
+        <a href="index.html" class="font-serif text-2xl sm:text-3xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all duration-500">Overview</a>
+        <a href="rooms.html" class="font-serif text-2xl sm:text-3xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all duration-500">Suites & Rooms</a>
+        <a href="amenities.html" class="font-serif text-2xl sm:text-3xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all duration-500">Amenities</a>
+        <a href="gallery.html" class="font-serif text-2xl sm:text-3xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all duration-500">Gallery</a>
+        <a href="contact.html" class="font-serif text-2xl sm:text-3xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all duration-500">Inquire & Map</a>
 
         <a href="https://wa.me/233550000000" target="_blank" class="mt-4 px-8 py-4 border border-luxury-gold/40 text-luxury-gold font-medium tracking-luxury text-xs hover:bg-luxury-gold hover:text-luxury-dark transition-all duration-500">
           WhatsApp Concierge
@@ -170,6 +170,7 @@ export function injectHeaderAndFooter() {
     // Mobile navigation logic
     const menuToggle = document.getElementById('mobile-menu-toggle');
     const mobileDropdown = document.getElementById('mobile-dropdown');
+    const headerInner = document.getElementById('header-inner');
 
     if (menuToggle && mobileDropdown) {
       menuToggle.addEventListener('click', () => {
@@ -181,9 +182,11 @@ export function injectHeaderAndFooter() {
           }, 50);
           // animate toggle button to close cross
           const lines = menuToggle.children;
-          (lines[0] as HTMLElement).style.transform = 'translateY(5px) rotate(45deg)';
+          (lines[0] as HTMLElement).style.transform = 'translateY(7px) rotate(45deg)';
           (lines[1] as HTMLElement).style.opacity = '0';
-          (lines[2] as HTMLElement).style.transform = 'translateY(-5px) rotate(-45deg)';
+          (lines[2] as HTMLElement).style.transform = 'translateY(-7px) rotate(-45deg)';
+          // prevent body background scrolling when menu is open
+          document.body.style.overflow = 'hidden';
         } else {
           mobileDropdown.classList.remove('opacity-100');
           setTimeout(() => {
@@ -193,18 +196,26 @@ export function injectHeaderAndFooter() {
           (lines[0] as HTMLElement).style.transform = 'none';
           (lines[1] as HTMLElement).style.opacity = '1';
           (lines[2] as HTMLElement).style.transform = 'none';
+          // restore scrolling
+          document.body.style.overflow = '';
         }
       });
     }
 
     // Shrink header on scroll
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        headerContainer.classList.add('h-20');
-        headerContainer.classList.remove('h-24');
-      } else {
-        headerContainer.classList.add('h-24');
-        headerContainer.classList.remove('h-20');
+      if (headerInner && mobileDropdown) {
+        if (window.scrollY > 50) {
+          headerInner.classList.add('h-16', 'sm:h-20');
+          headerInner.classList.remove('h-20', 'sm:h-24');
+          mobileDropdown.classList.add('top-16', 'sm:top-20');
+          mobileDropdown.classList.remove('top-20', 'sm:top-24');
+        } else {
+          headerInner.classList.add('h-20', 'sm:h-24');
+          headerInner.classList.remove('h-16', 'sm:h-20');
+          mobileDropdown.classList.add('top-20', 'sm:top-24');
+          mobileDropdown.classList.remove('top-16', 'sm:top-20');
+        }
       }
     });
   }
