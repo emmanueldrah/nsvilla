@@ -133,7 +133,7 @@ export function injectHeaderAndFooter() {
             ${getActiveIndicator('gallery.html')}
           </a>
           <a href="contact.html" class="${getLinkClass('contact.html')}">
-            Inquire & Map
+            Plan Stay & Events
             ${getActiveIndicator('contact.html')}
           </a>
         </nav>
@@ -159,7 +159,7 @@ export function injectHeaderAndFooter() {
         <a href="rooms.html" class="font-serif text-2xl sm:text-3xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all duration-500">Suites & Rooms</a>
         <a href="amenities.html" class="font-serif text-2xl sm:text-3xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all duration-500">Amenities</a>
         <a href="gallery.html" class="font-serif text-2xl sm:text-3xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all duration-500">Gallery</a>
-        <a href="contact.html" class="font-serif text-2xl sm:text-3xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all duration-500">Inquire & Map</a>
+        <a href="contact.html" class="font-serif text-2xl sm:text-3xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all duration-500">Plan Stay & Events</a>
 
         <a href="https://wa.me/233550000000" target="_blank" class="mt-4 px-8 py-4 border border-luxury-gold/40 text-luxury-gold font-medium tracking-luxury text-xs hover:bg-luxury-gold hover:text-luxury-dark transition-all duration-500">
           WhatsApp Concierge
@@ -246,7 +246,7 @@ export function injectHeaderAndFooter() {
             <li><a href="rooms.html" class="hover:text-luxury-gold transition-colors duration-300">Suites & Spaces</a></li>
             <li><a href="amenities.html" class="hover:text-luxury-gold transition-colors duration-300">Premium Amenities</a></li>
             <li><a href="gallery.html" class="hover:text-luxury-gold transition-colors duration-300">The Curated Lens</a></li>
-            <li><a href="contact.html" class="hover:text-luxury-gold transition-colors duration-300">Inquire & Navigate</a></li>
+            <li><a href="contact.html" class="hover:text-luxury-gold transition-colors duration-300">Plan Stay & Events</a></li>
           </ul>
         </div>
 
