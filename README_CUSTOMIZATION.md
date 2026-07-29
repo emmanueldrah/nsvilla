@@ -16,7 +16,7 @@ To avoid the sterile, "AI-polished" aesthetic common in modern luxury templates,
     *   `#111D15` — Rich woodland forest olive (background accents, containers)
     *   `#D2C9B9` — Warm weathered-sand khaki (secondary body copy)
 *   **Honest Editorial Copywriting:** Absolute ban on clichés like *"the ultimate luxury experience," "indulge in paradise," or "escape to heaven."* The text speaks as a confident, calm, and grounded host welcoming visitors to the real town of Ho beneath the Mount Adaklu range. No synthetic marketing hype or abstract over-polished prose.
-*   **Grounded Features:** We focus on real features and practical details of our boutique space in Ho: the private swimming pool (with swimming lessons available), the indoor bar & lounge, open rooftop space, Starlink internet (350+ Mbps with backup power), and 24/7 security.
+*   **Grounded Features:** We focus on real features and practical details of our boutique space in Ho: the private swimming pool (with swimming lessons available), the indoor bar & lounge, open rooftop space, high-speed Starlink internet (with backup power), and 24/7 security.
 
 ---
 
