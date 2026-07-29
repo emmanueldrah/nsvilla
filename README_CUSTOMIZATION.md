@@ -1,6 +1,6 @@
 # NS Luxury Villa — Customization & Design Architecture
 
-This guide explains the design rationale and provides detailed instructions for a non-developer or host to customize the contents of the website (images, contact details, prices, maps).
+This guide explains the design rationale and provides detailed instructions for a non-developer or host to customize the contents of the website (images, contact details, coordinates).
 
 ---
 
@@ -15,44 +15,39 @@ To avoid the sterile, "AI-polished" aesthetic common in modern luxury templates,
     *   `#FAF9F5` — Soft, unbleached limestone cream (fine text, primary elements)
     *   `#111D15` — Rich woodland forest olive (background accents, containers)
     *   `#D2C9B9` — Warm weathered-sand khaki (secondary body copy)
-*   **Honest Editorial Copywriting:** Absolute ban on clichés like *"ultimate luxury experience," "indulge in paradise," or "escape to heaven."* The text speaks as a confident, calm, and grounded host welcoming visitors to the real town of Ho beneath the Mount Adaklu range.
-*   **Tactile Interactions:**
-    *   **The Hourglass of Serenity:** A custom sliding timeline showcasing how the pool, rooftop bar, and workspace transition from morning dawn to deep night.
-    *   **2D Blueprint Spec Inspector:** An SVG architectural rendering that allows users to click/hover on specific suites and pool sectors to instantly view exact dimensions and utility limits.
-    *   **Starlink Constellation Canvas:** A gorgeous interactive HTML5 canvas mapping satellite orbits. It warps dynamic magnetic connections near the user's cursor to celebrate our 350 Mbps broadband latency.
-    *   **Serenity Audio Experience:** A custom browser synthesized ambient rain and breeze physical player. It uses pure `AudioContext` buffers to create organic local soundscapes (Volta Rain and Forest Drone) rather than streaming heavy audio artifacts.
+*   **Honest Editorial Copywriting:** Absolute ban on clichés like *"the ultimate luxury experience," "indulge in paradise," or "escape to heaven."* The text speaks as a confident, calm, and grounded host welcoming visitors to the real town of Ho beneath the Mount Adaklu range. No synthetic marketing hype or abstract over-polished prose.
+*   **Grounded Features:** We focus on real features and practical details of our boutique space in Ho: the private swimming pool (with swimming lessons available), the indoor bar & lounge, open rooftop space, Starlink internet (350+ Mbps with backup power), and 24/7 security.
 
 ---
 
 ## 2. Code Customization Guide
 
-All shared elements (headers, footers, logo SVGs, and interactive cursor/audio behaviors) are centralized in `src/components.ts` and `src/main.ts`.
+All shared elements (headers, footers, logo SVGs, and main interactions) are centralized in `src/components.ts` and `src/main.ts`.
 
 ### 2.1 Contact Details & WhatsApp Links
 *   **WhatsApp Direct API Senders:** Open `src/components.ts` and replace `+233550000000` or `233550000000` with your verified business line.
-*   **Form Redirection:** Inside `src/main.ts`, the direct calculator maps your inputs to a WhatsApp dispatch link:
+*   **Form Redirection:** Inside `src/main.ts`, the Inquiry Form maps your inputs to a direct, human-style WhatsApp dispatch link:
     ```typescript
     window.open(`https://wa.me/233550000000?text=${encoded}`, '_blank');
     ```
     Change the phone prefix to match your target host number.
-*   **Phone and Email:** Locate the Geospatial block inside the footer in `src/components.ts`:
+*   **Phone and Email:** Locate the contact blocks inside the footer in `src/components.ts`:
     ```html
     <a href="tel:+233550000000" ...>📞 +233 55 000 0000</a>
     <a href="mailto:stay@nsluxuryvilla.com" ...>✉ stay@nsluxuryvilla.com</a>
     ```
 
-### 2.2 Prices & Surcharges
-*   To adjust the pricing models, update the pricing attributes inside `contact.html` and the corresponding calculations in `src/main.ts`.
+### 2.2 Booking Form Selections
+*   To adjust the planning preferences, edit the select option values inside `contact.html` and the corresponding parsing script in `src/main.ts` under `initStayPlanner()`.
 *   Inside `contact.html`:
     ```html
-    <option value="sanctuary" data-price="250">The Sanctuary Suite... - $250/night</option>
-    <option value="canopy" data-price="220">The Canopy Vista... - $220/night</option>
-    <option value="entire" data-price="450">Entire Gated Villa... - $450/night</option>
+    <option value="Event: Wedding / Union Ceremonies">Event: Wedding / Union Ceremonies</option>
+    <option value="Event: Birthday / Celebration">Event: Birthday / Celebration</option>
+    <option value="Event: Corporate Team Building">Event: Corporate Team Building</option>
+    <option value="Short Stay: The Sanctuary Suite">Short Stay: The Sanctuary Suite</option>
+    <option value="Short Stay: The Canopy Vista">Short Stay: The Canopy Vista</option>
+    <option value="Short Stay: Entire Gated Villa">Short Stay: Entire Gated Villa</option>
     ```
-*   Inside `src/main.ts` under `initStayPlanner()`:
-    *   **Tourism Development Levy (1.5%):** Adjust `const levy = baseCost * 0.015;`
-    *   **Eco Tax Surcharge ($5):** Adjust `const ecoTax = 5.00;`
-    *   **Multi-night privilege discount (5% off 4+ nights):** Adjust `const discount = baseCost * 0.05;` inside `nights >= 4`.
 
 ### 2.3 Image Placeholder Replacements
 All imagery utilizes curated high-resolution photography links from Unsplash. To substitute your real physical photography:
