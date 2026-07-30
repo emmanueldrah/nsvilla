@@ -71,9 +71,10 @@ export function injectHeaderAndFooter() {
           </a>
         </nav>
 
-        <!-- CTA Direct WhatsApp -->
+        <!-- CTA Direct WhatsApp Placeholder -->
+        <!-- Replace with real WhatsApp number -->
         <div class="hidden lg:block">
-          <a href="https://wa.me/233550000000?text=Hello%20NS%20Luxury%20Villa,%20I%20wish%20to%20plan%20a%20stay." target="_blank" class="px-6 py-3 border border-luxury-gold/20 text-[10px] tracking-luxury-wide uppercase text-luxury-gold hover:bg-luxury-gold hover:text-luxury-dark hover:border-transparent transition-all duration-500 rounded-none">
+          <a href="https://wa.me/233XXXXXXXXX?text=Hello%20NS%20Luxury%20Villa,%20I%20wish%20to%20plan%20a%20stay." target="_blank" class="px-6 py-3 border border-luxury-gold/20 text-[10px] tracking-luxury-wide uppercase text-luxury-gold hover:bg-luxury-gold hover:text-luxury-dark hover:border-transparent transition-all duration-500 rounded-none">
             Book Stay
           </a>
         </div>
@@ -94,7 +95,8 @@ export function injectHeaderAndFooter() {
         <a href="gallery.html" class="font-serif text-2xl sm:text-3xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all duration-500">Gallery</a>
         <a href="contact.html" class="font-serif text-2xl sm:text-3xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all duration-500">Contact & Inquiries</a>
 
-        <a href="https://wa.me/233550000000" target="_blank" class="mt-4 px-8 py-4 border border-luxury-gold/40 text-luxury-gold font-medium tracking-luxury text-xs hover:bg-luxury-gold hover:text-luxury-dark transition-all duration-500">
+        <!-- Replace with real WhatsApp number -->
+        <a href="https://wa.me/233XXXXXXXXX" target="_blank" class="mt-4 px-8 py-4 border border-luxury-gold/40 text-luxury-gold font-medium tracking-luxury text-xs hover:bg-luxury-gold hover:text-luxury-dark transition-all duration-500">
           WhatsApp Inquiry
         </a>
       </div>
@@ -180,16 +182,27 @@ export function injectHeaderAndFooter() {
           </ul>
         </div>
 
-        <!-- Contact/Directions -->
+        <!-- Contact/Directions (C. Replace with real details before launch) -->
         <div class="flex flex-col gap-5">
-          <h4 class="text-[10px] uppercase tracking-luxury text-luxury-gold font-semibold">Location</h4>
+          <h4 class="text-[10px] uppercase tracking-luxury text-luxury-gold font-semibold">Location & Contact</h4>
           <p class="text-xs text-luxury-soft/70 leading-relaxed">
             Ho, Volta Region, Ghana<br>
             <span class="text-[9px] text-luxury-gold/80 block mt-1 tracking-widest uppercase">📍 Gated Compound</span>
           </p>
           <div class="flex flex-col gap-3 mt-1">
-            <a href="tel:+233550000000" class="text-xs text-luxury-soft/80 hover:text-luxury-gold transition-colors duration-300">📞 +233 55 000 0000</a>
-            <a href="mailto:stay@nsluxuryvilla.com" class="text-xs text-luxury-soft/80 hover:text-luxury-gold transition-colors duration-300">✉ stay@nsluxuryvilla.com</a>
+            <!-- Replace with real WhatsApp and phone number -->
+            <a href="https://wa.me/233XXXXXXXXX" target="_blank" class="text-xs text-luxury-soft/80 hover:text-luxury-gold transition-colors duration-300">💬 WhatsApp: [Your number]</a>
+            <a href="tel:+233XXXXXXXXX" class="text-xs text-luxury-soft/80 hover:text-luxury-gold transition-colors duration-300">📞 Phone: [Your number]</a>
+            <a href="mailto:stay@yourvilla.com" class="text-xs text-luxury-soft/80 hover:text-luxury-gold transition-colors duration-300">✉ stay@yourvilla.com</a>
+          </div>
+
+          <!-- Discreet Optional Social/Listing Placeholders -->
+          <div class="flex flex-col gap-2 mt-2 border-t border-luxury-gold/5 pt-4 text-[10px]">
+            <span class="text-luxury-gold/50 uppercase tracking-wider text-[8px]">TRUST & SOCIAL CHANNELS (OPTIONAL)</span>
+            <!-- Replace with real Airbnb URL -->
+            <a href="https://airbnb.com/rooms/your-placeholder-id" target="_blank" class="text-luxury-soft/60 hover:text-luxury-gold transition-colors duration-300">🏠 Airbnb Listing</a>
+            <!-- Replace with real TikTok handle or link -->
+            <a href="https://tiktok.com/@ns.luxury.villa" target="_blank" class="text-luxury-soft/60 hover:text-luxury-gold transition-colors duration-300">🎵 TikTok: @ns.luxury.villa</a>
           </div>
         </div>
       </div>

@@ -43,7 +43,8 @@ function initStayInquiryForm() {
     const encoded = encodeURIComponent(messageText);
 
     // Redirect to the direct WhatsApp line
-    window.open(`https://wa.me/233550000000?text=${encoded}`, '_blank');
+    // C. TODO: Replace "233XXXXXXXXX" with the host's actual phone number
+    window.open(`https://wa.me/233XXXXXXXXX?text=${encoded}`, '_blank');
   });
 }
 
