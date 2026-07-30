@@ -72,9 +72,9 @@ export function injectHeaderAndFooter() {
         </nav>
 
         <!-- CTA Direct WhatsApp Placeholder -->
-        <!-- Replace with real WhatsApp number -->
+        <!-- TODO: replace 233XXXXXXXXX with real WhatsApp number -->
         <div class="hidden lg:block">
-          <a href="https://wa.me/233XXXXXXXXX?text=Hello%20NS%20Luxury%20Villa,%20I%20wish%20to%20plan%20a%20stay." target="_blank" class="px-6 py-3 border border-luxury-gold/20 text-[10px] tracking-luxury-wide uppercase text-luxury-gold hover:bg-luxury-gold hover:text-luxury-dark hover:border-transparent transition-all duration-500 rounded-none">
+          <a href="https://wa.me/233535572774?text=Hello%20NS%20Luxury%20Villa,%20I%20wish%20to%20plan%20a%20stay." target="_blank" class="px-6 py-3 border border-luxury-gold/20 text-[10px] tracking-luxury-wide uppercase text-luxury-gold hover:bg-luxury-gold hover:text-luxury-dark hover:border-transparent transition-all duration-500 rounded-none">
             Book Stay
           </a>
         </div>
@@ -95,8 +95,8 @@ export function injectHeaderAndFooter() {
         <a href="gallery.html" class="font-serif text-2xl sm:text-3xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all duration-500">Gallery</a>
         <a href="contact.html" class="font-serif text-2xl sm:text-3xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all duration-500">Contact & Inquiries</a>
 
-        <!-- Replace with real WhatsApp number -->
-        <a href="https://wa.me/233XXXXXXXXX" target="_blank" class="mt-4 px-8 py-4 border border-luxury-gold/40 text-luxury-gold font-medium tracking-luxury text-xs hover:bg-luxury-gold hover:text-luxury-dark transition-all duration-500">
+        <!-- TODO: replace 233XXXXXXXXX with real WhatsApp number -->
+        <a href="https://wa.me/233535572774" target="_blank" class="mt-4 px-8 py-4 border border-luxury-gold/40 text-luxury-gold font-medium tracking-luxury text-xs hover:bg-luxury-gold hover:text-luxury-dark transition-all duration-500">
           WhatsApp Inquiry
         </a>
       </div>
@@ -190,10 +190,10 @@ export function injectHeaderAndFooter() {
             <span class="text-[9px] text-luxury-gold/80 block mt-1 tracking-widest uppercase">📍 Gated Compound</span>
           </p>
           <div class="flex flex-col gap-3 mt-1">
-            <!-- Replace with real WhatsApp and phone number -->
-            <a href="https://wa.me/233XXXXXXXXX" target="_blank" class="text-xs text-luxury-soft/80 hover:text-luxury-gold transition-colors duration-300">💬 WhatsApp: [Your number]</a>
-            <a href="tel:+233XXXXXXXXX" class="text-xs text-luxury-soft/80 hover:text-luxury-gold transition-colors duration-300">📞 Phone: [Your number]</a>
-            <a href="mailto:stay@yourvilla.com" class="text-xs text-luxury-soft/80 hover:text-luxury-gold transition-colors duration-300">✉ stay@yourvilla.com</a>
+            <!-- TODO: replace 233XXXXXXXXX with real WhatsApp number -->
+            <a href="https://wa.me/233535572774" target="_blank" class="text-xs text-luxury-soft/80 hover:text-luxury-gold transition-colors duration-300">💬 WhatsApp: 053 557 2774</a>
+            <a href="tel:+233535572774" class="text-xs text-luxury-soft/80 hover:text-luxury-gold transition-colors duration-300">📞 Phone: 053 557 2774</a>
+            <a href="mailto:stay@yourvilla.com" class="text-xs text-luxury-soft/80 hover:text-luxury-gold transition-colors duration-300">✉ Email: [Optional]</a>
           </div>
 
           <!-- Discreet Optional Social/Listing Placeholders -->
