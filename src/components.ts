@@ -74,7 +74,7 @@ export function injectHeaderAndFooter() {
         <!-- CTA Direct WhatsApp Placeholder -->
         <!-- TODO: replace 233XXXXXXXXX with real WhatsApp number -->
         <div class="hidden lg:block">
-          <a href="https://wa.me/233535572774?text=Hello%20NS%20Luxury%20Villa,%20I%20wish%20to%20plan%20a%20stay." target="_blank" class="px-6 py-3 border border-luxury-gold/20 text-[10px] tracking-luxury-wide uppercase text-luxury-gold hover:bg-luxury-gold hover:text-luxury-dark hover:border-transparent transition-all duration-500 rounded-none">
+          <a href="https://wa.me/233535572774?text=Hello%2C%20I%20want%20to%20inquire%20about%20NS%20Luxury%20Villa" target="_blank" class="px-6 py-3 border border-luxury-gold/20 text-[10px] tracking-luxury-wide uppercase text-luxury-gold hover:bg-luxury-gold hover:text-luxury-dark hover:border-transparent transition-all duration-500 rounded-none">
             Book Stay
           </a>
         </div>
@@ -96,7 +96,7 @@ export function injectHeaderAndFooter() {
         <a href="contact.html" class="font-serif text-2xl sm:text-3xl tracking-widest text-luxury-cream hover:text-luxury-gold transition-all duration-500">Contact & Inquiries</a>
 
         <!-- TODO: replace 233XXXXXXXXX with real WhatsApp number -->
-        <a href="https://wa.me/233535572774" target="_blank" class="mt-4 px-8 py-4 border border-luxury-gold/40 text-luxury-gold font-medium tracking-luxury text-xs hover:bg-luxury-gold hover:text-luxury-dark transition-all duration-500">
+        <a href="https://wa.me/233535572774?text=Hello%2C%20I%20want%20to%20inquire%20about%20NS%20Luxury%20Villa" target="_blank" class="mt-4 px-8 py-4 border border-luxury-gold/40 text-luxury-gold font-medium tracking-luxury text-xs hover:bg-luxury-gold hover:text-luxury-dark transition-all duration-500">
           WhatsApp Inquiry
         </a>
       </div>
@@ -191,25 +191,22 @@ export function injectHeaderAndFooter() {
           </p>
           <div class="flex flex-col gap-3 mt-1">
             <!-- TODO: replace 233XXXXXXXXX with real WhatsApp number -->
-            <a href="https://wa.me/233535572774" target="_blank" class="text-xs text-luxury-soft/80 hover:text-luxury-gold transition-colors duration-300">💬 WhatsApp: 053 557 2774</a>
+            <a href="https://wa.me/233535572774?text=Hello%2C%20I%20want%20to%20inquire%20about%20NS%20Luxury%20Villa" target="_blank" class="text-xs text-luxury-soft/80 hover:text-luxury-gold transition-colors duration-300">💬 WhatsApp: 053 557 2774</a>
             <a href="tel:+233535572774" class="text-xs text-luxury-soft/80 hover:text-luxury-gold transition-colors duration-300">📞 Phone: 053 557 2774</a>
-            <a href="mailto:stay@yourvilla.com" class="text-xs text-luxury-soft/80 hover:text-luxury-gold transition-colors duration-300">✉ Email: [Optional]</a>
           </div>
 
           <!-- Discreet Optional Social/Listing Placeholders -->
           <div class="flex flex-col gap-2 mt-2 border-t border-luxury-gold/5 pt-4 text-[10px]">
-            <span class="text-luxury-gold/50 uppercase tracking-wider text-[8px]">TRUST & SOCIAL CHANNELS (OPTIONAL)</span>
-            <!-- Replace with real Airbnb URL -->
-            <a href="https://airbnb.com/rooms/your-placeholder-id" target="_blank" class="text-luxury-soft/60 hover:text-luxury-gold transition-colors duration-300">🏠 Airbnb Listing</a>
+            <!-- TODO: add real Airbnb link when available -->
             <!-- Replace with real TikTok handle or link -->
-            <a href="https://tiktok.com/@ns.luxury.villa" target="_blank" class="text-luxury-soft/60 hover:text-luxury-gold transition-colors duration-300">🎵 TikTok: @ns.luxury.villa</a>
+            <a href="https://tiktok.com/@ns.luxury.villa" target="_blank" class="text-luxury-soft/60 hover:text-luxury-gold transition-colors duration-300">🎵 TikTok @ns.luxury.villa</a>
           </div>
         </div>
       </div>
 
       <div class="max-w-7xl mx-auto mt-20 pt-8 border-t border-luxury-gold/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[9px] text-luxury-soft/40 uppercase tracking-luxury-wide relative z-10">
         <span>© 2026 NS LUXURY VILLA. ALL RIGHTS RESERVED.</span>
-        <span>A private guesthouse in Ho</span>
+        <span class="text-right text-luxury-soft/40">Powered by Success Above Dreams</span>
       </div>
     `;
   }
