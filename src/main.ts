@@ -42,8 +42,7 @@ function initStayInquiryForm() {
     const messageText = `Hello NS Luxury Villa!\n\nI would like to inquire about booking details for:\n\n📅 Type of stay/event: ${selectionName}\n🌙 Nights: ${nights}\n👥 Guests: ${guests}\n\nAdditional Preferences:\n${preferences || 'None'}\n\nPlease let me know your rates and availability. Thank you!`;
     const encoded = encodeURIComponent(messageText);
 
-    // Redirect to the direct WhatsApp line
-    // TODO: replace 233XXXXXXXXX with real WhatsApp number
+    // Redirect to the direct primary WhatsApp line (0535572774)
     window.open(`https://wa.me/233535572774?text=${encoded}`, '_blank');
   });
 }

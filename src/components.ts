@@ -166,7 +166,10 @@ export function injectHeaderAndFooter() {
             </div>
           </div>
           <p class="text-xs text-luxury-soft/70 leading-relaxed max-w-sm">
-            Located in Ho, Volta Region, Ghana. We offer a secure, private compound with a pool, bar, and rooftop space for stays, retreats, and gatherings.
+            We offer a secure, private compound with a pool, bar, and rooftop space for stays, retreats, and gatherings in Ho, Volta Region, Ghana.
+          </p>
+          <p class="text-luxury-gold italic text-sm mt-1 font-serif">
+            “Arrive as a Guest, Stay as Family”
           </p>
         </div>
 
@@ -182,23 +185,24 @@ export function injectHeaderAndFooter() {
           </ul>
         </div>
 
-        <!-- Contact/Directions (C. Replace with real details before launch) -->
+        <!-- Contact/Directions -->
         <div class="flex flex-col gap-5">
           <h4 class="text-[10px] uppercase tracking-luxury text-luxury-gold font-semibold">Location & Contact</h4>
-          <p class="text-xs text-luxury-soft/70 leading-relaxed">
-            Ho, Volta Region, Ghana<br>
-            <span class="text-[9px] text-luxury-gold/80 block mt-1 tracking-widest uppercase">📍 Gated Compound</span>
+          <p class="text-xs text-luxury-soft/70 leading-relaxed font-sans">
+            VH-0102-0933, Torgbui Sapeh St,<br>
+            behind DVLA Head Office,<br>
+            Ho, Volta Region, Ghana
           </p>
-          <div class="flex flex-col gap-3 mt-1">
-            <!-- TODO: replace 233XXXXXXXXX with real WhatsApp number -->
-            <a href="https://wa.me/233535572774?text=Hello%2C%20I%20want%20to%20inquire%20about%20NS%20Luxury%20Villa" target="_blank" class="text-xs text-luxury-soft/80 hover:text-luxury-gold transition-colors duration-300">💬 WhatsApp: 053 557 2774</a>
-            <a href="tel:+233535572774" class="text-xs text-luxury-soft/80 hover:text-luxury-gold transition-colors duration-300">📞 Phone: 053 557 2774</a>
+          <div class="flex flex-col gap-2.5 mt-1">
+            <a href="https://wa.me/233535572774?text=Hello%2C%20I%20want%20to%20inquire%20about%20NS%20Luxury%20Villa" target="_blank" class="text-xs text-luxury-soft/80 hover:text-luxury-gold transition-colors duration-300">💬 WhatsApp: 0535572774</a>
+            <a href="https://wa.me/233503340698?text=Hello%2C%20I%20want%20to%20inquire%20about%20NS%20Luxury%20Villa" target="_blank" class="text-xs text-luxury-soft/80 hover:text-luxury-gold transition-colors duration-300">💬 WhatsApp: 0503340698</a>
+            <a href="tel:+233535572774" class="text-xs text-luxury-soft/80 hover:text-luxury-gold transition-colors duration-300">📞 Phone: 0535572774</a>
+            <a href="tel:+233503340698" class="text-xs text-luxury-soft/80 hover:text-luxury-gold transition-colors duration-300">📞 Phone: 0503340698</a>
+            <a href="mailto:nsvilla4u@gmail.com" class="text-xs text-luxury-soft/80 hover:text-luxury-gold transition-colors duration-300">✉️ Email: nsvilla4u@gmail.com</a>
           </div>
 
-          <!-- Discreet Optional Social/Listing Placeholders -->
+          <!-- Social Listing -->
           <div class="flex flex-col gap-2 mt-2 border-t border-luxury-gold/5 pt-4 text-[10px]">
-            <!-- TODO: add real Airbnb link when available -->
-            <!-- Replace with real TikTok handle or link -->
             <a href="https://tiktok.com/@ns.luxury.villa" target="_blank" class="text-luxury-soft/60 hover:text-luxury-gold transition-colors duration-300">🎵 TikTok @ns.luxury.villa</a>
           </div>
         </div>
