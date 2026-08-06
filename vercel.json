@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
       "source": "/rooms",
       "destination": "/rooms.html"
     },
@@ -19,6 +23,38 @@
     {
       "source": "/pricing",
       "destination": "/pricing.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/rooms.html",
+      "destination": "/rooms",
+      "permanent": false
+    },
+    {
+      "source": "/amenities.html",
+      "destination": "/amenities",
+      "permanent": false
+    },
+    {
+      "source": "/gallery.html",
+      "destination": "/gallery",
+      "permanent": false
+    },
+    {
+      "source": "/contact.html",
+      "destination": "/contact",
+      "permanent": false
+    },
+    {
+      "source": "/pricing.html",
+      "destination": "/pricing",
+      "permanent": false
     }
   ]
 }
