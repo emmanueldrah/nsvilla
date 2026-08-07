@@ -42,19 +42,21 @@ function normalizeInternalLinks(): void {
 
 function syncSiteNavigation(): void {
   const pages = [
-    { href: "./index.html", label: "Home", file: "index.html" },
-    { href: "./rooms.html", label: "Stay With Us", file: "rooms.html" },
-    { href: "./amenities.html", label: "Amenities", file: "amenities.html" },
-    { href: "./gallery.html", label: "Gallery", file: "gallery.html" },
-    { href: "./pricing.html", label: "Plan Your Stay", file: "pricing.html" },
-    { href: "./contact.html", label: "Contact", file: "contact.html" },
+    { href: "./index.html", label: "Home", file: "index.html", route: "index" },
+    { href: "./rooms.html", label: "Stay With Us", file: "rooms.html", route: "rooms" },
+    { href: "./amenities.html", label: "Amenities", file: "amenities.html", route: "amenities" },
+    { href: "./gallery.html", label: "Gallery", file: "gallery.html", route: "gallery" },
+    { href: "./pricing.html", label: "Plan Your Stay", file: "pricing.html", route: "pricing" },
+    { href: "./contact.html", label: "Contact", file: "contact.html", route: "contact" },
   ];
-  const current = location.pathname.split("/").pop() || "index.html";
+  let current = location.pathname.split("/").pop()?.replace(".html", "") || "index";
+  if (!current || current === "") current = "index";
+  
   document.querySelectorAll<HTMLElement>(".family-menu").forEach((menu) => {
     menu.innerHTML = pages
       .map(
         (page) =>
-          `<a href="${page.href}" class="${page.file === current ? "active" : ""}">${page.label}</a>`,
+          `<a href="${page.href}" class="${page.route === current || page.file === (current + ".html") ? "active" : ""}">${page.label}</a>`,
       )
       .join("");
   });
