@@ -28,7 +28,7 @@ function normalizeInternalLinks(): void {
   const routes: Record<string, string> = {
     "./": "./index.html",
     "./index": "./index.html",
-    "./rooms": "./rooms.html",
+    "./stay-with-us": "./rooms.html",
     "./amenities": "./amenities.html",
     "./gallery": "./gallery.html",
     "./pricing": "./pricing.html",
@@ -43,7 +43,7 @@ function normalizeInternalLinks(): void {
 function syncSiteNavigation(): void {
   const pages = [
     { href: "./index.html", label: "Home", file: "index.html", route: "index" },
-    { href: "./rooms.html", label: "Stay With Us", file: "rooms.html", route: "rooms" },
+    { href: "./stay-with-us", label: "Stay With Us", file: "rooms.html", route: "stay-with-us" },
     { href: "./amenities.html", label: "Amenities", file: "amenities.html", route: "amenities" },
     { href: "./gallery.html", label: "Gallery", file: "gallery.html", route: "gallery" },
     { href: "./pricing.html", label: "Plan Your Stay", file: "pricing.html", route: "pricing" },

@@ -5,7 +5,7 @@
       "destination": "/index.html"
     },
     {
-      "source": "/rooms",
+      "source": "/stay-with-us",
       "destination": "/rooms.html"
     },
     {
@@ -33,7 +33,7 @@
     },
     {
       "source": "/rooms.html",
-      "destination": "/rooms",
+      "destination": "/stay-with-us",
       "permanent": false
     },
     {
