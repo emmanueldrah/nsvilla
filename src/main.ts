@@ -92,8 +92,8 @@ function applyArtDirection(): void {
       ".family-page-hero > img",
     );
     if (hero) {
-      hero.src = "./images/frontview%20of%20the%20block%20B.jpeg";
-      hero.alt = "NS LUXURY VILLA apartment building";
+      hero.src = "./images/pool%20and%20bar%20(3).jpeg";
+      hero.alt = "Pool, bar and outdoor spaces at NS LUXURY VILLA";
     }
   }
   if (page === "gallery.html") {
@@ -108,7 +108,7 @@ function applyArtDirection(): void {
         "./images/nice%20paintings.jpeg",
         "Hand-painted mural along the villa walkway",
       ],
-      ["./images/front.jpeg", "NS LUXURY VILLA entrance and courtyard"],
+      ["./images/upper%20view.jpeg", "Aerial view of NS LUXURY VILLA"],
       ["./images/ns%20bar.jpeg", "Restaurant and bar interior"],
     ];
     featured.forEach((image, index) => {
@@ -345,7 +345,6 @@ function initVillaArchive(): void {
     "fell@home.jpeg",
     "fridge and mirror.jpeg",
     "fridge.jpeg",
-    "front.jpeg",
     "frontview of the block B.jpeg",
     "garden.jpeg",
     "hall.jpeg",
@@ -365,7 +364,6 @@ function initVillaArchive(): void {
     "out.jpeg",
     "outs.jpeg",
     "outside ground.jpeg",
-    "outside painting.jpeg",
     "outside.jpeg",
     "paint.jpeg",
     "pool (2).jpeg",
@@ -380,14 +378,12 @@ function initVillaArchive(): void {
     "pool entrance.jpeg",
     "pool entras night.jpeg",
     "pool washroom.jpeg",
-    "pool.jpeg",
     "poole.jpeg",
     "pooll.jpeg",
     "pools (2).jpeg",
     "pools.jpeg",
     "poolsi.jpeg",
     "poolside (2).jpeg",
-    "poolside.jpeg",
     "poolvi.jpeg",
     "poolw.jpeg",
     "reception.jpeg",
@@ -441,15 +437,15 @@ function initVillaArchive(): void {
   };
   const captions: Record<string, string> = {
     "nice pool.jpeg": "Swimming pool beneath the signature umbrella canopy",
-    "poolside.jpeg": "Poolside lounge framed by tropical planting",
     "poolw.jpeg": "Garden-framed view of the covered pool",
     "pool and bar.jpeg": "Poolside restaurant and bar terrace",
     "garden.jpeg": "Quiet lawn and garden space",
     "ns bar.jpeg": "Restaurant and bar interior",
     "rooftop bar.jpeg": "Open-air rooftop lounge",
-    "front.jpeg": "NS LUXURY VILLA entrance and courtyard",
     "nice paintings.jpeg": "Hand-painted mural along the villa walkway",
-    "outside painting.jpeg": "Colourful exterior mural",
+    "pool and bar (3).jpeg": "Pool, bar and outdoor spaces at dusk",
+    "paint.jpeg": "Hand-painted mural along the villa walkway",
+    "upper view.jpeg": "Aerial view of NS LUXURY VILLA",
     "nights.jpeg": "Pool and terrace after dark",
     "bed.jpeg": "Prepared guest bedroom",
     "apartment.jpeg": "Furnished apartment living space",
