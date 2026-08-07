@@ -9,19 +9,19 @@
       "destination": "/rooms.html"
     },
     {
-      "source": "/amenities",
+      "source": "/shared-spaces",
       "destination": "/amenities.html"
     },
     {
-      "source": "/gallery",
+      "source": "/our-home",
       "destination": "/gallery.html"
     },
     {
-      "source": "/contact",
+      "source": "/join-the-family",
       "destination": "/contact.html"
     },
     {
-      "source": "/pricing",
+      "source": "/plan-your-stay",
       "destination": "/pricing.html"
     }
   ],
@@ -38,22 +38,22 @@
     },
     {
       "source": "/amenities.html",
-      "destination": "/amenities",
+      "destination": "/shared-spaces",
       "permanent": false
     },
     {
       "source": "/gallery.html",
-      "destination": "/gallery",
+      "destination": "/our-home",
       "permanent": false
     },
     {
       "source": "/contact.html",
-      "destination": "/contact",
+      "destination": "/join-the-family",
       "permanent": false
     },
     {
       "source": "/pricing.html",
-      "destination": "/pricing",
+      "destination": "/plan-your-stay",
       "permanent": false
     }
   ]

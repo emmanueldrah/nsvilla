@@ -29,10 +29,10 @@ function normalizeInternalLinks(): void {
     "./": "./index.html",
     "./index": "./index.html",
     "./stay-with-us": "./rooms.html",
-    "./amenities": "./amenities.html",
-    "./gallery": "./gallery.html",
-    "./pricing": "./pricing.html",
-    "./contact": "./contact.html",
+    "./shared-spaces": "./amenities.html",
+    "./our-home": "./gallery.html",
+    "./plan-your-stay": "./pricing.html",
+    "./join-the-family": "./contact.html",
   };
   document.querySelectorAll<HTMLAnchorElement>("a[href]").forEach((link) => {
     const replacement = routes[link.getAttribute("href") || ""];
@@ -44,10 +44,10 @@ function syncSiteNavigation(): void {
   const pages = [
     { href: "./index.html", label: "Home", file: "index.html", route: "index" },
     { href: "./stay-with-us", label: "Stay With Us", file: "rooms.html", route: "stay-with-us" },
-    { href: "./amenities.html", label: "Amenities", file: "amenities.html", route: "amenities" },
-    { href: "./gallery.html", label: "Gallery", file: "gallery.html", route: "gallery" },
-    { href: "./pricing.html", label: "Plan Your Stay", file: "pricing.html", route: "pricing" },
-    { href: "./contact.html", label: "Contact", file: "contact.html", route: "contact" },
+    { href: "./shared-spaces", label: "Amenities", file: "amenities.html", route: "shared-spaces" },
+    { href: "./our-home", label: "Gallery", file: "gallery.html", route: "our-home" },
+    { href: "./plan-your-stay", label: "Plan Your Stay", file: "pricing.html", route: "plan-your-stay" },
+    { href: "./join-the-family", label: "Contact", file: "contact.html", route: "join-the-family" },
   ];
   let current = location.pathname.split("/").pop()?.replace(".html", "") || "index";
   if (!current || current === "") current = "index";
