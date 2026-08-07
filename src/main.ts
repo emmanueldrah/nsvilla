@@ -65,7 +65,7 @@ function syncSiteNavigation(): void {
       ".family-footer-grid > div:nth-child(2)",
     );
     if (explore)
-      explore.innerHTML = `<p class="family-footer-title">Explore</p>${pages.map((page) => `<a href="${page.href}">${page.label}</a>`).join("")}`;
+      explore.innerHTML = `<p class="family-footer-title">Explore</p>${pages.map((page) => `<a href="${page.href}" class="${page.route === current || page.file === (current + ".html") ? "active" : ""}">${page.label}</a>`).join("")}`;
   });
 }
 
