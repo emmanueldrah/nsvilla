@@ -9,6 +9,7 @@ document.documentElement.classList.add("js");
 
 // Initialize when DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
+  normalizeInternalLinks();
   syncSiteNavigation();
   applyArtDirection();
   initNavigation();
@@ -19,6 +20,22 @@ document.addEventListener("DOMContentLoaded", () => {
   initVillaArchive();
   initImageViewer();
 });
+
+function normalizeInternalLinks(): void {
+  const routes: Record<string, string> = {
+    "./": "./index.html",
+    "./index": "./index.html",
+    "./rooms": "./rooms.html",
+    "./amenities": "./amenities.html",
+    "./gallery": "./gallery.html",
+    "./pricing": "./pricing.html",
+    "./contact": "./contact.html",
+  };
+  document.querySelectorAll<HTMLAnchorElement>("a[href]").forEach((link) => {
+    const replacement = routes[link.getAttribute("href") || ""];
+    if (replacement) link.href = replacement;
+  });
+}
 
 function syncSiteNavigation(): void {
   const pages = [
@@ -516,6 +533,7 @@ function initImageViewer(): void {
 }
 
 export {
+  normalizeInternalLinks,
   initScrollReveals,
   initSmoothScroll,
   initFormHandlers,
