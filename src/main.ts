@@ -2,10 +2,13 @@
 // NS LUXURY VILLA - Interactive Features
 // ════════════════════════════════════════════════════════════
 
+import { inject } from "@vercel/analytics";
+
 const PRIMARY_WHATSAPP = "233535572774";
 
 // Content remains visible by default; this class only enables optional motion.
 document.documentElement.classList.add("js");
+inject();
 
 // Initialize when DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
