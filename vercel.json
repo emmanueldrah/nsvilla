@@ -1,24 +1,45 @@
 {
+  "cleanUrls": true,
   "rewrites": [
     {
       "source": "/",
       "destination": "/index.html"
     },
     {
+      "source": "/rooms",
+      "destination": "/rooms.html"
+    },
+    {
       "source": "/stay-with-us",
       "destination": "/rooms.html"
+    },
+    {
+      "source": "/amenities",
+      "destination": "/amenities.html"
     },
     {
       "source": "/shared-spaces",
       "destination": "/amenities.html"
     },
     {
+      "source": "/gallery",
+      "destination": "/gallery.html"
+    },
+    {
       "source": "/our-home",
       "destination": "/gallery.html"
     },
     {
+      "source": "/contact",
+      "destination": "/contact.html"
+    },
+    {
       "source": "/join-the-family",
       "destination": "/contact.html"
+    },
+    {
+      "source": "/pricing",
+      "destination": "/pricing.html"
     },
     {
       "source": "/plan-your-stay",
@@ -33,27 +54,27 @@
     },
     {
       "source": "/rooms.html",
-      "destination": "/stay-with-us",
+      "destination": "/rooms",
       "permanent": false
     },
     {
       "source": "/amenities.html",
-      "destination": "/shared-spaces",
+      "destination": "/amenities",
       "permanent": false
     },
     {
       "source": "/gallery.html",
-      "destination": "/our-home",
+      "destination": "/gallery",
       "permanent": false
     },
     {
       "source": "/contact.html",
-      "destination": "/join-the-family",
+      "destination": "/contact",
       "permanent": false
     },
     {
       "source": "/pricing.html",
-      "destination": "/plan-your-stay",
+      "destination": "/pricing",
       "permanent": false
     }
   ]

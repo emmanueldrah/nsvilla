@@ -26,28 +26,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function normalizeInternalLinks(): void {
   const routes: Record<string, string> = {
-    "./": "./index.html",
-    "./index": "./index.html",
-    "./stay-with-us": "./rooms.html",
-    "./shared-spaces": "./amenities.html",
-    "./our-home": "./gallery.html",
-    "./plan-your-stay": "./pricing.html",
-    "./join-the-family": "./contact.html",
+    "./": "./",
+    "./index": "./",
+    "./index.html": "./",
+    "./stay-with-us": "./rooms",
+    "./rooms.html": "./rooms",
+    "./shared-spaces": "./amenities",
+    "./amenities.html": "./amenities",
+    "./our-home": "./gallery",
+    "./gallery.html": "./gallery",
+    "./plan-your-stay": "./pricing",
+    "./pricing.html": "./pricing",
+    "./join-the-family": "./contact",
+    "./contact.html": "./contact",
   };
   document.querySelectorAll<HTMLAnchorElement>("a[href]").forEach((link) => {
-    const replacement = routes[link.getAttribute("href") || ""];
-    if (replacement) link.href = replacement;
+    const rawHref = link.getAttribute("href") || "";
+    const replacement = routes[rawHref];
+    if (replacement) link.setAttribute("href", replacement);
   });
 }
 
 function syncSiteNavigation(): void {
   const pages = [
-    { href: "./index.html", label: "Home", file: "index.html", route: "index" },
-    { href: "./stay-with-us", label: "Stay With Us", file: "rooms.html", route: "stay-with-us" },
-    { href: "./shared-spaces", label: "Amenities", file: "amenities.html", route: "shared-spaces" },
-    { href: "./our-home", label: "Gallery", file: "gallery.html", route: "our-home" },
-    { href: "./plan-your-stay", label: "Plan Your Stay", file: "pricing.html", route: "plan-your-stay" },
-    { href: "./join-the-family", label: "Contact", file: "contact.html", route: "join-the-family" },
+    { href: "./", label: "Home", aliases: ["index", "", "home"] },
+    { href: "./rooms", label: "Stay With Us", aliases: ["rooms", "stay-with-us"] },
+    { href: "./amenities", label: "Amenities", aliases: ["amenities", "shared-spaces"] },
+    { href: "./gallery", label: "Gallery", aliases: ["gallery", "our-home"] },
+    { href: "./pricing", label: "Plan Your Stay", aliases: ["pricing", "plan-your-stay"] },
+    { href: "./contact", label: "Contact", aliases: ["contact", "join-the-family"] },
   ];
   let current = location.pathname.split("/").pop()?.replace(".html", "") || "index";
   if (!current || current === "") current = "index";
@@ -56,7 +63,7 @@ function syncSiteNavigation(): void {
     menu.innerHTML = pages
       .map(
         (page) =>
-          `<a href="${page.href}" class="${page.route === current || page.file === (current + ".html") ? "active" : ""}">${page.label}</a>`,
+          `<a href="${page.href}" class="${page.aliases.includes(current) ? "active" : ""}">${page.label}</a>`,
       )
       .join("");
   });
@@ -65,13 +72,14 @@ function syncSiteNavigation(): void {
       ".family-footer-grid > div:nth-child(2)",
     );
     if (explore)
-      explore.innerHTML = `<p class="family-footer-title">Explore</p>${pages.map((page) => `<a href="${page.href}" class="${page.route === current || page.file === (current + ".html") ? "active" : ""}">${page.label}</a>`).join("")}`;
+      explore.innerHTML = `<p class="family-footer-title">Explore</p>${pages.map((page) => `<a href="${page.href}" class="${page.aliases.includes(current) ? "active" : ""}">${page.label}</a>`).join("")}`;
   });
 }
 
 function applyArtDirection(): void {
-  const page = location.pathname.split("/").pop() || "index.html";
-  if (page === "amenities.html") {
+  const path = location.pathname.toLowerCase();
+  const page = path.split("/").pop()?.replace(".html", "") || "index";
+  if (page === "amenities" || page === "shared-spaces") {
     const hero = document.querySelector<HTMLImageElement>(
       ".family-page-hero > img",
     );
@@ -81,7 +89,7 @@ function applyArtDirection(): void {
         "Swimming pool beneath the signature umbrella canopy at NS LUXURY VILLA";
     }
   }
-  if (page === "pricing.html") {
+  if (page === "pricing" || page === "plan-your-stay") {
     const closingImage =
       document.querySelector<HTMLImageElement>(".family-cta > img");
     if (closingImage) {
@@ -89,7 +97,7 @@ function applyArtDirection(): void {
       closingImage.alt = "Prepared guest bedroom at NS LUXURY VILLA";
     }
   }
-  if (page === "contact.html") {
+  if (page === "contact" || page === "join-the-family") {
     const hero = document.querySelector<HTMLImageElement>(
       ".family-page-hero > img",
     );
@@ -98,7 +106,7 @@ function applyArtDirection(): void {
       hero.alt = "Pool, bar and outdoor spaces at NS LUXURY VILLA";
     }
   }
-  if (page === "gallery.html") {
+  if (page === "gallery" || page === "our-home") {
     const featured =
       document.querySelectorAll<HTMLImageElement>(".family-mosaic img");
     const images: Array<[string, string]> = [
