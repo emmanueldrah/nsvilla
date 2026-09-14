@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="google-site-verification" content="FWLdtfIrWqWpQ8KiyPhrUMvHi8hyNnTf8ZOzbv4zB0g" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
@@ -69,6 +70,26 @@
       }
     </script>
     <link rel="stylesheet" href="./src/style.css" />
+    <link
+      rel="preload"
+      as="image"
+      fetchpriority="high"
+      href="./images/nsvil.jpeg"
+      imagesrcset="./images/opt/nsvil-480.jpg 480w, ./images/opt/nsvil-960.jpg 960w, ./images/opt/nsvil-1100.jpg 1100w, ./images/nsvil.jpeg 1250w"
+      imagesizes="100vw"
+    />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..700;1,9..144,200..700&family=Inter:ital,wght@0,100..900&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..700;1,9..144,200..700&family=Inter:ital,wght@0,100..900&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..700;1,9..144,200..700&family=Inter:ital,wght@0,100..900&display=swap" /></noscript>
   </head>
   <body class="family-site">
     <header class="family-header">
@@ -99,9 +120,13 @@
     <main id="main">
       <section class="family-hero">
         <img
-          loading="lazy"
           src="./images/nsvil.jpeg"
           alt="NS LUXURY VILLA, its blue canopy, landscaped courtyard and apartment building"
+          width="1250"
+          height="834"
+          fetchpriority="high"
+          srcset="./images/opt/nsvil-480.jpg 480w, ./images/opt/nsvil-960.jpg 960w, ./images/opt/nsvil-1100.jpg 1100w, ./images/nsvil.jpeg 1250w"
+          sizes="100vw"
         />
         <div class="family-hero-overlay"></div>
         <div class="container family-hero-content">
