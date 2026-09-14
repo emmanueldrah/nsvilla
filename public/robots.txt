@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nsvilla.com/sitemap.xml
+Sitemap: https://www.nsvilla.com/sitemap.xml
