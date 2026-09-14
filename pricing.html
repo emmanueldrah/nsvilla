@@ -10,6 +10,17 @@
     <title>Plan Your Stay | NS LUXURY VILLA</title>
     <link rel="icon" href="./public/images/NS%20LOGO.jpeg" type="image/jpeg" />
     <link rel="stylesheet" href="./src/style.css" />
+    <link
+      rel="preload"
+      as="image"
+      fetchpriority="high"
+      href="./images/rooftop%20bar.jpeg"
+      imagesrcset="./images/opt/rooftop-bar-480.jpg 480w, ./images/opt/rooftop-bar-960.jpg 960w, ./images/opt/rooftop-bar-1100.jpg 1100w, ./images/rooftop%20bar.jpeg 1250w"
+      imagesizes="100vw"
+    />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..700;1,9..144,200..700&family=Inter:ital,wght@0,100..900&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..700;1,9..144,200..700&family=Inter:ital,wght@0,100..900&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..700;1,9..144,200..700&family=Inter:ital,wght@0,100..900&display=swap" /></noscript>
   </head>
   <body class="family-site">
     <header class="family-header">
@@ -38,6 +49,11 @@
         <img
           src="./images/rooftop%20bar.jpeg"
           alt="Rooftop at NS LUXURY VILLA"
+          width="1250"
+          height="834"
+          fetchpriority="high"
+          srcset="./images/opt/rooftop-bar-480.jpg 480w, ./images/opt/rooftop-bar-960.jpg 960w, ./images/opt/rooftop-bar-1100.jpg 1100w, ./images/rooftop%20bar.jpeg 1250w"
+          sizes="100vw"
         />
         <div class="container family-page-hero-content">
           <p class="family-kicker">Plan your stay</p>

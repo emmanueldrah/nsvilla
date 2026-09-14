@@ -17,6 +17,7 @@ export default defineConfig({
         gallery: "gallery.html",
         pricing: "pricing.html",
         contact: "contact.html",
+        admin: "admin.html",
       },
     },
   },

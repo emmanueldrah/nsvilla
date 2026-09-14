@@ -3,12 +3,15 @@
 // ════════════════════════════════════════════════════════════
 
 import { inject } from "@vercel/analytics";
+import { initRemoteContent } from "./content";
 
 const PRIMARY_WHATSAPP = "233535572774";
 
 // Content remains visible by default; this class only enables optional motion.
 document.documentElement.classList.add("js");
-inject();
+const isLocal =
+  location.hostname === "localhost" || location.hostname === "127.0.0.1";
+if (!isLocal) inject();
 
 // Initialize when DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
@@ -16,12 +19,17 @@ document.addEventListener("DOMContentLoaded", () => {
   syncSiteNavigation();
   applyArtDirection();
   initNavigation();
-  initScrollReveals();
   initSmoothScroll();
   initFormHandlers();
   initFloatingWhatsApp();
-  initVillaArchive();
+  initRemoteContent();
+});
+
+// Non-paint-critical enhancements run after the page has loaded.
+window.addEventListener("load", () => {
+  initScrollReveals();
   initImageViewer();
+  initVillaArchive();
 });
 
 function normalizeInternalLinks(): void {
@@ -102,7 +110,7 @@ function applyArtDirection(): void {
       ".family-page-hero > img",
     );
     if (hero) {
-      hero.src = "./images/pool%20and%20bar%20(3).jpeg";
+      hero.src = "./images/opt/pool-bar-hero.jpeg";
       hero.alt = "Pool, bar and outdoor spaces at NS LUXURY VILLA";
     }
   }
@@ -281,7 +289,8 @@ Sent from NS LUXURY VILLA Booking Form
 
     // Open WhatsApp with pre-filled message
     const encodedMessage = encodeURIComponent(whatsappMessage);
-    const whatsappUrl = `https://wa.me/${PRIMARY_WHATSAPP}?text=${encodedMessage}`;
+    const waNumber = window.NsVilla?.contact?.waPrimary || PRIMARY_WHATSAPP;
+    const whatsappUrl = `https://wa.me/${waNumber}?text=${encodedMessage}`;
 
     window.open(whatsappUrl, "_blank");
 
@@ -301,6 +310,7 @@ function initFloatingWhatsApp(): void {
   if (!existingBtn) {
     const btn = document.createElement("a");
     btn.id = "floating-whatsapp";
+    btn.setAttribute("aria-label", "Chat with NS LUXURY VILLA on WhatsApp");
     btn.href = `https://wa.me/${PRIMARY_WHATSAPP}`;
     btn.target = "_blank";
     btn.rel = "noopener noreferrer";
@@ -311,7 +321,10 @@ function initFloatingWhatsApp(): void {
         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-9.746 9.798c0 2.709.894 5.223 2.53 7.265L2.677 22l7.8-2.464a9.859 9.859 0 004.59 1.168h.007c5.427 0 9.851-4.424 9.851-9.851 0-2.632-.994-5.107-2.801-6.975-1.807-1.868-4.281-2.897-6.879-2.897"/>
       </svg>
     `;
-    document.body.appendChild(btn);
+    const nav = document.createElement("nav");
+    nav.setAttribute("aria-label", "Quick contact");
+    nav.appendChild(btn);
+    document.body.appendChild(nav);
   }
 }
 

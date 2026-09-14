@@ -10,6 +10,17 @@
     <title>Amenities | NS LUXURY VILLA</title>
     <link rel="icon" href="./public/images/NS%20LOGO.jpeg" type="image/jpeg" />
     <link rel="stylesheet" href="./src/style.css" />
+    <link
+      rel="preload"
+      as="image"
+      fetchpriority="high"
+      href="./images/nice%20pool.jpeg"
+      imagesrcset="./images/opt/nice-pool-480.jpg 480w, ./images/opt/nice-pool-960.jpg 960w, ./images/opt/nice-pool-1100.jpg 1100w, ./images/nice%20pool.jpeg 1250w"
+      imagesizes="100vw"
+    />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..700;1,9..144,200..700&family=Inter:ital,wght@0,100..900&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..700;1,9..144,200..700&family=Inter:ital,wght@0,100..900&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..700;1,9..144,200..700&family=Inter:ital,wght@0,100..900&display=swap" /></noscript>
   </head>
   <body class="family-site amenities-page">
     <header class="family-header amenities-header">
@@ -51,6 +62,11 @@
             <img
               src="./images/nice%20pool.jpeg"
               alt="Swimming pool beneath the signature umbrella canopy"
+              width="1250"
+              height="834"
+              fetchpriority="high"
+              srcset="./images/opt/nice-pool-480.jpg 480w, ./images/opt/nice-pool-960.jpg 960w, ./images/opt/nice-pool-1100.jpg 1100w, ./images/nice%20pool.jpeg 1250w"
+              sizes="100vw"
             />
             <figcaption>
               One of the places where guests become family.

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>NS LUXURY VILLA — Admin</title>
+    <link rel="icon" href="./public/images/NS%20LOGO.jpeg" type="image/jpeg" />
+  </head>
+  <body>
+    <main>
+    <!-- Login -->
+    <section id="view-login" class="card login-card">
+      <h1>NS LUXURY VILLA</h1>
+      <p class="sub">Admin portal</p>
+      <form id="login-form">
+        <div class="field">
+          <label for="admin-password">Password</label>
+          <input
+            id="admin-password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            required
+          />
+        </div>
+        <p id="login-error" class="error-msg" role="alert"></p>
+        <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+      </form>
+    </section>
+
+    <!-- Admin app -->
+    <section id="view-app" class="hidden">
+      <header class="admin-header">
+        <div>
+          <h1>NS LUXURY VILLA</h1>
+          <span class="admin-sub">Admin portal</span>
+        </div>
+        <div class="admin-actions">
+          <span id="last-saved" class="last-saved"></span>
+          <button id="view-site" class="btn btn-ghost btn-sm" type="button">View site</button>
+          <button id="logout-btn" class="btn btn-ghost btn-sm" type="button">Log out</button>
+        </div>
+      </header>
+
+      <div class="admin-wrap">
+        <nav class="tabs" aria-label="Admin sections">
+          <button type="button" class="tab active" data-panel="flyers">Flyers &amp; Promos</button>
+          <button type="button" class="tab" data-panel="content">Site content</button>
+          <button type="button" class="tab" data-panel="broadcast">WhatsApp broadcast</button>
+        </nav>
+
+        <section id="panel-flyers" class="panel active" aria-label="Flyers and promotions">
+          <div class="card">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap">
+              <h2 style="margin: 0">Flyers &amp; promotions</h2>
+              <button id="new-flyer" class="btn btn-gold" type="button">+ New flyer</button>
+            </div>
+            <p class="hint" style="font-size: 0.85rem; color: #59645e; margin: 0.75rem 0 1rem">
+              Flyers appear as cards on the homepage. Turn on "Show as banner" to also show one as a strip
+              across every page. "Active" controls visibility; optional end dates auto-hide past offers.
+            </p>
+            <div id="flyer-list"></div>
+            <div id="flyer-editor" class="flyer-editor hidden"></div>
+          </div>
+        </section>
+
+        <section id="panel-content" class="panel" aria-label="Site content">
+          <div class="card">
+            <h2>Site content</h2>
+            <p class="hint" style="font-size: 0.85rem; color: #59645e; margin: 0 0 1.25rem">
+              These edits go live on the website as soon as you save — no redeploy needed.
+            </p>
+            <div id="content-editor"></div>
+            <div style="margin-top: 1.25rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap">
+              <button id="save-content" class="btn btn-primary" type="button">Save all content</button>
+              <p id="content-status" class="ok-msg" style="margin: 0" role="status"></p>
+            </div>
+          </div>
+        </section>
+
+        <section id="panel-broadcast" class="panel" aria-label="WhatsApp broadcast">
+          <div class="card">
+            <h2>Broadcast a message on WhatsApp</h2>
+            <p class="hint" style="font-size: 0.85rem; color: #59645e; margin: 0 0 1.25rem">
+              Compose a promo (or pick one of your flyers) and open WhatsApp with the message ready to send
+              to your guests.
+            </p>
+            <div id="broadcast-form"></div>
+          </div>
+        </section>
+      </div>
+    </section>
+    </main>
+
+    <script type="module" src="./src/admin.ts"></script>
+  </body>
+</html>

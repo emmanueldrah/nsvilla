@@ -6,6 +6,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/admin",
+      "destination": "/admin.html"
+    },
+    {
       "source": "/rooms",
       "destination": "/rooms.html"
     },

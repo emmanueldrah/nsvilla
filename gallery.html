@@ -10,6 +10,17 @@
     <title>Our Home | NS LUXURY VILLA</title>
     <link rel="icon" href="./public/images/NS%20LOGO.jpeg" type="image/jpeg" />
     <link rel="stylesheet" href="./src/style.css" />
+    <link
+      rel="preload"
+      as="image"
+      fetchpriority="high"
+      href="./images/nights.jpeg"
+      imagesrcset="./images/opt/nights-480.jpg 480w, ./images/opt/nights-960.jpg 960w, ./images/opt/nights-1100.jpg 1100w, ./images/nights.jpeg 1250w"
+      imagesizes="100vw"
+    />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..700;1,9..144,200..700&family=Inter:ital,wght@0,100..900&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..700;1,9..144,200..700&family=Inter:ital,wght@0,100..900&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..700;1,9..144,200..700&family=Inter:ital,wght@0,100..900&display=swap" /></noscript>
   </head>
   <body class="family-site">
     <header class="family-header">
@@ -39,9 +50,13 @@
     <main id="main">
       <section class="family-page-hero">
         <img
-          loading="lazy"
           src="./images/nights.jpeg"
           alt="NS LUXURY VILLA at night"
+          width="1250"
+          height="833"
+          fetchpriority="high"
+          srcset="./images/opt/nights-480.jpg 480w, ./images/opt/nights-960.jpg 960w, ./images/opt/nights-1100.jpg 1100w, ./images/nights.jpeg 1250w"
+          sizes="100vw"
         />
         <div class="container family-page-hero-content">
           <p class="family-kicker">Our home</p>
