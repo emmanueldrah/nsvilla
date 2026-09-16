@@ -600,10 +600,12 @@ function initRoomCatalog(): void {
     }
     const suiteSelect = document.querySelector<HTMLSelectElement>('select[name="suite"], #suite');
     if (suiteSelect) {
-      if (selectedRoom.toLowerCase().includes("apartment")) {
-        suiteSelect.value = "An apartment stay";
-      } else if (selectedRoom.toLowerCase().includes("room")) {
-        suiteSelect.value = "A room stay";
+      const roomLower = selectedRoom.toLowerCase().trim();
+      for (const option of Array.from(suiteSelect.options)) {
+        if (option.value.toLowerCase().includes(roomLower) || option.text.toLowerCase().includes(roomLower)) {
+          suiteSelect.value = option.value;
+          break;
+        }
       }
     }
   }
