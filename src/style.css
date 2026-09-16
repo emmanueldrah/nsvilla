@@ -1083,16 +1083,9 @@ nav a.active {
   }
 }
 @media (max-width: 560px) {
-  .family-hero {
-    min-height: 720px;
-  }
-  .family-hero-content {
-    padding-top: 8rem;
-  }
-  .family-hero-note {
-    left: 1.5rem;
-    right: 1.5rem;
-    line-height: 1.6;
+  /* Pool story, gallery, menus */
+  .family-pool-image {
+    min-height: 300px;
   }
   .family-intro,
   .family-rooms,
@@ -2469,6 +2462,33 @@ details {
     padding: 0.85rem;
   }
 
+  /* Stack all 2-column grids on mobile */
+  .family-contact-grid,
+  .family-video-layout,
+  .family-wide-story,
+  .family-feature-grid,
+  .family-price-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .family-contact-grid {
+    gap: 2.5rem;
+  }
+  /* Stack the form input grid on mobile */
+  .family-form-grid {
+    grid-template-columns: 1fr;
+  }
+  /* Page section vertical padding */
+  .family-page-section {
+    padding: 4rem 0;
+  }
+  .family-video-section {
+    padding: 4rem 0;
+  }
+  /* Wide story stacking */
+  .family-wide-story {
+    grid-template-rows: 280px auto;
+  }
   /* Hero: reduce min-height and tighten content on tablets/large phones */
   .family-hero {
     min-height: 600px;
