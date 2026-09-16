@@ -1888,3 +1888,456 @@ details {
 .cms-flyer-body .family-btn {
   margin-top: 0.5rem;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   VILLA ROOMS CATALOG, VIDEO TOURS & PRICING
+   ═══════════════════════════════════════════════════════════ */
+
+.villa-catalog-section {
+  padding: 5rem 0 7rem;
+  background: var(--cream);
+}
+
+.villa-catalog-intro {
+  margin-bottom: 2.5rem;
+}
+
+.villa-rate-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: rgba(240, 191, 79, 0.15);
+  border: 1px solid rgba(240, 191, 79, 0.45);
+  border-radius: 12px;
+  padding: 1rem 1.4rem;
+  margin: 1.5rem 0 2rem;
+  color: var(--primary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.villa-rate-banner-icon {
+  font-size: 1.35rem;
+  flex-shrink: 0;
+}
+
+.villa-filter-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.villa-filter-btn {
+  background: var(--cream);
+  border: 1.5px solid var(--border-light);
+  color: var(--primary);
+  font-family: Inter, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 0.65rem 1.4rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.villa-filter-btn:hover {
+  border-color: var(--primary);
+  background: var(--light);
+}
+
+.villa-filter-btn.active {
+  background: var(--primary);
+  color: var(--cream);
+  border-color: var(--primary);
+  box-shadow: 0 4px 14px rgba(23, 59, 54, 0.2);
+}
+
+.villa-rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 1080px) {
+  .villa-rooms-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .villa-rooms-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.villa-room-card {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: 1.15rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(23, 59, 54, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.villa-room-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(23, 59, 54, 0.12);
+}
+
+.villa-room-card.has-video {
+  border-color: rgba(240, 191, 79, 0.6);
+}
+
+.villa-media-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: #0f2723;
+  overflow: hidden;
+}
+
+.villa-media-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.villa-room-card:hover .villa-media-container img {
+  transform: scale(1.03);
+}
+
+.villa-room-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: #000;
+}
+
+.villa-media-tag {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 2;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.villa-media-tag.video-tag {
+  background: rgba(23, 59, 54, 0.9);
+  color: var(--gold);
+  border: 1px solid rgba(240, 191, 79, 0.4);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.villa-media-tag.photo-tag {
+  background: rgba(255, 250, 243, 0.92);
+  color: var(--primary);
+  border: 1px solid var(--border-light);
+}
+
+.villa-room-content {
+  padding: 1.65rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.villa-room-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.6rem;
+}
+
+.villa-room-category {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.villa-room-title {
+  font: 400 1.65rem Fraunces, Georgia, serif;
+  color: var(--primary);
+  margin: 0.25rem 0 0;
+  line-height: 1.2;
+}
+
+.villa-price-pill {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.villa-price-val {
+  font-size: 1.35rem;
+  font-weight: 700;
+  font-family: Fraunces, Georgia, serif;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.villa-price-sub {
+  font-size: 0.72rem;
+  color: var(--muted);
+  display: block;
+  margin-top: 0.2rem;
+}
+
+.villa-bed-highlight {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--light);
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.35rem 0.8rem;
+  border-radius: 6px;
+  margin: 0.75rem 0 1rem;
+  border: 1px solid var(--border-light);
+  width: fit-content;
+}
+
+.villa-room-desc {
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin-bottom: 1.1rem;
+}
+
+.villa-feature-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+  margin-top: auto;
+}
+
+.villa-chip {
+  background: #f7f4ed;
+  border: 1px solid #e7ddcf;
+  color: #49544e;
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+}
+
+.villa-card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+}
+
+.villa-btn-wa {
+  background: #25d366;
+  color: #ffffff;
+  border: 1px solid #20b858;
+  font-weight: 600;
+  font-size: 0.84rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.villa-btn-wa:hover {
+  background: #1ebc59;
+  transform: translateY(-1px);
+  color: #fff;
+}
+
+.villa-btn-inquire {
+  background: var(--cream);
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  font-weight: 600;
+  font-size: 0.84rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.villa-btn-inquire:hover {
+  background: var(--primary);
+  color: var(--cream);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PRICING RATE MATRIX & VIDEO HIGHLIGHTS
+   ═══════════════════════════════════════════════════════════ */
+
+.pricing-table-card {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: 1.25rem;
+  padding: 2.2rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 14px 40px rgba(23, 59, 54, 0.07);
+}
+
+.pricing-table-header {
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 1.25rem;
+}
+
+.pricing-table-header h3 {
+  font: 400 1.9rem Fraunces, Georgia, serif;
+  color: var(--primary);
+  margin: 0 0 0.35rem;
+}
+
+.pricing-tier-row {
+  display: grid;
+  grid-template-columns: 1.2fr 2fr 1fr 1fr;
+  align-items: center;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid #eee5d8;
+  gap: 1rem;
+}
+
+.pricing-tier-row:last-child {
+  border-bottom: 0;
+}
+
+@media (max-width: 860px) {
+  .pricing-tier-row {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+    padding: 1.25rem 0;
+  }
+}
+
+.pricing-tier-name {
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 1.05rem;
+}
+
+.pricing-tier-rooms {
+  font-size: 0.85rem;
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.room-badge-pill {
+  background: var(--light);
+  color: var(--primary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+}
+
+.room-badge-pill.has-vid {
+  background: var(--primary);
+  color: var(--gold);
+}
+
+.pricing-tier-rate {
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.pricing-tier-rate span {
+  font-size: 0.8rem;
+  font-family: Inter, sans-serif;
+  color: var(--muted);
+  font-weight: normal;
+}
+
+.pricing-videos-section {
+  padding: 5rem 0;
+  background: #173b36;
+  color: var(--cream);
+}
+
+.pricing-videos-section h2 {
+  color: var(--cream);
+  margin-top: 0.25rem;
+}
+
+.pricing-videos-section p.family-lead {
+  color: rgba(255, 250, 243, 0.8);
+  max-width: 650px;
+  margin-bottom: 3rem;
+}
+
+.pricing-videos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 960px) {
+  .pricing-videos-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.pricing-video-card {
+  background: rgba(255, 250, 243, 0.06);
+  border: 1px solid rgba(240, 191, 79, 0.25);
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.pricing-video-card .villa-media-container {
+  aspect-ratio: 16 / 9;
+}
+
+.pricing-video-card-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.pricing-video-card-body h3 {
+  font: 400 1.45rem Fraunces, Georgia, serif;
+  color: var(--cream);
+  margin: 0.25rem 0 0.5rem;
+}
+
+.pricing-video-card-body p {
+  color: rgba(255, 250, 243, 0.75);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin: 0 0 1.25rem;
+}
+

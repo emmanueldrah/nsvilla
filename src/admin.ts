@@ -416,7 +416,7 @@ function renderContentEditor(): void {
       ${field(`c-price-${i}-tag`, "Tag", it.tag || "")}
       ${field(`c-price-${i}-title`, "Title", it.title || "")}
       ${field(`c-price-${i}-body`, "Description", it.body || "", { textarea: true })}
-      ${field(`c-price-${i}-points`, "Points (comma-separated)", (it.points || []).join(", "), { hint: "e.g. Ensuite comfort, Smart TV and Wi-Fi, Pool and lounge access" })}`)
+      ${field(`c-price-${i}-points`, "Points (comma-separated)", (it.points || []).join(", "), { hint: "e.g. Ensuite comfort, TV and Wi-Fi, Pool and lounge access" })}`)
     .join("");
 
   const footerRows = [

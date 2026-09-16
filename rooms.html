@@ -27,13 +27,14 @@
         "@context": "https://schema.org",
         "@type": "Hotel",
         "name": "NS Luxury Villa",
-        "description": "Comfortable, modern rooms and suites in Ho, Ghana with pool access.",
+        "description": "Comfortable, modern apartments and ensuite rooms in Ho, Ghana with pool access, video tours, and transparent rates.",
         "url": "https://www.nsvilla.com/rooms",
         "hasMap": "https://maps.app.goo.gl/m5D2RskmYyLiiPyo8",
         "sameAs": [
           "https://maps.app.goo.gl/m5D2RskmYyLiiPyo8"
         ],
         "telephone": "+233535572774",
+        "priceRange": "GH₵500 - GH₵850",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Ho",
@@ -41,9 +42,18 @@
           "addressCountry": "GH"
         },
         "containsPlace": [
-          { "@type": "HotelRoom", "name": "Furnished Apartment" },
-          { "@type": "HotelRoom", "name": "Studio Room" },
-          { "@type": "HotelRoom", "name": "Ensuite Room" }
+          { "@type": "HotelRoom", "name": "Apartment A1", "bed": "2 Beds in bedroom", "offers": { "@type": "Offer", "price": "850", "priceCurrency": "GHS" } },
+          { "@type": "HotelRoom", "name": "Apartment A2", "bed": "1 Queen Bed", "offers": { "@type": "Offer", "price": "850", "priceCurrency": "GHS" } },
+          { "@type": "HotelRoom", "name": "Apartment A3", "bed": "2 Beds in bedroom", "offers": { "@type": "Offer", "price": "850", "priceCurrency": "GHS" } },
+          { "@type": "HotelRoom", "name": "Apartment A4", "bed": "1 Queen Bed", "offers": { "@type": "Offer", "price": "850", "priceCurrency": "GHS" } },
+          { "@type": "HotelRoom", "name": "Apartment A5", "bed": "2 Beds in bedroom", "offers": { "@type": "Offer", "price": "850", "priceCurrency": "GHS" } },
+          { "@type": "HotelRoom", "name": "Apartment A6", "bed": "1 Queen Bed", "offers": { "@type": "Offer", "price": "850", "priceCurrency": "GHS" } },
+          { "@type": "HotelRoom", "name": "Single Room B5", "bed": "1 Bed", "offers": { "@type": "Offer", "price": "600", "priceCurrency": "GHS" } },
+          { "@type": "HotelRoom", "name": "Single Room B6", "bed": "1 Bed", "offers": { "@type": "Offer", "price": "600", "priceCurrency": "GHS" } },
+          { "@type": "HotelRoom", "name": "Single Room B7", "bed": "1 Bed", "offers": { "@type": "Offer", "price": "600", "priceCurrency": "GHS" } },
+          { "@type": "HotelRoom", "name": "Single Room B8", "bed": "1 Bed", "offers": { "@type": "Offer", "price": "500", "priceCurrency": "GHS" } },
+          { "@type": "HotelRoom", "name": "Single Room B9", "bed": "1 Bed", "offers": { "@type": "Offer", "price": "500", "priceCurrency": "GHS" } },
+          { "@type": "HotelRoom", "name": "Single Room B10", "bed": "1 Bed", "offers": { "@type": "Offer", "price": "600", "priceCurrency": "GHS" } }
         ]
       }
     </script>
@@ -148,12 +158,525 @@
                 <span class="family-feature-tag">SETTLE IN</span>
                 <h3>Everyday ease</h3>
                 <p>
-                  Starlink Wi-Fi, smart TVs and a full kitchen for a stay that
+                  Starlink Wi-Fi, television and a full kitchen for a stay that
                   works your way. Private-room guests also share selected common
                   spaces.
                 </p>
               </div>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="villa-catalog-section" id="rooms">
+        <div class="container">
+          <div class="villa-catalog-intro">
+            <p class="family-kicker dark">All Rooms & Rates</p>
+            <h2>Find your room at NS Luxury Villa.</h2>
+            <p class="family-note">
+              Browse our complete selection of self-contained luxury apartments and peaceful ensuite single rooms in Ho, Volta Region. Transparent pricing, modern amenities, and video tours to help you plan your stay.
+            </p>
+          </div>
+
+          <div class="villa-rate-banner">
+            <span class="villa-rate-banner-icon">📌</span>
+            <div>
+              <strong>Rate & Booking Policy:</strong> All rates are listed in Ghana Cedis (GH₵) per night. Rates are subject to change based on seasonality, duration of stay, and availability. Daily housekeeping, Starlink Wi-Fi, pool access, and 24/7 security are included.
+            </div>
+          </div>
+
+          <!-- Category Filter Bar -->
+          <div class="villa-filter-nav" role="tablist" aria-label="Room filter">
+            <button type="button" class="villa-filter-btn active" data-filter="all">All Rooms (12)</button>
+            <button type="button" class="villa-filter-btn" data-filter="apartment">Apartments (A1–A6) · GH₵ 850</button>
+            <button type="button" class="villa-filter-btn" data-filter="single">Single Rooms (B5–B10) · From GH₵ 500</button>
+          </div>
+
+          <!-- Rooms Grid -->
+          <div class="villa-rooms-grid">
+
+            <!-- APARTMENT A6 (With Video) -->
+            <article class="villa-room-card has-video" data-category="apartment">
+              <div class="villa-media-container">
+                <span class="villa-media-tag video-tag">🎬 Video Tour</span>
+                <video class="villa-room-video" controls playsinline preload="metadata" poster="./images/apartment.jpeg">
+                  <source src="./videos/A6.mp4" type="video/mp4" />
+                  Your browser does not support video.
+                </video>
+              </div>
+              <div class="villa-room-content">
+                <div class="villa-room-top">
+                  <div>
+                    <span class="villa-room-category">Block A · Apartment</span>
+                    <h3 class="villa-room-title">Apartment A6</h3>
+                  </div>
+                  <div class="villa-price-pill">
+                    <span class="villa-price-val">GH₵ 850</span>
+                    <span class="villa-price-sub">per night</span>
+                  </div>
+                </div>
+                <div class="villa-bed-highlight">
+                  🛏️ 1 Queen-Sized Bed
+                </div>
+                <p class="villa-room-desc">
+                  Modern furnished apartment with private hall, dedicated kitchen area, and a queen-sized bed. Watch the interactive video tour above.
+                </p>
+                <div class="villa-feature-chips">
+                  <span class="villa-chip">Full Kitchen</span>
+                  <span class="villa-chip">Starlink Wi-Fi</span>
+                  <span class="villa-chip">TV</span>
+                  <span class="villa-chip">AC & Hot Water</span>
+                  <span class="villa-chip">Pool Access</span>
+                </div>
+                <div class="villa-card-actions">
+                  <a href="https://wa.me/233535572774?text=Hello%20NS%20Luxury%20Villa%2C%20I%20would%20like%20to%20book%20Apartment%20A6%20(GH%E2%82%B5850%2Fnight)." class="villa-btn-wa" target="_blank" rel="noopener noreferrer">
+                    <span>WhatsApp</span> ↗
+                  </a>
+                  <a href="./contact?room=Apartment+A6" class="villa-btn-inquire">Inquire</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- APARTMENT A1 -->
+            <article class="villa-room-card" data-category="apartment">
+              <div class="villa-media-container">
+                <span class="villa-media-tag photo-tag">✨ Verified Photo</span>
+                <img src="./images/two%20beds.jpeg" alt="Apartment A1 bedroom with two beds" loading="lazy" />
+              </div>
+              <div class="villa-room-content">
+                <div class="villa-room-top">
+                  <div>
+                    <span class="villa-room-category">Block A · Apartment</span>
+                    <h3 class="villa-room-title">Apartment A1</h3>
+                  </div>
+                  <div class="villa-price-pill">
+                    <span class="villa-price-val">GH₵ 850</span>
+                    <span class="villa-price-sub">per night</span>
+                  </div>
+                </div>
+                <div class="villa-bed-highlight">
+                  🛏️ 2 Beds in Same Bedroom
+                </div>
+                <p class="villa-room-desc">
+                  Spacious apartment layout featuring two comfortable beds in the master bedroom—ideal for companions, colleagues, or family stays.
+                </p>
+                <div class="villa-feature-chips">
+                  <span class="villa-chip">2 Beds</span>
+                  <span class="villa-chip">Full Kitchen</span>
+                  <span class="villa-chip">Starlink Wi-Fi</span>
+                  <span class="villa-chip">TV</span>
+                  <span class="villa-chip">AC & Hot Water</span>
+                  <span class="villa-chip">Pool Access</span>
+                </div>
+                <div class="villa-card-actions">
+                  <a href="https://wa.me/233535572774?text=Hello%20NS%20Luxury%20Villa%2C%20I%20would%20like%20to%20book%20Apartment%20A1%20(GH%E2%82%B5850%2Fnight)." class="villa-btn-wa" target="_blank" rel="noopener noreferrer">
+                    <span>WhatsApp</span> ↗
+                  </a>
+                  <a href="./contact?room=Apartment+A1" class="villa-btn-inquire">Inquire</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- APARTMENT A2 -->
+            <article class="villa-room-card" data-category="apartment">
+              <div class="villa-media-container">
+                <span class="villa-media-tag photo-tag">✨ Verified Photo</span>
+                <img src="./images/apartment.jpeg" alt="Apartment A2 living space" loading="lazy" />
+              </div>
+              <div class="villa-room-content">
+                <div class="villa-room-top">
+                  <div>
+                    <span class="villa-room-category">Block A · Apartment</span>
+                    <h3 class="villa-room-title">Apartment A2</h3>
+                  </div>
+                  <div class="villa-price-pill">
+                    <span class="villa-price-val">GH₵ 850</span>
+                    <span class="villa-price-sub">per night</span>
+                  </div>
+                </div>
+                <div class="villa-bed-highlight">
+                  🛏️ 1 Queen-Sized Bed
+                </div>
+                <p class="villa-room-desc">
+                  Serene and private apartment suite fitted with a plush queen-sized bed, generous living room, and cooking amenities.
+                </p>
+                <div class="villa-feature-chips">
+                  <span class="villa-chip">Queen Bed</span>
+                  <span class="villa-chip">Full Kitchen</span>
+                  <span class="villa-chip">Starlink Wi-Fi</span>
+                  <span class="villa-chip">TV</span>
+                  <span class="villa-chip">AC & Hot Water</span>
+                  <span class="villa-chip">Pool Access</span>
+                </div>
+                <div class="villa-card-actions">
+                  <a href="https://wa.me/233535572774?text=Hello%20NS%20Luxury%20Villa%2C%20I%20would%20like%20to%20book%20Apartment%20A2%20(GH%E2%82%B5850%2Fnight)." class="villa-btn-wa" target="_blank" rel="noopener noreferrer">
+                    <span>WhatsApp</span> ↗
+                  </a>
+                  <a href="./contact?room=Apartment+A2" class="villa-btn-inquire">Inquire</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- APARTMENT A3 -->
+            <article class="villa-room-card" data-category="apartment">
+              <div class="villa-media-container">
+                <span class="villa-media-tag photo-tag">✨ Verified Photo</span>
+                <img src="./images/two%20beds.jpeg" alt="Apartment A3 two beds" loading="lazy" />
+              </div>
+              <div class="villa-room-content">
+                <div class="villa-room-top">
+                  <div>
+                    <span class="villa-room-category">Block A · Apartment</span>
+                    <h3 class="villa-room-title">Apartment A3</h3>
+                  </div>
+                  <div class="villa-price-pill">
+                    <span class="villa-price-val">GH₵ 850</span>
+                    <span class="villa-price-sub">per night</span>
+                  </div>
+                </div>
+                <div class="villa-bed-highlight">
+                  🛏️ 2 Beds in Same Bedroom
+                </div>
+                <p class="villa-room-desc">
+                  Convenient 2-bed apartment layout, offering flexible sleeping arrangements with complete living and kitchen facilities.
+                </p>
+                <div class="villa-feature-chips">
+                  <span class="villa-chip">2 Beds</span>
+                  <span class="villa-chip">Full Kitchen</span>
+                  <span class="villa-chip">Starlink Wi-Fi</span>
+                  <span class="villa-chip">TV</span>
+                  <span class="villa-chip">AC & Hot Water</span>
+                  <span class="villa-chip">Pool Access</span>
+                </div>
+                <div class="villa-card-actions">
+                  <a href="https://wa.me/233535572774?text=Hello%20NS%20Luxury%20Villa%2C%20I%20would%20like%20to%20book%20Apartment%20A3%20(GH%E2%82%B5850%2Fnight)." class="villa-btn-wa" target="_blank" rel="noopener noreferrer">
+                    <span>WhatsApp</span> ↗
+                  </a>
+                  <a href="./contact?room=Apartment+A3" class="villa-btn-inquire">Inquire</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- APARTMENT A4 -->
+            <article class="villa-room-card" data-category="apartment">
+              <div class="villa-media-container">
+                <span class="villa-media-tag photo-tag">✨ Verified Photo</span>
+                <img src="./images/soft%20bed.jpeg" alt="Apartment A4 bedroom" loading="lazy" />
+              </div>
+              <div class="villa-room-content">
+                <div class="villa-room-top">
+                  <div>
+                    <span class="villa-room-category">Block A · Apartment</span>
+                    <h3 class="villa-room-title">Apartment A4</h3>
+                  </div>
+                  <div class="villa-price-pill">
+                    <span class="villa-price-val">GH₵ 850</span>
+                    <span class="villa-price-sub">per night</span>
+                  </div>
+                </div>
+                <div class="villa-bed-highlight">
+                  🛏️ 1 Queen-Sized Bed
+                </div>
+                <p class="villa-room-desc">
+                  Bright, tranquil apartment with one queen bed, comfortable furnishings, AC climate control, and full access to villa amenities.
+                </p>
+                <div class="villa-feature-chips">
+                  <span class="villa-chip">Queen Bed</span>
+                  <span class="villa-chip">Full Kitchen</span>
+                  <span class="villa-chip">Starlink Wi-Fi</span>
+                  <span class="villa-chip">TV</span>
+                  <span class="villa-chip">AC & Hot Water</span>
+                  <span class="villa-chip">Pool Access</span>
+                </div>
+                <div class="villa-card-actions">
+                  <a href="https://wa.me/233535572774?text=Hello%20NS%20Luxury%20Villa%2C%20I%20would%20like%20to%20book%20Apartment%20A4%20(GH%E2%82%B5850%2Fnight)." class="villa-btn-wa" target="_blank" rel="noopener noreferrer">
+                    <span>WhatsApp</span> ↗
+                  </a>
+                  <a href="./contact?room=Apartment+A4" class="villa-btn-inquire">Inquire</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- APARTMENT A5 -->
+            <article class="villa-room-card" data-category="apartment">
+              <div class="villa-media-container">
+                <span class="villa-media-tag photo-tag">✨ Verified Photo</span>
+                <img src="./images/beds.jpeg" alt="Apartment A5 twin beds" loading="lazy" />
+              </div>
+              <div class="villa-room-content">
+                <div class="villa-room-top">
+                  <div>
+                    <span class="villa-room-category">Block A · Apartment</span>
+                    <h3 class="villa-room-title">Apartment A5</h3>
+                  </div>
+                  <div class="villa-price-pill">
+                    <span class="villa-price-val">GH₵ 850</span>
+                    <span class="villa-price-sub">per night</span>
+                  </div>
+                </div>
+                <div class="villa-bed-highlight">
+                  🛏️ 2 Beds in Same Bedroom
+                </div>
+                <p class="villa-room-desc">
+                  Thoughtful two-bed layout in the bedroom, providing comfortable personal rest with fully equipped shared spaces.
+                </p>
+                <div class="villa-feature-chips">
+                  <span class="villa-chip">2 Beds</span>
+                  <span class="villa-chip">Full Kitchen</span>
+                  <span class="villa-chip">Starlink Wi-Fi</span>
+                  <span class="villa-chip">TV</span>
+                  <span class="villa-chip">AC & Hot Water</span>
+                  <span class="villa-chip">Pool Access</span>
+                </div>
+                <div class="villa-card-actions">
+                  <a href="https://wa.me/233535572774?text=Hello%20NS%20Luxury%20Villa%2C%20I%20would%20like%20to%20book%20Apartment%20A5%20(GH%E2%82%B5850%2Fnight)." class="villa-btn-wa" target="_blank" rel="noopener noreferrer">
+                    <span>WhatsApp</span> ↗
+                  </a>
+                  <a href="./contact?room=Apartment+A5" class="villa-btn-inquire">Inquire</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- SINGLE ROOM B5 (With Video) -->
+            <article class="villa-room-card has-video" data-category="single">
+              <div class="villa-media-container">
+                <span class="villa-media-tag video-tag">🎬 Video Tour</span>
+                <video class="villa-room-video" controls playsinline preload="metadata" poster="./images/bedroom.jpeg">
+                  <source src="./videos/B5.mp4" type="video/mp4" />
+                  Your browser does not support video.
+                </video>
+              </div>
+              <div class="villa-room-content">
+                <div class="villa-room-top">
+                  <div>
+                    <span class="villa-room-category">Block B · Single Room</span>
+                    <h3 class="villa-room-title">Room B5</h3>
+                  </div>
+                  <div class="villa-price-pill">
+                    <span class="villa-price-val">GH₵ 600</span>
+                    <span class="villa-price-sub">per night</span>
+                  </div>
+                </div>
+                <div class="villa-bed-highlight">
+                  🛏️ Private Ensuite Room
+                </div>
+                <p class="villa-room-desc">
+                  Comfortable private ensuite room featuring an attached bathroom, AC, hot water, and Starlink Wi-Fi. Watch the video walkthrough above.
+                </p>
+                <div class="villa-feature-chips">
+                  <span class="villa-chip">Private Bath</span>
+                  <span class="villa-chip">Starlink Wi-Fi</span>
+                  <span class="villa-chip">TV</span>
+                  <span class="villa-chip">AC & Hot Water</span>
+                  <span class="villa-chip">Pool Access</span>
+                </div>
+                <div class="villa-card-actions">
+                  <a href="https://wa.me/233535572774?text=Hello%20NS%20Luxury%20Villa%2C%20I%20would%20like%20to%20book%20Room%20B5%20(GH%E2%82%B5600%2Fnight)." class="villa-btn-wa" target="_blank" rel="noopener noreferrer">
+                    <span>WhatsApp</span> ↗
+                  </a>
+                  <a href="./contact?room=Room+B5" class="villa-btn-inquire">Inquire</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- SINGLE ROOM B6 (With Video) -->
+            <article class="villa-room-card has-video" data-category="single">
+              <div class="villa-media-container">
+                <span class="villa-media-tag video-tag">🎬 Video Tour</span>
+                <video class="villa-room-video" controls playsinline preload="metadata" poster="./images/bed.jpeg">
+                  <source src="./videos/B6.mp4" type="video/mp4" />
+                  Your browser does not support video.
+                </video>
+              </div>
+              <div class="villa-room-content">
+                <div class="villa-room-top">
+                  <div>
+                    <span class="villa-room-category">Block B · Single Room</span>
+                    <h3 class="villa-room-title">Room B6</h3>
+                  </div>
+                  <div class="villa-price-pill">
+                    <span class="villa-price-val">GH₵ 600</span>
+                    <span class="villa-price-sub">per night</span>
+                  </div>
+                </div>
+                <div class="villa-bed-highlight">
+                  🛏️ Private Ensuite Room
+                </div>
+                <p class="villa-room-desc">
+                  Relaxing ensuite single room with fresh linens, quiet surroundings, television, and attached bathroom. Take a tour via the video above.
+                </p>
+                <div class="villa-feature-chips">
+                  <span class="villa-chip">Private Bath</span>
+                  <span class="villa-chip">Starlink Wi-Fi</span>
+                  <span class="villa-chip">TV</span>
+                  <span class="villa-chip">AC & Hot Water</span>
+                  <span class="villa-chip">Pool Access</span>
+                </div>
+                <div class="villa-card-actions">
+                  <a href="https://wa.me/233535572774?text=Hello%20NS%20Luxury%20Villa%2C%20I%20would%20like%20to%20book%20Room%20B6%20(GH%E2%82%B5600%2Fnight)." class="villa-btn-wa" target="_blank" rel="noopener noreferrer">
+                    <span>WhatsApp</span> ↗
+                  </a>
+                  <a href="./contact?room=Room+B6" class="villa-btn-inquire">Inquire</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- SINGLE ROOM B7 -->
+            <article class="villa-room-card" data-category="single">
+              <div class="villa-media-container">
+                <span class="villa-media-tag photo-tag">✨ Verified Photo</span>
+                <img src="./images/bedroom%20(2).jpeg" alt="Room B7 bedroom" loading="lazy" />
+              </div>
+              <div class="villa-room-content">
+                <div class="villa-room-top">
+                  <div>
+                    <span class="villa-room-category">Block B · Single Room</span>
+                    <h3 class="villa-room-title">Room B7</h3>
+                  </div>
+                  <div class="villa-price-pill">
+                    <span class="villa-price-val">GH₵ 600</span>
+                    <span class="villa-price-sub">per night</span>
+                  </div>
+                </div>
+                <div class="villa-bed-highlight">
+                  🛏️ Private Ensuite Room
+                </div>
+                <p class="villa-room-desc">
+                  Peaceful single room in Block B, offering ensuite bath comfort, daily cleaning, and reliable high-speed internet.
+                </p>
+                <div class="villa-feature-chips">
+                  <span class="villa-chip">Private Bath</span>
+                  <span class="villa-chip">Starlink Wi-Fi</span>
+                  <span class="villa-chip">TV</span>
+                  <span class="villa-chip">AC & Hot Water</span>
+                  <span class="villa-chip">Pool Access</span>
+                </div>
+                <div class="villa-card-actions">
+                  <a href="https://wa.me/233535572774?text=Hello%20NS%20Luxury%20Villa%2C%20I%20would%20like%20to%20book%20Room%20B7%20(GH%E2%82%B5600%2Fnight)." class="villa-btn-wa" target="_blank" rel="noopener noreferrer">
+                    <span>WhatsApp</span> ↗
+                  </a>
+                  <a href="./contact?room=Room+B7" class="villa-btn-inquire">Inquire</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- SINGLE ROOM B8 (Special GH₵ 500) -->
+            <article class="villa-room-card" data-category="single">
+              <div class="villa-media-container">
+                <span class="villa-media-tag photo-tag">✨ Verified Photo</span>
+                <img src="./images/bedroom%20(3).jpeg" alt="Room B8 bedroom" loading="lazy" />
+              </div>
+              <div class="villa-room-content">
+                <div class="villa-room-top">
+                  <div>
+                    <span class="villa-room-category">Block B · Single Room</span>
+                    <h3 class="villa-room-title">Room B8</h3>
+                  </div>
+                  <div class="villa-price-pill">
+                    <span class="villa-price-val">GH₵ 500</span>
+                    <span class="villa-price-sub">per night</span>
+                  </div>
+                </div>
+                <div class="villa-bed-highlight">
+                  🛏️ Private Ensuite Room · Best Value
+                </div>
+                <p class="villa-room-desc">
+                  Affordable luxury comfort at an unbeatable nightly rate. Features ensuite bathroom, AC, TV, and full swimming pool access.
+                </p>
+                <div class="villa-feature-chips">
+                  <span class="villa-chip">Best Value</span>
+                  <span class="villa-chip">Private Bath</span>
+                  <span class="villa-chip">Starlink Wi-Fi</span>
+                  <span class="villa-chip">AC & Hot Water</span>
+                  <span class="villa-chip">Pool Access</span>
+                </div>
+                <div class="villa-card-actions">
+                  <a href="https://wa.me/233535572774?text=Hello%20NS%20Luxury%20Villa%2C%20I%20would%20like%20to%20book%20Room%20B8%20(GH%E2%82%B5500%2Fnight)." class="villa-btn-wa" target="_blank" rel="noopener noreferrer">
+                    <span>WhatsApp</span> ↗
+                  </a>
+                  <a href="./contact?room=Room+B8" class="villa-btn-inquire">Inquire</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- SINGLE ROOM B9 (Special GH₵ 500) -->
+            <article class="villa-room-card" data-category="single">
+              <div class="villa-media-container">
+                <span class="villa-media-tag photo-tag">✨ Verified Photo</span>
+                <img src="./images/bed%20(2).jpeg" alt="Room B9 bedroom" loading="lazy" />
+              </div>
+              <div class="villa-room-content">
+                <div class="villa-room-top">
+                  <div>
+                    <span class="villa-room-category">Block B · Single Room</span>
+                    <h3 class="villa-room-title">Room B9</h3>
+                  </div>
+                  <div class="villa-price-pill">
+                    <span class="villa-price-val">GH₵ 500</span>
+                    <span class="villa-price-sub">per night</span>
+                  </div>
+                </div>
+                <div class="villa-bed-highlight">
+                  🛏️ Private Ensuite Room · Best Value
+                </div>
+                <p class="villa-room-desc">
+                  Cozy, budget-friendly private ensuite stay with hot shower, air conditioning, fast Wi-Fi, and serene surroundings.
+                </p>
+                <div class="villa-feature-chips">
+                  <span class="villa-chip">Best Value</span>
+                  <span class="villa-chip">Private Bath</span>
+                  <span class="villa-chip">Starlink Wi-Fi</span>
+                  <span class="villa-chip">AC & Hot Water</span>
+                  <span class="villa-chip">Pool Access</span>
+                </div>
+                <div class="villa-card-actions">
+                  <a href="https://wa.me/233535572774?text=Hello%20NS%20Luxury%20Villa%2C%20I%20would%20like%20to%20book%20Room%20B9%20(GH%E2%82%B5500%2Fnight)." class="villa-btn-wa" target="_blank" rel="noopener noreferrer">
+                    <span>WhatsApp</span> ↗
+                  </a>
+                  <a href="./contact?room=Room+B9" class="villa-btn-inquire">Inquire</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- SINGLE ROOM B10 -->
+            <article class="villa-room-card" data-category="single">
+              <div class="villa-media-container">
+                <span class="villa-media-tag photo-tag">✨ Verified Photo</span>
+                <img src="./images/bedroo.jpeg" alt="Room B10 bedroom" loading="lazy" />
+              </div>
+              <div class="villa-room-content">
+                <div class="villa-room-top">
+                  <div>
+                    <span class="villa-room-category">Block B · Single Room</span>
+                    <h3 class="villa-room-title">Room B10</h3>
+                  </div>
+                  <div class="villa-price-pill">
+                    <span class="villa-price-val">GH₵ 600</span>
+                    <span class="villa-price-sub">per night</span>
+                  </div>
+                </div>
+                <div class="villa-bed-highlight">
+                  🛏️ Private Ensuite Room
+                </div>
+                <p class="villa-room-desc">
+                  Quiet, welcoming single room with private bathroom, television, daily housekeeping, and 24-hour security.
+                </p>
+                <div class="villa-feature-chips">
+                  <span class="villa-chip">Private Bath</span>
+                  <span class="villa-chip">Starlink Wi-Fi</span>
+                  <span class="villa-chip">TV</span>
+                  <span class="villa-chip">AC & Hot Water</span>
+                  <span class="villa-chip">Pool Access</span>
+                </div>
+                <div class="villa-card-actions">
+                  <a href="https://wa.me/233535572774?text=Hello%20NS%20Luxury%20Villa%2C%20I%20would%20like%20to%20book%20Room%20B10%20(GH%E2%82%B5600%2Fnight)." class="villa-btn-wa" target="_blank" rel="noopener noreferrer">
+                    <span>WhatsApp</span> ↗
+                  </a>
+                  <a href="./contact?room=Room+B10" class="villa-btn-inquire">Inquire</a>
+                </div>
+              </div>
+            </article>
+
           </div>
         </div>
       </section>

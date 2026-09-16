@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initSmoothScroll();
   initFormHandlers();
   initFloatingWhatsApp();
+  initRoomCatalog();
   initRemoteContent();
 });
 
@@ -554,6 +555,60 @@ function initImageViewer(): void {
   });
 }
 
+function initRoomCatalog(): void {
+  // Category filter tabs on /rooms
+  const filterButtons = document.querySelectorAll<HTMLButtonElement>(".villa-filter-btn");
+  const roomCards = document.querySelectorAll<HTMLElement>(".villa-room-card");
+
+  if (filterButtons.length && roomCards.length) {
+    filterButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        filterButtons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const category = btn.dataset.filter || "all";
+
+        roomCards.forEach((card) => {
+          if (category === "all" || card.dataset.category === category) {
+            card.style.display = "";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      });
+    });
+  }
+
+  // Auto-pause video players when another room video starts
+  const roomVideos = document.querySelectorAll<HTMLVideoElement>(".villa-room-video");
+  roomVideos.forEach((video) => {
+    video.addEventListener("play", () => {
+      roomVideos.forEach((other) => {
+        if (other !== video && !other.paused) {
+          other.pause();
+        }
+      });
+    });
+  });
+
+  // Pre-fill contact form if room parameter exists
+  const params = new URLSearchParams(window.location.search);
+  const selectedRoom = params.get("room");
+  if (selectedRoom) {
+    const msgInput = document.querySelector<HTMLTextAreaElement>('textarea[name="message"], #message');
+    if (msgInput && !msgInput.value) {
+      msgInput.value = `Hello, I would like to inquire about booking ${selectedRoom}. Please confirm availability and dates.`;
+    }
+    const suiteSelect = document.querySelector<HTMLSelectElement>('select[name="suite"], #suite');
+    if (suiteSelect) {
+      if (selectedRoom.toLowerCase().includes("apartment")) {
+        suiteSelect.value = "An apartment stay";
+      } else if (selectedRoom.toLowerCase().includes("room")) {
+        suiteSelect.value = "A room stay";
+      }
+    }
+  }
+}
+
 export {
   normalizeInternalLinks,
   initScrollReveals,
@@ -564,4 +619,6 @@ export {
   initImageViewer,
   syncSiteNavigation,
   applyArtDirection,
+  initRoomCatalog,
 };
+

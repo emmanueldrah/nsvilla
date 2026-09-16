@@ -113,7 +113,7 @@ export const DEFAULT_CONTENT = {
     {
       tag: "SETTLE IN",
       title: "Everyday ease",
-      body: "Starlink Wi-Fi, smart TVs and a full kitchen for a stay that works your way. Private-room guests also share selected common spaces.",
+      body: "Starlink Wi-Fi, TV and a full kitchen for a stay that works your way. Private-room guests also share selected common spaces.",
     },
   ],
   amenities: [
@@ -138,7 +138,7 @@ export const DEFAULT_CONTENT = {
       tag: "JUST YOU",
       title: "A solo reset",
       body: "For a quiet night, reliable Wi-Fi and a place to restore your rhythm.",
-      points: ["Ensuite comfort", "Smart TV and Wi-Fi", "Pool and lounge access"],
+      points: ["Ensuite comfort", "TV and Wi-Fi", "Pool and lounge access"],
     },
     {
       tag: "YOUR PEOPLE",
