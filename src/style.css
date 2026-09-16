@@ -680,9 +680,9 @@ nav a.active {
   inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(8, 38, 32, 0.92) 0%,
-    rgba(8, 38, 32, 0.72) 42%,
-    rgba(8, 38, 32, 0.12) 100%
+    rgba(8, 38, 32, 0.97) 0%,
+    rgba(8, 38, 32, 0.82) 38%,
+    rgba(8, 38, 32, 0.18) 100%
   );
 }
 .family-hero-content {
@@ -2462,6 +2462,15 @@ details {
     padding: 0.85rem;
   }
 
+  /* Logo: smaller on mobile so it doesn't dominate the hero */
+  .family-logo img {
+    width: 52px;
+    height: 52px;
+  }
+  .family-header {
+    padding: 0.75rem 0;
+  }
+
   /* Stack all 2-column grids on mobile */
   .family-contact-grid,
   .family-video-layout,
@@ -2527,7 +2536,7 @@ details {
     align-items: flex-start;
   }
   .family-hero-content {
-    padding-top: 6rem;
+    padding-top: 5rem;
     padding-bottom: 3.5rem;
   }
   .family-hero-brand {
