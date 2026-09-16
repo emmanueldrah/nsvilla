@@ -30,8 +30,8 @@
       rel="preload"
       as="image"
       fetchpriority="high"
-      href="./images/rooftop%20bar.jpeg"
-      imagesrcset="./images/opt/rooftop-bar-480.jpg 480w, ./images/opt/rooftop-bar-960.jpg 960w, ./images/opt/rooftop-bar-1100.jpg 1100w, ./images/rooftop%20bar.jpeg 1250w"
+      href="/images/opt/rooftop-bar-1100.jpg"
+      imagesrcset="/images/opt/rooftop-bar-480.jpg 480w, /images/opt/rooftop-bar-960.jpg 960w, /images/opt/rooftop-bar-1100.jpg 1100w"
       imagesizes="100vw"
     />
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..700;1,9..144,200..700&family=Inter:ital,wght@0,100..900&display=swap" />
@@ -42,7 +42,7 @@
     <header class="family-header">
       <nav class="family-nav container">
         <a href="./" class="family-logo"
-          ><img src="./images/NS%20LOGO.jpeg" alt="NS LUXURY VILLA" /></a
+          ><img src="/images/NS%20LOGO.jpeg" alt="NS LUXURY VILLA" /></a
         ><button
           class="menu-toggle"
           type="button"
@@ -63,12 +63,12 @@
     <main id="main">
       <section class="family-page-hero">
         <img
-          src="./images/rooftop%20bar.jpeg"
+          src="/images/opt/rooftop-bar-1100.jpg"
           alt="Rooftop at NS LUXURY VILLA"
           width="1250"
           height="834"
           fetchpriority="high"
-          srcset="./images/opt/rooftop-bar-480.jpg 480w, ./images/opt/rooftop-bar-960.jpg 960w, ./images/opt/rooftop-bar-1100.jpg 1100w, ./images/rooftop%20bar.jpeg 1250w"
+          srcset="/images/opt/rooftop-bar-480.jpg 480w, /images/opt/rooftop-bar-960.jpg 960w, /images/opt/rooftop-bar-1100.jpg 1100w"
           sizes="100vw"
         />
         <div class="container family-page-hero-content">
@@ -251,8 +251,8 @@
             <article class="pricing-video-card">
               <div class="villa-media-container">
                 <span class="villa-media-tag video-tag">🎬 Video Tour</span>
-                <video class="villa-room-video" controls playsinline preload="metadata" poster="./images/apartment.jpeg">
-                  <source src="./videos/A6.mp4" type="video/mp4" />
+                <video class="villa-room-video" controls playsinline preload="metadata" poster="/images/apartment.jpeg">
+                  <source src="/videos/A6.mp4" type="video/mp4" />
                   Your browser does not support video.
                 </video>
               </div>
@@ -273,8 +273,8 @@
             <article class="pricing-video-card">
               <div class="villa-media-container">
                 <span class="villa-media-tag video-tag">🎬 Video Tour</span>
-                <video class="villa-room-video" controls playsinline preload="metadata" poster="./images/bedroom.jpeg">
-                  <source src="./videos/B5.mp4" type="video/mp4" />
+                <video class="villa-room-video" controls playsinline preload="metadata" poster="/images/bedroom.jpeg">
+                  <source src="/videos/B5.mp4" type="video/mp4" />
                   Your browser does not support video.
                 </video>
               </div>
@@ -295,8 +295,8 @@
             <article class="pricing-video-card">
               <div class="villa-media-container">
                 <span class="villa-media-tag video-tag">🎬 Video Tour</span>
-                <video class="villa-room-video" controls playsinline preload="metadata" poster="./images/bed.jpeg">
-                  <source src="./videos/B6.mp4" type="video/mp4" />
+                <video class="villa-room-video" controls playsinline preload="metadata" poster="/images/bed.jpeg">
+                  <source src="/videos/B6.mp4" type="video/mp4" />
                   Your browser does not support video.
                 </video>
               </div>
@@ -318,8 +318,11 @@
 
       <section class="family-cta">
         <img
-          src="./images/soft%20bed.jpeg"
+          src="/images/opt/bed-1100.jpg"
           alt="Prepared guest bedroom at NS LUXURY VILLA"
+          srcset="/images/opt/bed-480.jpg 480w, /images/opt/bed-960.jpg 960w, /images/opt/bed-1100.jpg 1100w"
+          sizes="100vw"
+          loading="lazy"
         />
         <div>
           <p class="family-kicker">Let us help</p>
@@ -338,7 +341,7 @@
       <div class="container family-footer-grid">
         <div>
           <img
-            src="./images/NS%20LOGO.jpeg"
+            src="/images/NS%20LOGO.jpeg"
             alt="NS LUXURY VILLA"
             class="family-footer-logo"
           />

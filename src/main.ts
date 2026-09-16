@@ -92,8 +92,8 @@ function applyArtDirection(): void {
     const hero = document.querySelector<HTMLImageElement>(
       ".family-page-hero > img",
     );
-    if (hero) {
-      hero.src = "./images/nice%20pool.jpeg";
+    if (hero && !hero.src) {
+      hero.src = "/images/opt/nice-pool-1100.jpg";
       hero.alt =
         "Swimming pool beneath the signature umbrella canopy at NS LUXURY VILLA";
     }
@@ -101,8 +101,8 @@ function applyArtDirection(): void {
   if (page === "pricing" || page === "plan-your-stay") {
     const closingImage =
       document.querySelector<HTMLImageElement>(".family-cta > img");
-    if (closingImage) {
-      closingImage.src = "./images/soft%20bed.jpeg";
+    if (closingImage && !closingImage.src) {
+      closingImage.src = "/images/opt/bed-1100.jpg";
       closingImage.alt = "Prepared guest bedroom at NS LUXURY VILLA";
     }
   }
@@ -110,8 +110,8 @@ function applyArtDirection(): void {
     const hero = document.querySelector<HTMLImageElement>(
       ".family-page-hero > img",
     );
-    if (hero) {
-      hero.src = "./images/opt/pool-bar-hero.jpeg";
+    if (hero && !hero.src) {
+      hero.src = "/images/opt/pool-bar-hero.jpeg";
       hero.alt = "Pool, bar and outdoor spaces at NS LUXURY VILLA";
     }
   }
@@ -120,25 +120,25 @@ function applyArtDirection(): void {
       document.querySelectorAll<HTMLImageElement>(".family-mosaic img");
     const images: Array<[string, string]> = [
       [
-        "./images/nice%20pool.jpeg",
+        "/images/opt/nice-pool-1100.jpg",
         "Swimming pool beneath the signature umbrella canopy",
       ],
       [
-        "./images/nice%20paintings.jpeg",
+        "/images/nice%20paintings.jpeg",
         "Hand-painted mural along the villa walkway",
       ],
-      ["./images/upper%20view.jpeg", "Aerial view of NS LUXURY VILLA"],
-      ["./images/ns%20bar.jpeg", "Restaurant and bar interior"],
+      ["/images/upper%20view.jpeg", "Aerial view of NS LUXURY VILLA"],
+      ["/images/ns%20bar.jpeg", "Restaurant and bar interior"],
     ];
     featured.forEach((image, index) => {
       const chosen = images[index];
-      if (chosen) {
+      if (chosen && !image.getAttribute("src")) {
         image.src = chosen[0];
         image.alt = chosen[1];
       }
     });
     const film = document.querySelector<HTMLVideoElement>(".family-video");
-    if (film) film.poster = "./images/nice%20pool.jpeg";
+    if (film && !film.poster) film.poster = "/images/opt/nice-pool-1100.jpg";
   }
 }
 
@@ -491,7 +491,7 @@ function initVillaArchive(): void {
   archive.innerHTML = assets
     .map((asset, index) => {
       const caption = captionFor(asset);
-      return `<figure class="villa-archive-item" data-category="${category(asset)}"><img src="./images/${encodeURIComponent(asset)}" alt="${caption}" loading="lazy" decoding="async"><figcaption>${String(index + 1).padStart(2, "0")} · ${caption}</figcaption></figure>`;
+      return `<figure class="villa-archive-item" data-category="${category(asset)}"><img src="/images/${encodeURIComponent(asset)}" alt="${caption}" loading="lazy" decoding="async"><figcaption>${String(index + 1).padStart(2, "0")} · ${caption}</figcaption></figure>`;
     })
     .join("");
   document
