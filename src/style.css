@@ -690,6 +690,17 @@ nav a.active {
   z-index: 1;
   max-width: 760px;
   padding-top: 7rem;
+  padding-bottom: 5rem;
+}
+.family-hero-brand {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.7rem, 2.5vw, 0.8rem);
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 250, 243, 0.55);
+  margin: 0 0 0.6rem;
+  line-height: 1;
 }
 .family-kicker {
   margin: 0 0 1.25rem;
@@ -2457,6 +2468,27 @@ details {
     right: 1.25rem;
     padding: 0.85rem;
   }
+
+  /* Hero: reduce min-height and tighten content on tablets/large phones */
+  .family-hero {
+    min-height: 600px;
+  }
+  .family-hero-content {
+    padding-top: 6.5rem;
+    padding-bottom: 4rem;
+  }
+  .family-hero h1 {
+    font-size: clamp(2.6rem, 8vw, 4rem);
+  }
+  .family-lead {
+    font-size: 1.05rem;
+  }
+  /* Prevent hero note from overlapping on mid phones */
+  .family-hero-note {
+    right: 1rem;
+    bottom: 1rem;
+    font-size: 0.62rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -2469,12 +2501,54 @@ details {
     width: 100%;
   }
 
+  /* Hero: mobile-first layout fixes */
+  .family-hero {
+    min-height: unset;
+    align-items: flex-start;
+  }
+  .family-hero-content {
+    padding-top: 6rem;
+    padding-bottom: 3.5rem;
+  }
+  .family-hero-brand {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    margin-bottom: 0.5rem;
+  }
   /* Hero headings sizing on small phones */
+  .family-hero h1 {
+    font-size: clamp(2.2rem, 8.5vw, 3rem);
+    margin-bottom: 1rem;
+    line-height: 1.05;
+  }
+  .family-lead {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+  /* Stack hero buttons on small screens */
+  .family-hero .family-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .family-hero .family-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  /* Move note below buttons instead of floating over them */
+  .family-hero-note {
+    position: static;
+    margin-top: 1.25rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: rgba(255, 250, 243, 0.6);
+    display: block;
+    text-align: left;
+  }
+
+  /* Sub-page hero headings sizing on small phones */
   .family-page-hero h1 {
     font-size: clamp(2.2rem, 8.5vw, 3rem);
-  }
-  .family-hero h1 {
-    font-size: clamp(2.4rem, 9vw, 3.4rem);
   }
   .family-page-hero-content {
     padding: 6.5rem 0 2.5rem;
