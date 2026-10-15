@@ -1347,7 +1347,7 @@ nav a.active {
 }
 .family-page-hero::before,
 .family-hero::before {
-  content: "NS · 4U";
+  content: "Arrive as a guest · Stay as family";
   position: absolute;
   z-index: 2;
   right: clamp(1.5rem, 5vw, 5rem);
