@@ -531,137 +531,9 @@ function initVillaArchive(): void {
   archive.innerHTML = assets
     .map((asset, index) => {
       const caption = captionFor(asset);
-      const encodedAsset = encodeURIComponent(asset);
-      const downloadFilename = `NS-Luxury-Villa-${asset.replace(/\s+/g, "-")}`;
-      return `
-        <figure class="villa-archive-item" data-category="${category(asset)}" data-asset="${asset}">
-          <div class="villa-archive-media">
-            <img src="/images/${encodedAsset}" data-orig-url="/images/${encodedAsset}" data-filename="${downloadFilename}" alt="${caption}" loading="lazy" decoding="async">
-            <button type="button" class="villa-archive-overlay-btn" data-action="download" data-url="/images/${encodedAsset}" data-filename="${downloadFilename}" aria-label="Download ${caption}" title="Download photo">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="7 10 12 15 17 10"></polyline>
-                <line x1="12" y1="15" x2="12" y2="3"></line>
-              </svg>
-              <span>Download</span>
-            </button>
-          </div>
-          <figcaption>
-            <span class="villa-archive-caption-text">${String(index + 1).padStart(2, "0")} · ${caption}</span>
-            <button type="button" class="villa-archive-save-btn" data-action="download" data-url="/images/${encodedAsset}" data-filename="${downloadFilename}" aria-label="Download ${caption}" title="Download photo">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="7 10 12 15 17 10"></polyline>
-                <line x1="12" y1="15" x2="12" y2="3"></line>
-              </svg>
-              <span>Save</span>
-            </button>
-          </figcaption>
-        </figure>
-      `;
+      return `<figure class="villa-archive-item" data-category="${category(asset)}"><img src="/images/${encodeURIComponent(asset)}" alt="${caption}" loading="lazy" decoding="async"><figcaption>${String(index + 1).padStart(2, "0")} · ${caption}</figcaption></figure>`;
     })
     .join("");
-
-  const batchBtn = document.getElementById("villa-download-batch") as HTMLButtonElement | null;
-  const batchText = batchBtn?.querySelector<HTMLElement>(".batch-text");
-
-  const updateBatchLabel = () => {
-    if (!batchText) return;
-    const activeBtn = document.querySelector<HTMLButtonElement>("[data-gallery-filter].is-active");
-    const filter = activeBtn?.dataset.galleryFilter || "all";
-    const visibleCount = archive.querySelectorAll<HTMLElement>(".villa-archive-item:not([hidden])").length;
-    const labelMap: Record<string, string> = {
-      all: "All Photos",
-      stay: "Stay Photos",
-      pool: "Pool Photos",
-      bar: "Bar & Rooftop",
-      home: "Villa & Grounds",
-    };
-    const title = labelMap[filter] || "Selected Photos";
-    batchText.textContent = `Download ${title} (.zip) (${visibleCount})`;
-  };
-
-  updateBatchLabel();
-
-  batchBtn?.addEventListener("click", async () => {
-    const visibleFigures = Array.from(archive.querySelectorAll<HTMLElement>(".villa-archive-item:not([hidden])"));
-    if (!visibleFigures.length) return;
-
-    const activeBtn = document.querySelector<HTMLButtonElement>("[data-gallery-filter].is-active");
-    const filter = activeBtn?.dataset.galleryFilter || "all";
-    const zipName = `NS-Luxury-Villa-${filter.charAt(0).toUpperCase() + filter.slice(1)}-Photos.zip`;
-
-    batchBtn.disabled = true;
-    batchBtn.classList.add("is-busy");
-
-    const items = visibleFigures.map((fig) => {
-      const asset = fig.dataset.asset || "";
-      const img = fig.querySelector("img");
-      const cleanAsset = asset || img?.src.split("/").pop() || "photo.jpeg";
-      const cleanName = `NS-Luxury-Villa-${decodeURIComponent(cleanAsset).replace(/\s+/g, "-")}`;
-      return {
-        url: img?.src || `/images/${encodeURIComponent(cleanAsset)}`,
-        filename: cleanName.endsWith(".jpeg") ? cleanName : `${cleanName}.jpeg`,
-      };
-    });
-
-    try {
-      const JSZipModule = await import("jszip");
-      const JSZip = JSZipModule.default;
-      const zip = new JSZip();
-      let completed = 0;
-      const total = items.length;
-
-      if (batchText) batchText.textContent = `Downloading 0 / ${total}...`;
-
-      const chunkSize = 6;
-      for (let i = 0; i < items.length; i += chunkSize) {
-        const chunk = items.slice(i, i + chunkSize);
-        await Promise.all(
-          chunk.map(async (item) => {
-            try {
-              const res = await fetch(item.url);
-              if (res.ok) {
-                const blob = await res.blob();
-                zip.file(item.filename, blob);
-              }
-            } catch (err) {
-              console.warn(`Failed downloading ${item.url}`, err);
-            } finally {
-              completed++;
-              if (batchText) batchText.textContent = `Packing ${completed} / ${total}...`;
-            }
-          })
-        );
-      }
-
-      if (batchText) batchText.textContent = "Compressing ZIP...";
-      const content = await zip.generateAsync({ type: "blob" });
-      const objectUrl = URL.createObjectURL(content);
-      const link = document.createElement("a");
-      link.href = objectUrl;
-      link.download = zipName;
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      setTimeout(() => URL.revokeObjectURL(objectUrl), 2000);
-
-      if (batchText) batchText.textContent = "✓ ZIP Downloaded!";
-      setTimeout(() => {
-        batchBtn.classList.remove("is-busy");
-        batchBtn.disabled = false;
-        updateBatchLabel();
-      }, 2500);
-    } catch (err) {
-      console.error("Batch download failed", err);
-      if (batchText) batchText.textContent = "Download failed";
-      setTimeout(() => {
-        batchBtn.classList.remove("is-busy");
-        batchBtn.disabled = false;
-        updateBatchLabel();
-      }, 2000);
-    }
-  });
 
   document
     .querySelectorAll<HTMLButtonElement>("[data-gallery-filter]")
@@ -680,7 +552,6 @@ function initVillaArchive(): void {
               (item.hidden =
                 filter !== "all" && item.dataset.category !== filter),
           );
-        updateBatchLabel();
       }),
     );
 
@@ -693,16 +564,15 @@ function initImageViewer(): void {
     dialog = document.createElement("dialog");
     dialog.className = "image-viewer";
     dialog.innerHTML = `
-      <div class="image-viewer-header">
-        <button type="button" class="image-viewer-download" title="Download this high-resolution photo" aria-label="Download image">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <div class="image-viewer-toolbar">
+        <button type="button" class="image-viewer-action-btn image-viewer-download" title="Download original photograph" aria-label="Download original photograph">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
             <polyline points="7 10 12 15 17 10"></polyline>
             <line x1="12" y1="15" x2="12" y2="3"></line>
           </svg>
-          <span class="viewer-download-label">Download Photo</span>
         </button>
-        <button type="button" class="image-viewer-close" aria-label="Close image viewer" title="Close (Esc)">×</button>
+        <button type="button" class="image-viewer-action-btn image-viewer-close" aria-label="Close image viewer" title="Close (Esc)">×</button>
       </div>
       <figure>
         <img alt="">
@@ -715,34 +585,45 @@ function initImageViewer(): void {
   const viewerImage = dialog.querySelector<HTMLImageElement>("figure img")!;
   const viewerCaption = dialog.querySelector<HTMLElement>("figcaption")!;
   const viewerDownloadBtn = dialog.querySelector<HTMLButtonElement>(".image-viewer-download")!;
-  const viewerDownloadLabel = viewerDownloadBtn.querySelector<HTMLElement>(".viewer-download-label")!;
   const close = () => dialog?.close();
 
   let currentDownloadUrl = "";
   let currentDownloadName = "";
 
-  viewerDownloadBtn.onclick = async (e) => {
-    e.stopPropagation();
-    if (!currentDownloadUrl) return;
+  const defaultDownloadIcon = `
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+      <polyline points="7 10 12 15 17 10"></polyline>
+      <line x1="12" y1="15" x2="12" y2="3"></line>
+    </svg>
+  `;
+
+  const successDownloadIcon = `
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  `;
+
+  const handleDownload = async () => {
+    if (!currentDownloadUrl || viewerDownloadBtn.disabled) return;
     viewerDownloadBtn.disabled = true;
-    const oldText = viewerDownloadLabel.textContent || "Download Photo";
-    viewerDownloadLabel.textContent = "Downloading...";
     try {
       await downloadImage(currentDownloadUrl, currentDownloadName);
-      viewerDownloadLabel.textContent = "✓ Saved!";
+      viewerDownloadBtn.innerHTML = successDownloadIcon;
       viewerDownloadBtn.classList.add("is-success");
       setTimeout(() => {
-        viewerDownloadLabel.textContent = oldText;
+        viewerDownloadBtn.innerHTML = defaultDownloadIcon;
         viewerDownloadBtn.classList.remove("is-success");
         viewerDownloadBtn.disabled = false;
-      }, 1800);
+      }, 1600);
     } catch {
-      viewerDownloadLabel.textContent = "Error";
-      setTimeout(() => {
-        viewerDownloadLabel.textContent = oldText;
-        viewerDownloadBtn.disabled = false;
-      }, 1500);
+      viewerDownloadBtn.disabled = false;
     }
+  };
+
+  viewerDownloadBtn.onclick = (e) => {
+    e.stopPropagation();
+    handleDownload();
   };
 
   dialog.querySelector(".image-viewer-close")?.addEventListener("click", close);
@@ -758,9 +639,10 @@ function initImageViewer(): void {
     currentDownloadUrl = fullUrl;
     currentDownloadName =
       image.dataset.filename ||
-      `NS-Luxury-Villa-${(image.alt || "photo").slice(0, 32).trim().replace(/[^a-zA-Z0-9_-]+/g, "-")}.jpeg`;
+      `NS-Luxury-Villa-${(image.alt || "photo").slice(0, 36).trim().replace(/[^a-zA-Z0-9_-]+/g, "-")}.jpeg`;
     viewerDownloadBtn.disabled = false;
-    viewerDownloadLabel.textContent = "Download Photo";
+    viewerDownloadBtn.innerHTML = defaultDownloadIcon;
+    viewerDownloadBtn.classList.remove("is-success");
     dialog!.showModal();
   };
 
@@ -785,39 +667,16 @@ function initImageViewer(): void {
     });
   };
 
-  attachTriggers();
-  (window as unknown as { __attachImageViewers?: () => void }).__attachImageViewers = attachTriggers;
-
-  // Global listener for all [data-action="download"] buttons on the page
-  document.addEventListener("click", async (event) => {
-    const btn = (event.target as HTMLElement).closest<HTMLButtonElement>("[data-action='download']");
-    if (!btn) return;
-    event.preventDefault();
-    event.stopPropagation();
-
-    const url = btn.dataset.url;
-    const filename = btn.dataset.filename;
-    if (!url) return;
-
-    const labelSpan = btn.querySelector("span");
-    const originalText = labelSpan ? labelSpan.textContent : btn.textContent;
-    btn.disabled = true;
-    if (labelSpan) labelSpan.textContent = "...";
-
-    try {
-      await downloadImage(url, filename);
-      btn.classList.add("is-success");
-      if (labelSpan) labelSpan.textContent = "✓";
-      setTimeout(() => {
-        btn.classList.remove("is-success");
-        if (labelSpan) labelSpan.textContent = originalText;
-        btn.disabled = false;
-      }, 1800);
-    } catch {
-      if (labelSpan) labelSpan.textContent = originalText;
-      btn.disabled = false;
+  // Keyboard shortcut: press 'd' while viewer dialog is open to download
+  document.addEventListener("keydown", (event) => {
+    if (dialog?.open && (event.key === "d" || event.key === "D")) {
+      event.preventDefault();
+      handleDownload();
     }
   });
+
+  attachTriggers();
+  (window as unknown as { __attachImageViewers?: () => void }).__attachImageViewers = attachTriggers;
 }
 
 function initRoomCatalog(): void {
