@@ -61,15 +61,15 @@ function normalizeInternalLinks(): void {
 function syncSiteNavigation(): void {
   const pages = [
     { href: "./", label: "Home", aliases: ["index", "", "home"] },
-    { href: "./rooms", label: "Stay With Us", aliases: ["rooms", "stay-with-us"] },
-    { href: "./amenities", label: "Amenities", aliases: ["amenities", "shared-spaces"] },
+    { href: "./rooms", label: "Rooms", aliases: ["rooms", "stay-with-us"] },
+    { href: "./amenities", label: "Pool", aliases: ["amenities", "shared-spaces"] },
     { href: "./gallery", label: "Gallery", aliases: ["gallery", "our-home"] },
-    { href: "./pricing", label: "Plan Your Stay", aliases: ["pricing", "plan-your-stay"] },
-    { href: "./contact", label: "Contact", aliases: ["contact", "join-the-family"] },
+    { href: "./pricing", label: "Rates", aliases: ["pricing", "plan-your-stay"] },
+    { href: "./contact", label: "Book a stay", aliases: ["contact", "join-the-family"] },
   ];
   let current = location.pathname.split("/").pop()?.replace(".html", "") || "index";
   if (!current || current === "") current = "index";
-  
+
   document.querySelectorAll<HTMLElement>(".family-menu").forEach((menu) => {
     menu.innerHTML = pages
       .map(
@@ -79,11 +79,16 @@ function syncSiteNavigation(): void {
       .join("");
   });
   document.querySelectorAll<HTMLElement>(".family-footer").forEach((footer) => {
-    const explore = footer.querySelector(
+    const section = footer.querySelector(
       ".family-footer-grid > div:nth-child(2)",
     );
-    if (explore)
-      explore.innerHTML = `<p class="family-footer-title">Explore</p>${pages.map((page) => `<a href="${page.href}" class="${page.aliases.includes(current) ? "active" : ""}">${page.label}</a>`).join("")}`;
+    if (section)
+      section.innerHTML = `<p class="family-footer-title">Lokoe, Ho</p>${pages
+        .map(
+          (page) =>
+            `<a href="${page.href}" class="${page.aliases.includes(current) ? "active" : ""}">${page.label}</a>`,
+        )
+        .join("")}`;
   });
 }
 
