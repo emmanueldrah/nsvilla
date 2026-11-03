@@ -155,7 +155,7 @@ export const DEFAULT_CONTENT = {
   ],
   footer: {
     tagline: "Arrive as a guest, stay as family.",
-    copyright: "© 2026 NS LUXURY VILLA · Ho, Volta Region, Ghana",
+    copyright: "© 2026 NS LUXURY VILLA · Lokoe, Ho, Volta Region, Ghana",
   },
   flyers: [],
 };

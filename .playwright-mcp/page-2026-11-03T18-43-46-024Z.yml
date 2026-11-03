@@ -1,0 +1,159 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - link "NS LUXURY VILLA home" [ref=e4] [cursor=pointer]:
+        - /url: ./
+        - img "NS LUXURY VILLA" [ref=e5]
+      - generic [ref=e6]:
+        - link "Home" [ref=e7] [cursor=pointer]:
+          - /url: ./
+        - link "Stay With Us" [ref=e8] [cursor=pointer]:
+          - /url: ./rooms
+        - link "Amenities" [ref=e9] [cursor=pointer]:
+          - /url: ./amenities
+        - link "Gallery" [ref=e10] [cursor=pointer]:
+          - /url: ./gallery
+        - link "Plan Your Stay" [ref=e11] [cursor=pointer]:
+          - /url: ./pricing
+        - link "Contact" [ref=e12] [cursor=pointer]:
+          - /url: ./contact
+  - main [ref=e13]:
+    - generic [ref=e14]:
+      - text: Arrive as a guest · Stay as family
+      - 'button "View larger: NS LUXURY VILLA, its blue canopy, landscaped courtyard and apartment building" [ref=e15]'
+      - generic [ref=e17]:
+        - heading "NS LUXURY VILLA · Ho, Ghana" [level=2] [ref=e18]
+        - heading [level=1] [ref=e19]:
+          - text: Arrive as a guest.
+          - emphasis [ref=e20]: Stay as family.
+        - paragraph [ref=e21]: In Ho, Volta Region, there is a place where a locked door becomes an open home. Where the pool feels like yours, the staff remembers your name and every evening slows down just enough. This is NS Luxury Villa — and you belong here.
+        - generic [ref=e22]:
+          - link "Plan your stay" [ref=e23] [cursor=pointer]:
+            - /url: ./contact
+          - link "Explore our home" [ref=e24] [cursor=pointer]:
+            - /url: "#home"
+        - generic [ref=e25]: Hotel Rooms · Luxury Suites · Swimming Pool · Restaurant & Bar · Rooftop Terrace
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - paragraph [ref=e29]: A different kind of welcome
+        - heading "More than a booking. It is an invitation in." [level=2] [ref=e30]: More than a booking.It is an invitation in.
+      - generic [ref=e31]:
+        - paragraph [ref=e32]: "At NS LUXURY VILLA, we do not just offer a room — we open the door and invite you in. The pool, the meals, the quiet corners and the easy conversation all say the same thing: you are not a visitor here, you are part of us."
+        - paragraph [ref=e33]: Whether you are in Ho for business, a weekend away, a family visit or simply a change of pace — find rooms, suites and furnished apartments that feel less like an overnight booking and more like coming home.
+        - link "Find your space →" [ref=e34] [cursor=pointer]:
+          - /url: ./rooms
+          - text: Find your space
+          - generic [ref=e35]: →
+    - generic [ref=e37]:
+      - paragraph [ref=e38]: Everything handled
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - strong [ref=e41]: Space to settle in
+          - text: Furnished apartments, studios and spacious ensuite rooms
+        - generic [ref=e42]:
+          - strong [ref=e43]: Comfort that works
+          - text: AC, hot water, Starlink Wi-Fi and TV
+        - generic [ref=e44]:
+          - strong [ref=e45]: Feel looked after
+          - text: Free on-site parking, daily cleaning and 24-hour security
+    - region [ref=e46]:
+      - generic [ref=e47]:
+        - generic [ref=e48]:
+          - paragraph [ref=e49]: A look around
+          - heading "Step into the welcome." [level=2] [ref=e50]
+          - paragraph [ref=e51]: Take a moment to see the spaces, colour and easy warmth waiting for you at NS LUXURY VILLA.
+        - generic "A welcome to NS LUXURY VILLA" [ref=e52]: Your browser does not support this video. .
+    - generic [ref=e53]:
+      - 'button "View larger: Swimming pool at NS LUXURY VILLA" [ref=e55]'
+      - generic [ref=e56]:
+        - paragraph [ref=e57]: For the moments in between
+        - heading "Swim. Sip. Stay awhile." [level=2] [ref=e58]
+        - paragraph [ref=e59]: Our pool, bar, peaceful garden and outdoor lounge bring the best parts of the day together—from sunlit afternoons to unhurried evenings with your people.
+        - link "Discover shared spaces" [ref=e60] [cursor=pointer]:
+          - /url: ./amenities
+    - generic [ref=e62]:
+      - generic [ref=e63]:
+        - generic [ref=e64]:
+          - paragraph [ref=e65]: Rest well
+          - heading "Comfort with a sense of home." [level=2] [ref=e66]
+        - paragraph [ref=e67]: Thoughtful rooms and apartment spaces give every guest room to breathe, settle in and belong.
+      - generic [ref=e68]:
+        - article [ref=e69]:
+          - 'button "View larger: Bedroom at NS LUXURY VILLA" [ref=e70]'
+          - generic [ref=e71]:
+            - text: REST
+            - heading "A soft place to land" [level=3] [ref=e72]
+            - paragraph [ref=e73]: Ensuite rooms with AC and hot water for deep rest and easy mornings.
+        - article [ref=e74]:
+          - 'button "View larger: Apartment living area at NS LUXURY VILLA" [ref=e75]'
+          - generic [ref=e76]:
+            - text: TOGETHER
+            - heading "Space for your people" [level=3] [ref=e77]
+            - paragraph [ref=e78]: Furnished apartments with a full kitchen for shared meals and home comforts.
+        - article [ref=e79]:
+          - 'button "View larger: Rooftop at NS LUXURY VILLA" [ref=e80]'
+          - generic [ref=e81]:
+            - text: UNWIND & CELEBRATE
+            - heading "Evenings above it all" [level=3] [ref=e82]
+            - paragraph [ref=e83]: A scenic open-air rooftop for conversation, drinks, or private event hosting (GH₵ 2,000 / day, subject to change).
+    - generic [ref=e85]:
+      - generic [ref=e86]:
+        - generic [ref=e87]:
+          - paragraph [ref=e88]: The character of our home
+          - heading "Colour, care and connection." [level=2] [ref=e89]
+        - link "View the full gallery →" [ref=e90] [cursor=pointer]:
+          - /url: ./gallery
+          - text: View the full gallery
+          - generic [ref=e91]: →
+      - generic [ref=e92]:
+        - 'button "View larger: Hand-painted mural at NS LUXURY VILLA" [ref=e93]'
+        - 'button "View larger: Pool entrance at night at NS LUXURY VILLA" [ref=e94]'
+        - 'button "View larger: NS LUXURY VILLA pool and terrace at night" [ref=e95]'
+        - 'button "View larger: Bar area at NS LUXURY VILLA" [ref=e96]'
+    - generic [ref=e98]:
+      - paragraph [ref=e99]: Visit us
+      - heading "Find us at Torgbui Sapeh Street, Ho" [level=2] [ref=e100]
+      - paragraph [ref=e101]: VH-0102-0933, Torgbui Sapeh St, Ho, Ghana
+      - link "Get Directions on Google Maps" [ref=e102] [cursor=pointer]:
+        - /url: https://maps.app.goo.gl/m5D2RskmYyLiiPyo8
+    - generic [ref=e103]:
+      - 'button "View larger: NS LUXURY VILLA welcome" [ref=e104]'
+      - generic [ref=e105]:
+        - paragraph [ref=e106]: The door is open
+        - heading "Come as you are. Leave feeling at home." [level=2] [ref=e107]: Come as you are.Leave feeling at home.
+        - paragraph [ref=e108]: Tell us your dates and let us prepare a welcome worth remembering.
+        - link "Start your welcome" [ref=e109] [cursor=pointer]:
+          - /url: ./contact
+  - contentinfo [ref=e110]:
+    - generic [ref=e111]:
+      - generic [ref=e112]:
+        - img "NS LUXURY VILLA" [ref=e113]
+        - paragraph [ref=e114]: Arrive as a guest, stay as family.
+      - generic [ref=e115]:
+        - paragraph [ref=e116]: Explore
+        - link "Home" [ref=e117] [cursor=pointer]:
+          - /url: ./
+        - link "Stay With Us" [ref=e118] [cursor=pointer]:
+          - /url: ./rooms
+        - link "Amenities" [ref=e119] [cursor=pointer]:
+          - /url: ./amenities
+        - link "Gallery" [ref=e120] [cursor=pointer]:
+          - /url: ./gallery
+        - link "Plan Your Stay" [ref=e121] [cursor=pointer]:
+          - /url: ./pricing
+        - link "Contact" [ref=e122] [cursor=pointer]:
+          - /url: ./contact
+      - generic [ref=e123]:
+        - paragraph [ref=e124]: Reach out
+        - link "+233 535 572 774" [ref=e125] [cursor=pointer]:
+          - /url: tel:+233535572774
+        - link "nsvilla4u@gmail.com" [ref=e126] [cursor=pointer]:
+          - /url: mailto:nsvilla4u@gmail.com
+        - link "WhatsApp us" [ref=e127] [cursor=pointer]:
+          - /url: https://wa.me/233535572774
+        - link "Find us on Google Maps" [ref=e128] [cursor=pointer]:
+          - /url: https://maps.app.goo.gl/m5D2RskmYyLiiPyo8
+    - generic [ref=e129]: © 2026 NS LUXURY VILLA · Ho, Volta Region, Ghana
+  - navigation "Quick contact":
+    - link "Chat with NS LUXURY VILLA on WhatsApp" [ref=e130] [cursor=pointer]:
+      - /url: https://wa.me/233535572774
