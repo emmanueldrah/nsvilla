@@ -37,6 +37,7 @@ function loadEnv() {
 }
 loadEnv();
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "nsadmin";
+const MANAGEMENT_API_URL = (process.env.NSLV_MANAGEMENT_API_URL || "http://localhost:3001/api/v1").replace(/\/+$/, "");
 
 function loadStore() {
   try {
@@ -145,6 +146,22 @@ async function handleApi(req, res, url) {
   if (url.pathname === "/api/content" && method === "GET") {
     const store = loadStore();
     return json(res, 200, { content: store.content || cloneDefault() });
+  }
+  if (url.pathname === "/api/live-availability" && method === "GET") {
+    const checkInDate = url.searchParams.get("checkInDate") || "";
+    const checkOutDate = url.searchParams.get("checkOutDate") || "";
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(checkInDate) || !/^\d{4}-\d{2}-\d{2}$/.test(checkOutDate)) {
+      return json(res, 400, { error: "Choose valid arrival and departure dates." });
+    }
+    try {
+      const target = new URL(`${MANAGEMENT_API_URL}/public/availability`);
+      target.search = new URLSearchParams({ checkInDate, checkOutDate, adults: url.searchParams.get("adults") || "1", children: url.searchParams.get("children") || "0" }).toString();
+      const upstream = await fetch(target, { signal: AbortSignal.timeout(8000) });
+      const payload = await upstream.json();
+      return json(res, upstream.status, upstream.ok ? { data: payload?.data || [] } : { error: payload?.error?.message || "Availability could not be checked." });
+    } catch {
+      return json(res, 502, { error: "The reservation system could not be reached. Please try again shortly." });
+    }
   }
   if (url.pathname === "/api/content" && method === "PUT") {
     if (!isAuthed(req)) return json(res, 401, { error: "Not authenticated." });

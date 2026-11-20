@@ -49,6 +49,7 @@
         <nav class="tabs" aria-label="Admin sections">
           <button type="button" class="tab active" data-panel="flyers">Flyers &amp; Promos</button>
           <button type="button" class="tab" data-panel="content">Site content</button>
+          <button type="button" class="tab" data-panel="rooms">Room availability</button>
           <button type="button" class="tab" data-panel="broadcast">WhatsApp broadcast</button>
         </nav>
 
@@ -77,6 +78,20 @@
             <div style="margin-top: 1.25rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap">
               <button id="save-content" class="btn btn-primary" type="button">Save all content</button>
               <p id="content-status" class="ok-msg" style="margin: 0" role="status"></p>
+            </div>
+          </div>
+        </section>
+
+        <section id="panel-rooms" class="panel" aria-label="Room availability">
+          <div class="card">
+            <h2>Live room availability</h2>
+            <p class="hint" style="font-size: 0.85rem; color: #59645e; margin: 0 0 1rem">
+              Turn a room off when it is occupied or unavailable. The Rooms page updates immediately after saving.
+            </p>
+            <div id="room-availability-editor"></div>
+            <div style="margin-top: 1.25rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap">
+              <button id="save-room-availability" class="btn btn-primary" type="button">Save room availability</button>
+              <p id="room-availability-status" class="ok-msg" style="margin: 0" role="status"></p>
             </div>
           </div>
         </section>

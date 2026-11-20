@@ -171,7 +171,26 @@
             <p class="family-note">
               Browse our available apartments and ensuite rooms in Lokoe, Ho, Volta Region, Ghana. You can check the rates, review the spaces and choose what fits your stay best.
             </p>
+            <p id="live-room-count" class="live-room-count">Browse every room below, or check live availability for your dates.</p>
           </div>
+
+          <section class="availability-panel" aria-labelledby="availability-title">
+            <div>
+              <p class="family-kicker dark">Live availability</p>
+              <h3 id="availability-title">Find a room for your dates.</h3>
+              <p>Availability comes directly from our reservation system. Search every room, or select one specific room to check it for your dates.</p>
+            </div>
+            <form id="availability-search" class="availability-form">
+              <label>Arrival<input type="date" name="checkInDate" required /></label>
+              <label>Departure<input type="date" name="checkOutDate" required /></label>
+              <label>Adults<select name="adults"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></label>
+              <label>Children<select name="children"><option value="0">0</option><option value="1">1</option><option value="2">2</option></select></label>
+              <label>Specific room <select name="roomNumber"><option value="">Any available room</option><optgroup label="Apartments"><option value="A1">Apartment A1</option><option value="A2">Apartment A2</option><option value="A3">Apartment A3</option><option value="A4">Apartment A4</option><option value="A5">Apartment A5</option><option value="A6">Apartment A6</option></optgroup><optgroup label="Studios"><option value="B5">Room B5</option><option value="B6">Room B6</option><option value="B7">Room B7</option><option value="B8">Room B8</option><option value="B9">Room B9</option><option value="B10">Room B10</option></optgroup></select></label>
+              <button class="family-btn family-btn-primary" type="submit">Check availability</button>
+            </form>
+            <p id="availability-status" class="availability-status" role="status" aria-live="polite">Select dates to view live availability.</p>
+            <div id="availability-results" class="availability-results"></div>
+          </section>
 
           <div class="villa-rate-banner">
             <span class="villa-rate-banner-icon">📌</span>
@@ -192,7 +211,7 @@
           <div class="villa-rooms-grid">
 
             <!-- APARTMENT A6 (With Video) -->
-            <article class="villa-room-card has-video" data-category="apartment">
+            <article class="villa-room-card has-video" data-category="apartment" data-room="A6">
               <div class="villa-media-container">
                 <span class="villa-media-tag video-tag">🎬 Video Tour</span>
                 <video class="villa-room-video" controls playsinline preload="metadata" poster="/images/apartment.jpeg">
@@ -235,7 +254,7 @@
             </article>
 
             <!-- APARTMENT A1 -->
-            <article class="villa-room-card" data-category="apartment">
+            <article class="villa-room-card" data-category="apartment" data-room="A1">
               <div class="villa-media-container">
                 <span class="villa-media-tag photo-tag">✨ Verified Photo</span>
                 <img src="/images/two%20beds.jpeg" alt="Apartment A1 bedroom with two beds" loading="lazy" />
@@ -276,7 +295,7 @@
             </article>
 
             <!-- APARTMENT A2 -->
-            <article class="villa-room-card" data-category="apartment">
+            <article class="villa-room-card" data-category="apartment" data-room="A2">
               <div class="villa-media-container">
                 <span class="villa-media-tag photo-tag">✨ Verified Photo</span>
                 <img src="/images/apartment.jpeg" alt="Apartment A2 living space" loading="lazy" />
@@ -317,7 +336,7 @@
             </article>
 
             <!-- APARTMENT A3 -->
-            <article class="villa-room-card" data-category="apartment">
+            <article class="villa-room-card" data-category="apartment" data-room="A3">
               <div class="villa-media-container">
                 <span class="villa-media-tag photo-tag">✨ Verified Photo</span>
                 <img src="/images/two%20beds.jpeg" alt="Apartment A3 two beds" loading="lazy" />
@@ -358,7 +377,7 @@
             </article>
 
             <!-- APARTMENT A4 -->
-            <article class="villa-room-card" data-category="apartment">
+            <article class="villa-room-card" data-category="apartment" data-room="A4">
               <div class="villa-media-container">
                 <span class="villa-media-tag photo-tag">✨ Verified Photo</span>
                 <img src="/images/soft%20bed.jpeg" alt="Apartment A4 bedroom" loading="lazy" />
@@ -398,11 +417,14 @@
               </div>
             </article>
 
-            <!-- APARTMENT A5 -->
-            <article class="villa-room-card" data-category="apartment">
+            <!-- APARTMENT A5 (With Video) -->
+            <article class="villa-room-card has-video" data-category="apartment" data-room="A5">
               <div class="villa-media-container">
-                <span class="villa-media-tag photo-tag">✨ Verified Photo</span>
-                <img src="/images/beds.jpeg" alt="Apartment A5 twin beds" loading="lazy" />
+                <span class="villa-media-tag video-tag">🎬 Video Tour</span>
+                <video class="villa-room-video" controls playsinline preload="metadata" poster="/images/beds.jpeg">
+                  <source src="./videos/A5.mp4?v=2" type="video/mp4" />
+                  Your browser does not support video.
+                </video>
               </div>
               <div class="villa-room-content">
                 <div class="villa-room-top">
@@ -440,7 +462,7 @@
             </article>
 
             <!-- SINGLE ROOM B5 (With Video) -->
-            <article class="villa-room-card has-video" data-category="single">
+            <article class="villa-room-card has-video" data-category="single" data-room="B5">
               <div class="villa-media-container">
                 <span class="villa-media-tag video-tag">🎬 Video Tour</span>
                 <video class="villa-room-video" controls playsinline preload="metadata" poster="/images/bedroom.jpeg">
@@ -484,7 +506,7 @@
             </article>
 
             <!-- SINGLE ROOM B6 (With Video) -->
-            <article class="villa-room-card has-video" data-category="single">
+            <article class="villa-room-card has-video" data-category="single" data-room="B6">
               <div class="villa-media-container">
                 <span class="villa-media-tag video-tag">🎬 Video Tour</span>
                 <video class="villa-room-video" controls playsinline preload="metadata" poster="/images/bed.jpeg">
@@ -527,11 +549,14 @@
               </div>
             </article>
 
-            <!-- SINGLE ROOM B7 -->
-            <article class="villa-room-card" data-category="single">
+            <!-- SINGLE ROOM B7 (With Video) -->
+            <article class="villa-room-card has-video" data-category="single" data-room="B7">
               <div class="villa-media-container">
-                <span class="villa-media-tag photo-tag">✨ Verified Photo</span>
-                <img src="/images/bedroom%20(2).jpeg" alt="Room B7 bedroom" loading="lazy" />
+                <span class="villa-media-tag video-tag">🎬 Video Tour</span>
+                <video class="villa-room-video" controls playsinline preload="metadata" poster="/images/bedroom%20(2).jpeg">
+                  <source src="./videos/B7.mp4" type="video/mp4" />
+                  Your browser does not support video.
+                </video>
               </div>
               <div class="villa-room-content">
                 <div class="villa-room-top">
@@ -568,11 +593,14 @@
               </div>
             </article>
 
-            <!-- SINGLE ROOM B8 (Special GH₵ 500) -->
-            <article class="villa-room-card" data-category="single">
+            <!-- SINGLE ROOM B8 (Special GH₵ 500, With Video) -->
+            <article class="villa-room-card has-video" data-category="single" data-room="B8">
               <div class="villa-media-container">
-                <span class="villa-media-tag photo-tag">✨ Verified Photo</span>
-                <img src="/images/bedroom%20(3).jpeg" alt="Room B8 bedroom" loading="lazy" />
+                <span class="villa-media-tag video-tag">🎬 Video Tour</span>
+                <video class="villa-room-video" controls playsinline preload="metadata" poster="/images/bedroom%20(3).jpeg">
+                  <source src="./videos/B8.mp4" type="video/mp4" />
+                  Your browser does not support video.
+                </video>
               </div>
               <div class="villa-room-content">
                 <div class="villa-room-top">
@@ -610,11 +638,14 @@
               </div>
             </article>
 
-            <!-- SINGLE ROOM B9 (Special GH₵ 500) -->
-            <article class="villa-room-card" data-category="single">
+            <!-- SINGLE ROOM B9 (Special GH₵ 500, With Video) -->
+            <article class="villa-room-card has-video" data-category="single" data-room="B9">
               <div class="villa-media-container">
-                <span class="villa-media-tag photo-tag">✨ Verified Photo</span>
-                <img src="/images/bed%20(2).jpeg" alt="Room B9 bedroom" loading="lazy" />
+                <span class="villa-media-tag video-tag">🎬 Video Tour</span>
+                <video class="villa-room-video" controls playsinline preload="metadata" poster="/images/bed%20(2).jpeg">
+                  <source src="./videos/B9.mp4" type="video/mp4" />
+                  Your browser does not support video.
+                </video>
               </div>
               <div class="villa-room-content">
                 <div class="villa-room-top">
@@ -653,7 +684,7 @@
             </article>
 
             <!-- SINGLE ROOM B10 -->
-            <article class="villa-room-card" data-category="single">
+            <article class="villa-room-card" data-category="single" data-room="B10">
               <div class="villa-media-container">
                 <span class="villa-media-tag photo-tag">✨ Verified Photo</span>
                 <img src="/images/bedroo.jpeg" alt="Room B10 bedroom" loading="lazy" />

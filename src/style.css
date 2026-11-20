@@ -2588,6 +2588,46 @@ details {
   }
 }
 
+.live-room-count {
+  display: inline-block;
+  margin: 0.75rem 0 0;
+  color: #173b36;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.availability-panel {
+  margin: 2rem 0;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid rgba(23, 59, 54, 0.16);
+  border-radius: 1.25rem;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(23, 59, 54, 0.08);
+}
+.availability-panel h3 { margin: 0.25rem 0 0.5rem; font: 500 clamp(1.5rem, 3vw, 2.1rem) Fraunces, Georgia, serif; color: var(--primary); }
+.availability-panel > div:first-child > p:last-child { margin: 0; color: var(--muted); line-height: 1.6; }
+.availability-form { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)) auto; gap: 0.8rem; align-items: end; margin-top: 1.4rem; }
+.availability-form label { display: grid; gap: 0.35rem; color: var(--primary); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; }
+.availability-form input, .availability-form select { min-height: 2.9rem; border: 1px solid var(--border-light); border-radius: 0.55rem; padding: 0.55rem 0.65rem; background: #fff; color: var(--primary); font: inherit; }
+.availability-form .family-btn { min-height: 2.9rem; white-space: nowrap; }
+.availability-status { margin: 1rem 0 0; color: var(--primary); font-weight: 700; }
+.availability-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0.85rem; margin-top: 1rem; }
+.availability-card { display: flex; min-height: 160px; flex-direction: column; justify-content: space-between; padding: 1rem; border: 1px solid rgba(23, 59, 54, 0.13); border-radius: 0.85rem; background: var(--light); }
+.availability-card h3 { font-size: 1.25rem; }
+.availability-card p { margin: 0.35rem 0; color: var(--muted); line-height: 1.45; }
+.availability-room-list { font-size: 0.88rem; }
+.availability-state { color: #18724f !important; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; }
+.availability-card-footer { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; margin-top: 1rem; color: var(--primary); font-weight: 800; }
+.availability-card-footer small { font-weight: 500; }
+.availability-empty { margin: 0; padding: 1rem; border-radius: 0.75rem; background: #fff8ed; color: var(--primary); }
+@media (max-width: 900px) { .availability-form { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .availability-form { grid-template-columns: 1fr; } .availability-card-footer { align-items: flex-start; flex-direction: column; } }
+
+.villa-room-card[hidden] {
+  display: none;
+}
+
 .villa-room-card {
   background: #ffffff;
   border: 1px solid rgba(223, 209, 190, 0.65);

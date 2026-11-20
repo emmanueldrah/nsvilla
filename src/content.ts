@@ -44,6 +44,7 @@ export async function initRemoteContent(): Promise<void> {
     applyRooms(content);
     applyAmenities(content);
     applyPricing(content);
+    applyRoomAvailability(content);
     applyFooter(content);
     applyFlyers(content);
   } catch {
@@ -115,6 +116,24 @@ function applyPricing(c: SiteContent): void {
       list.innerHTML = item.points.map((p) => `<li>${escapeHtml(p)}</li>`).join("");
     }
   });
+}
+
+function applyRoomAvailability(c: SiteContent): void {
+  const availability = c.roomAvailability;
+  if (!Array.isArray(availability) || !availability.length) return;
+
+  let visibleCount = 0;
+  availability.forEach((room) => {
+    const card = document.querySelector<HTMLElement>(`[data-room="${room.id}"]`);
+    if (!card) return;
+    card.hidden = !room.available;
+    if (room.available) visibleCount += 1;
+  });
+
+  const count = document.querySelector<HTMLElement>("#live-room-count");
+  if (count) {
+    count.textContent = `${visibleCount} ${visibleCount === 1 ? "room" : "rooms"} available now`;
+  }
 }
 
 function applyFooter(c: SiteContent): void {

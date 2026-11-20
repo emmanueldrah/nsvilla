@@ -8,3 +8,7 @@ data/
 *.log
 .vscode/
 .idea/
+.vercel
+.env*
+.playwright-mcp/
+ROOM/

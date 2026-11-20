@@ -133,6 +133,20 @@ export const DEFAULT_CONTENT = {
       body: "The garden, terrace and rooftop give you room for fresh air, private gatherings and a little breathing room away from the busy part of town.",
     },
   ],
+  roomAvailability: [
+    { id: "A1", name: "Apartment A1", available: true },
+    { id: "A2", name: "Apartment A2", available: true },
+    { id: "A3", name: "Apartment A3", available: true },
+    { id: "A4", name: "Apartment A4", available: true },
+    { id: "A5", name: "Apartment A5", available: true },
+    { id: "A6", name: "Apartment A6", available: true },
+    { id: "B5", name: "Room B5", available: true },
+    { id: "B6", name: "Room B6", available: true },
+    { id: "B7", name: "Room B7", available: true },
+    { id: "B8", name: "Room B8", available: true },
+    { id: "B9", name: "Room B9", available: true },
+    { id: "B10", name: "Room B10", available: true },
+  ],
   pricing: [
     {
       tag: "JUST YOU",
@@ -168,9 +182,15 @@ export function normalizeContent(input) {
   const base = cloneDefault();
   if (!input || typeof input !== "object") return base;
   const out = { ...base };
-  for (const section of ["contact", "hero", "rooms", "amenities", "pricing", "footer", "flyers"]) {
+  for (const section of ["contact", "hero", "rooms", "amenities", "pricing", "roomAvailability", "footer", "flyers"]) {
     if (section === "flyers") {
       out.flyers = Array.isArray(input.flyers) ? input.flyers : [];
+    } else if (section === "roomAvailability") {
+      out.roomAvailability = Array.isArray(input.roomAvailability)
+        ? input.roomAvailability
+            .filter((item) => item && typeof item.id === "string" && typeof item.name === "string")
+            .map((item) => ({ id: item.id, name: item.name, available: item.available !== false }))
+        : base.roomAvailability;
     } else if (input[section] && typeof input[section] === "object") {
       out[section] = Array.isArray(input[section])
         ? input[section].slice(0, 10)

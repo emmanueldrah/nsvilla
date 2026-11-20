@@ -100,12 +100,14 @@ async function loadApp(): Promise<void> {
       rooms: [],
       amenities: [],
       pricing: [],
+      roomAvailability: [],
       footer: { tagline: "", copyright: "" },
       flyers: [],
     };
   }
   renderFlyers();
   renderContentEditor();
+  renderRoomAvailability();
   renderBroadcast();
   renderLastSaved();
   $("#new-flyer")?.addEventListener("click", () => {
@@ -361,6 +363,39 @@ function openFlyerEditor(flyer: Flyer | null): void {
 
   $("#fl-cancel")?.addEventListener("click", () => {
     editor.classList.add("hidden");
+  });
+}
+
+// ────────────────────────────────────────────────────────────
+// Room availability
+// ────────────────────────────────────────────────────────────
+function renderRoomAvailability(): void {
+  const box = $("#room-availability-editor");
+  if (!box || !content) return;
+
+  const rooms = content.roomAvailability?.length
+    ? content.roomAvailability
+    : [
+        "A1", "A2", "A3", "A4", "A5", "A6",
+        "B5", "B6", "B7", "B8", "B9", "B10",
+      ].map((id) => ({ id, name: id.startsWith("A") ? `Apartment ${id}` : `Room ${id}`, available: true }));
+
+  box.innerHTML = rooms.map((room) => `
+    <div class="field-row" style="grid-template-columns: 1fr auto; align-items: center; margin-bottom: 0.75rem">
+      <label for="room-${escapeHtml(room.id)}" style="margin: 0"><strong>${escapeHtml(room.name)}</strong></label>
+      <input id="room-${escapeHtml(room.id)}" type="checkbox" ${room.available ? "checked" : ""} aria-label="${escapeHtml(room.name)} available">
+    </div>`).join("");
+
+  $("#save-room-availability")?.addEventListener("click", async () => {
+    const updated = rooms.map((room) => ({
+      ...room,
+      available: ($(`#room-${room.id}`) as HTMLInputElement)?.checked ?? room.available,
+    }));
+    content = { ...content!, roomAvailability: updated };
+    const ok = await putContent(content);
+    const status = $("#room-availability-status");
+    if (status) status.textContent = ok ? "Saved — the Rooms page is updated." : "Save failed. Please try again.";
+    renderLastSaved();
   });
 }
 

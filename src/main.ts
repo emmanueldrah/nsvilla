@@ -4,6 +4,7 @@
 
 import { inject } from "@vercel/analytics";
 import { initRemoteContent } from "./content";
+import { initLiveAvailability } from "./live-availability";
 
 const PRIMARY_WHATSAPP = "233535572774";
 
@@ -23,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initFormHandlers();
   initFloatingWhatsApp();
   initRoomCatalog();
+  initLiveAvailability();
   initRemoteContent();
   initVillaArchive();
   initImageViewer();

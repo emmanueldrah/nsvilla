@@ -35,6 +35,12 @@ export interface PricingItem extends CardItem {
   points: string[];
 }
 
+export interface RoomAvailability {
+  id: string;
+  name: string;
+  available: boolean;
+}
+
 export interface SiteContent {
   updatedAt: string | null;
   contact: ContactFields;
@@ -42,6 +48,7 @@ export interface SiteContent {
   rooms: CardItem[];
   amenities: CardItem[];
   pricing: PricingItem[];
+  roomAvailability: RoomAvailability[];
   footer: { tagline: string; copyright: string };
   flyers: Flyer[];
 }
