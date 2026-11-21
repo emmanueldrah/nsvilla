@@ -449,7 +449,7 @@ function openWhatsAppEnquiry(details: EnquiryDetails): void {
 
 *Guest Information:*
 Name: ${details.name}
-Email: ${details.email}
+Email: ${details.email || "Not provided"}
 Phone: ${details.phone || "Not provided"}
 
 *Booking Details:*
@@ -604,6 +604,7 @@ function initFormHandlers(): void {
   const checkinField = form.querySelector<HTMLInputElement>("#checkin");
   const checkoutField = form.querySelector<HTMLInputElement>("#checkout");
   const suiteField = form.querySelector<HTMLSelectElement>("#suite");
+  const emailField = form.querySelector<HTMLInputElement>("#email");
   const policyField = form.querySelector<HTMLInputElement>("#accept-policy");
   const submitField = form.querySelector<HTMLButtonElement>("#booking-submit");
   const roomTypeField = form.querySelector<HTMLInputElement>("#roomTypeId");
@@ -633,8 +634,11 @@ function initFormHandlers(): void {
   const syncSelectionUi = (): void => {
     const suite = valueOf("#suite");
     const roomNumber = roomCodeOf(suite);
+    // Email is optional for an enquiry. The reservation provider needs one
+    // for a confirmed online hold, so a guest who leaves it blank is sent to
+    // WhatsApp instead of being blocked by a validation error.
     const canBookOnline = Boolean(
-      roomNumber && valueOf("#checkin") && valueOf("#checkout"),
+      roomNumber && valueOf("#checkin") && valueOf("#checkout") && valueOf("#email"),
     );
     if (policyField) policyField.required = canBookOnline;
     if (submitField && form.dataset.bookingComplete !== "true") {
@@ -652,6 +656,7 @@ function initFormHandlers(): void {
     }
   };
   suiteField?.addEventListener("change", syncSelectionUi);
+  emailField?.addEventListener("input", syncSelectionUi);
   checkinField?.addEventListener("change", syncSelectionUi);
   checkoutField?.addEventListener("change", syncSelectionUi);
   syncSelectionUi();
