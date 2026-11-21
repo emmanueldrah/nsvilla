@@ -1574,7 +1574,8 @@ nav a.active {
   overflow: hidden;
   color: #fffaf3;
 }
-.family-page-hero > img {
+.family-page-hero > img,
+.family-page-hero > video {
   position: absolute;
   inset: 0;
   width: 100%;
