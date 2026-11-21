@@ -2751,6 +2751,44 @@ details {
   border-color: rgba(240, 191, 79, 0.75);
 }
 
+/* Give the catalogue a considered editorial rhythm instead of one repeated card. */
+.villa-room-card--signature {
+  background: linear-gradient(145deg, #fffdf8, #f4ead8);
+}
+.villa-room-card--signature .villa-media-container,
+.villa-room-card--shared .villa-media-container {
+  aspect-ratio: 16 / 11;
+}
+.villa-room-card--signature .villa-bed-highlight {
+  background: #173b36;
+  border-color: #173b36;
+  color: #fffaf3;
+}
+.villa-room-card--shared {
+  background: linear-gradient(145deg, #fff, #edf5f1);
+}
+.villa-room-card--value {
+  border-color: rgba(156, 69, 41, 0.36);
+  background: linear-gradient(145deg, #fffdf9, #f9eee2);
+}
+.villa-room-card--value .villa-bed-highlight {
+  background: #fff4d4;
+  border-color: rgba(240, 191, 79, 0.5);
+}
+.villa-room-card--venue {
+  background: #173b36;
+  border-color: #173b36;
+}
+.villa-room-card--venue .villa-room-title,
+.villa-room-card--venue .villa-price-val,
+.villa-room-card--venue .villa-room-desc,
+.villa-room-card--venue .villa-room-category {
+  color: #fffaf3;
+}
+.villa-room-card--venue .villa-price-sub { color: rgba(255, 250, 243, 0.72); }
+.villa-room-card--venue .villa-bed-highlight { background: rgba(240, 191, 79, 0.16); border-color: rgba(240, 191, 79, 0.45); color: #fffaf3; }
+.villa-room-card--venue .villa-chip { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.18); color: #fffaf3; }
+
 .villa-media-container {
   position: relative;
   width: 100%;
@@ -3104,7 +3142,7 @@ details {
 
 .pricing-videos-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 2rem;
 }
 
@@ -3144,6 +3182,14 @@ details {
   aspect-ratio: 16 / 9;
 }
 
+.pricing-video-card--featured {
+  grid-column: span 2;
+}
+
+.pricing-video-card--value {
+  border-color: rgba(240, 191, 79, 0.58);
+}
+
 .pricing-video-card-body {
   padding: 1.5rem;
   display: flex;
@@ -3162,6 +3208,49 @@ details {
   font-size: 0.88rem;
   line-height: 1.6;
   margin: 0 0 1.25rem;
+}
+
+.pricing-video-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: auto;
+}
+.pricing-video-card-footer strong { color: var(--gold); font: 600 1.25rem Fraunces, Georgia, serif; white-space: nowrap; }
+.pricing-video-card-footer small { color: rgba(255, 255, 255, 0.72); font: 500 0.75rem Inter, sans-serif; }
+
+/* Pool page: show the actual variety of the outdoor area, not one repeated hero image. */
+.pool-media-section { padding: clamp(4rem, 7vw, 6.5rem) 0; background: #fffaf3; }
+.pool-media-heading { display: flex; align-items: end; justify-content: space-between; gap: 1.5rem; margin-bottom: 2rem; }
+.pool-media-heading h2, .pool-film-layout h2 { margin: 0; color: var(--primary); font-size: clamp(2rem, 3vw, 3.05rem); line-height: 1.05; }
+.pool-media-link { color: var(--primary); font-weight: 800; white-space: nowrap; }
+.pool-media-link span { color: #a95136; }
+.pool-media-mosaic { display: grid; grid-template-columns: 1.4fr 1fr 1fr; grid-template-rows: repeat(2, minmax(180px, 1fr)); gap: 1rem; }
+.pool-media-mosaic figure { position: relative; min-height: 0; margin: 0; overflow: hidden; border-radius: 1.15rem; background: #173b36; }
+.pool-media-mosaic .pool-media-main { grid-row: span 2; }
+.pool-media-mosaic img { width: 100%; height: 100%; min-height: 180px; object-fit: cover; display: block; transition: transform 0.45s ease; }
+.pool-media-mosaic figure:hover img { transform: scale(1.04); }
+.pool-media-mosaic figcaption { position: absolute; right: 0; bottom: 0; left: 0; padding: 2.5rem 1rem 0.9rem; color: #fffaf3; font-size: 0.8rem; font-weight: 700; background: linear-gradient(transparent, rgba(8, 22, 20, 0.78)); }
+.pool-film-section { padding: clamp(4rem, 7vw, 6.5rem) 0; background: #173b36; }
+.pool-film-layout { display: grid; grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr); align-items: center; gap: clamp(2rem, 5vw, 5rem); }
+.pool-film-layout h2 { color: #fffaf3; }
+.pool-film-layout > div > p:last-child { color: rgba(255, 250, 243, 0.78); line-height: 1.7; }
+.pool-film { width: 100%; border-radius: 1.15rem; background: #081614; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28); }
+
+@media (max-width: 900px) {
+  .pricing-video-card--featured { grid-column: auto; }
+  .pool-media-mosaic { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+  .pool-media-mosaic .pool-media-main { grid-row: auto; grid-column: span 2; min-height: 300px; }
+  .pool-film-layout { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 560px) {
+  .pool-media-heading { display: block; }
+  .pool-media-link { display: inline-block; margin-top: 1rem; }
+  .pool-media-mosaic { grid-template-columns: 1fr; }
+  .pool-media-mosaic .pool-media-main { grid-column: auto; min-height: 240px; }
+  .pricing-video-card-footer { align-items: flex-start; flex-direction: column; }
 }
 
 /* ═══════════════════════════════════════════════════════════
