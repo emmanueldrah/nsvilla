@@ -520,14 +520,13 @@ function renderBookingResult(
       </ul>
       <p class="booking-result-payment">
         Send the deposit to MoMo <strong>${escapeHtml(String(booking.momo?.number || activeBookingConfig.momo?.number || ""))}</strong>
-        (${escapeHtml(String(booking.momo?.name || activeBookingConfig.momo?.name || ""))}) and use payment reference
-        <strong>${escapeHtml(String(booking.paymentReference || confirmationNo))}</strong>.
+        (${escapeHtml(String(booking.momo?.name || activeBookingConfig.momo?.name || ""))}). You do not need to type a long booking reference — after paying, enter the short MoMo transaction ID below.
         ${holdText ? `Your hold expires <strong>${escapeHtml(holdText)}</strong>.` : ""}
       </p>
       <form id="payment-reference-form" class="booking-reference-form">
-        <label for="momo-reference">Already paid? Paste the MoMo transaction reference</label>
+        <label for="momo-reference">Already paid? Enter the MoMo transaction ID</label>
         <div class="booking-reference-row">
-          <input id="momo-reference" name="momo-reference" placeholder="e.g. 1234567890" autocomplete="off" />
+          <input id="momo-reference" name="momo-reference" placeholder="e.g. 1234567890" maxlength="40" autocomplete="off" />
           <button class="family-btn family-btn-primary" type="submit">Submit reference</button>
         </div>
         <p id="payment-reference-status" role="status" aria-live="polite"></p>
