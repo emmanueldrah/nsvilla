@@ -1,4 +1,4 @@
-interface AvailableRoomType {
+export interface AvailableRoomType {
   id: string;
   name: string;
   description?: string | null;
@@ -24,12 +24,13 @@ const formatMoney = (amount: number, currency: string) =>
 
 const escapeHtml = (value: string) => value.replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[character]!));
 
-function bookingLink(room: string, checkInDate: string, checkOutDate: string) {
-  const params = new URLSearchParams({ room, checkin: checkInDate, checkout: checkOutDate });
+function bookingLink(room: string, checkInDate: string, checkOutDate: string, adults: number, children: number, roomTypeId: string, roomNumber: string) {
+  const params = new URLSearchParams({ room, checkin: checkInDate, checkout: checkOutDate, adults: String(adults), children: String(children), roomTypeId });
+  if (roomNumber) params.set("roomNo", roomNumber);
   return `./contact?${params.toString()}`;
 }
 
-function renderResults(target: HTMLElement, types: AvailableRoomType[], checkInDate: string, checkOutDate: string) {
+function renderResults(target: HTMLElement, types: AvailableRoomType[], checkInDate: string, checkOutDate: string, adults: number, children: number) {
   const visible = types.filter((type) => type.available);
   if (!visible.length) {
     target.innerHTML = `<p class="availability-empty">No rooms match these dates and guest numbers. Try different dates or contact us directly.</p>`;
@@ -40,9 +41,11 @@ function renderResults(target: HTMLElement, types: AvailableRoomType[], checkInD
     const roomNames = (type.availableRooms || []).map((room) => room.name || `Room ${room.number}`);
     const rooms = roomNames.length === 1 ? `${roomNames[0]} is available` : `${type.availableCount} ${type.availableCount === 1 ? "room" : "rooms"} available`;
     const capacity = `Up to ${type.maxAdults} adult${type.maxAdults === 1 ? "" : "s"}${type.maxChildren ? ` · ${type.maxChildren} child${type.maxChildren === 1 ? "" : "ren"}` : ""}`;
+    const firstRoomNumber = type.availableRooms?.[0]?.number || "";
+    const href = bookingLink(roomNames[0] || type.name, checkInDate, checkOutDate, adults, children, type.id, firstRoomNumber);
     return `<article class="availability-card">
       <div><p class="availability-state">${escapeHtml(rooms)}</p><h3>${escapeHtml(type.name)}</h3><p>${escapeHtml(type.description || capacity)}</p>${roomNames.length > 1 ? `<p class="availability-room-list">Available: ${roomNames.map(escapeHtml).join(", ")}</p>` : ""}</div>
-      <div class="availability-card-footer"><span>${formatMoney(type.basePrice, type.currency)} <small>per night</small></span><a class="villa-btn-inquire" href="${bookingLink(roomNames[0] || type.name, checkInDate, checkOutDate)}">Book this stay</a></div>
+      <div class="availability-card-footer"><span>${formatMoney(type.basePrice, type.currency)} <small>per night</small></span><a class="villa-btn-inquire" href="${escapeHtml(href)}">Book this stay</a></div>
     </article>`;
   }).join("");
 }
@@ -68,11 +71,13 @@ export function initLiveAvailability(): void {
       return;
     }
     const data = new FormData(form);
+    const adults = Number(data.get("adults") || "1") || 1;
+    const children = Number(data.get("children") || "0") || 0;
     const query = new URLSearchParams({
       checkInDate: checkIn.value,
       checkOutDate: checkOut.value,
-      adults: String(data.get("adults") || "1"),
-      children: String(data.get("children") || "0"),
+      adults: String(adults),
+      children: String(children),
     });
     const roomNumber = String(data.get("roomNumber") || "").trim();
     if (roomNumber) query.set("roomNumber", roomNumber);
@@ -82,7 +87,7 @@ export function initLiveAvailability(): void {
       const response = await fetch(`/api/live-availability?${query}`, { cache: "no-store" });
       const body = (await response.json()) as { data?: AvailableRoomType[]; error?: string };
       if (!response.ok) throw new Error(body.error || "Availability could not be checked.");
-      renderResults(results, body.data || [], checkIn.value, checkOut.value);
+      renderResults(results, body.data || [], checkIn.value, checkOut.value, adults, children);
       const count = (body.data || []).reduce((sum, type) => sum + (type.available ? type.availableCount : 0), 0);
       status.textContent = roomNumber
         ? (count ? `Room ${roomNumber} is available for these dates.` : `Room ${roomNumber} is not available for these dates.`)

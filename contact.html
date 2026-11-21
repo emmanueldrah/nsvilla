@@ -143,8 +143,22 @@
             </h3>
             <div class="family-form-grid">
               <div>
-                <label for="name">Your name</label
-                ><input id="name" name="name" required autocomplete="name" />
+                <label for="firstname">First name</label
+                ><input
+                  id="firstname"
+                  name="firstname"
+                  required
+                  autocomplete="given-name"
+                />
+              </div>
+              <div>
+                <label for="lastname">Last name</label
+                ><input
+                  id="lastname"
+                  name="lastname"
+                  required
+                  autocomplete="family-name"
+                />
               </div>
               <div>
                 <label for="email">Email address</label
@@ -157,6 +171,18 @@
                 />
               </div>
               <div>
+                <label for="phone">Phone / WhatsApp number</label
+                ><input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  required
+                  autocomplete="tel"
+                  placeholder="+233 24 000 0000"
+                  pattern="^\+?[0-9\s-]{7,20}$"
+                />
+              </div>
+              <div>
                 <label for="checkin">Arrival date</label
                 ><input id="checkin" name="checkin" type="date" />
               </div>
@@ -165,15 +191,27 @@
                 ><input id="checkout" name="checkout" type="date" />
               </div>
               <div>
-                <label for="guests">Number of guests</label
-                ><select id="guests" name="guests">
-                  <option value="">Choose one</option>
-                  <option>1 guest</option>
-                  <option>2 guests</option>
-                  <option>3–4 guests</option>
-                  <option>5+ guests</option>
+                <label for="adults">Adults</label
+                ><select id="adults" name="adults">
+                  <option value="1">1 adult</option>
+                  <option value="2">2 adults</option>
+                  <option value="3">3 adults</option>
+                  <option value="4">4 adults</option>
+                  <option value="5">5 adults</option>
+                  <option value="6">6 adults</option>
                 </select>
               </div>
+              <div>
+                <label for="children">Children</label
+                ><select id="children" name="children">
+                  <option value="0">No children</option>
+                  <option value="1">1 child</option>
+                  <option value="2">2 children</option>
+                  <option value="3">3 children</option>
+                  <option value="4">4 children</option>
+                </select>
+              </div>
+              <input type="hidden" id="roomTypeId" name="roomTypeId" />
               <div>
                 <label for="suite">Select your preferred room</label
                 ><select id="suite" name="suite">
@@ -208,14 +246,35 @@
                 ><textarea
                   id="message"
                   name="message"
-                  placeholder="Tell us a little about your visit or special requests"
+                  placeholder="Airport pickup, late arrival, dietary needs…"
                 ></textarea>
               </div>
               <div class="full">
-                <button class="family-btn family-btn-primary" type="submit">
+                <label class="booking-policy" for="accept-policy">
+                  <input
+                    type="checkbox"
+                    id="accept-policy"
+                    name="acceptPolicy"
+                    required
+                  />
+                  <span>
+                    I accept the booking &amp; cancellation policy: a 30%
+                    deposit confirms the room and the balance is settled on
+                    arrival, with free cancellation up to 24 hours before
+                    arrival.
+                  </span>
+                </label>
+              </div>
+              <div class="full">
+                <button
+                  class="family-btn family-btn-primary"
+                  type="submit"
+                  id="booking-submit"
+                >
                   Send your enquiry via WhatsApp
                 </button>
               </div>
+              <div class="full" id="booking-result" hidden></div>
             </div>
             <p
               id="form-message"

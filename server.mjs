@@ -38,6 +38,11 @@ function loadEnv() {
 loadEnv();
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "nsadmin";
 const MANAGEMENT_API_URL = (process.env.NSLV_MANAGEMENT_API_URL || "http://localhost:3001/api/v1").replace(/\/+$/, "");
+// The booking functions read the env var themselves; give them the same local
+// default so `node server.mjs` works without any configuration.
+if (!process.env.NSLV_MANAGEMENT_API_URL) process.env.NSLV_MANAGEMENT_API_URL = MANAGEMENT_API_URL;
+const { POST: createBooking } = await import("./api/create-booking.mjs");
+const { POST: submitPaymentReference } = await import("./api/payment-reference.mjs");
 
 function loadStore() {
   try {
@@ -112,6 +117,32 @@ function staticFile(req, res, urlPath) {
   fs.createReadStream(filePath).pipe(res);
 }
 
+// Runs one of the Vercel booking functions against a plain Node request so the
+// local server and the deployed site behave exactly the same (same validation,
+// same whitelisting, same upstream payload).
+async function runServerlessFunction(res, handler, pathname, bodyText) {
+  try {
+    const response = await handler(
+      new Request(`http://local${pathname}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: bodyText || "{}",
+      }),
+    );
+    const text = await response.text();
+    res.writeHead(response.status, {
+      "Content-Type":
+        response.headers.get("Content-Type") ||
+        "application/json; charset=utf-8",
+      "Cache-Control": "no-store, max-age=0",
+    });
+    res.end(text);
+  } catch (error) {
+    console.error("[api] serverless function failed", error);
+    json(res, 500, { error: "Unexpected server error." });
+  }
+}
+
 async function handleApi(req, res, url) {
   const method = req.method;
   const bodyText = await new Promise((resolve, reject) => {
@@ -162,6 +193,12 @@ async function handleApi(req, res, url) {
     } catch {
       return json(res, 502, { error: "The reservation system could not be reached. Please try again shortly." });
     }
+  }
+  if (url.pathname === "/api/create-booking" && method === "POST") {
+    return runServerlessFunction(res, createBooking, "/api/create-booking", bodyText);
+  }
+  if (url.pathname === "/api/payment-reference" && method === "POST") {
+    return runServerlessFunction(res, submitPaymentReference, "/api/payment-reference", bodyText);
   }
   if (url.pathname === "/api/content" && method === "PUT") {
     if (!isAuthed(req)) return json(res, 401, { error: "Not authenticated." });

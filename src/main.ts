@@ -4,7 +4,10 @@
 
 import { inject } from "@vercel/analytics";
 import { initRemoteContent } from "./content";
-import { initLiveAvailability } from "./live-availability";
+import {
+  initLiveAvailability,
+  type AvailableRoomType,
+} from "./live-availability";
 
 const PRIMARY_WHATSAPP = "233535572774";
 
@@ -21,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   applyArtDirection();
   initNavigation();
   initSmoothScroll();
+  initBookingPrefill();
   initFormHandlers();
   initFloatingWhatsApp();
   initRoomCatalog();
@@ -227,6 +231,313 @@ function initSmoothScroll(): void {
 }
 
 // ════════════════════════════════════════════════════════════
+// Live booking — website → NSLV management system
+// ════════════════════════════════════════════════════════════
+const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const ROOM_NUMBER_PATTERN = /\b([AB]\d{1,2})\b/i;
+const ISO_DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+
+interface BookingConfirmation {
+  confirmationNo: string;
+  status?: string;
+  holdExpiresAt?: string | null;
+  checkInDate?: string;
+  checkOutDate?: string;
+  nights?: number;
+  adults?: number;
+  children?: number;
+  roomType?: { name?: string };
+  room?: { number?: string; name?: string | null };
+  totalAmount?: number;
+  depositAmount?: number;
+  currency?: string;
+  momo?: { number?: string; name?: string };
+  paymentReference?: string;
+}
+
+interface EnquiryDetails {
+  name: string;
+  email: string;
+  phone: string;
+  suite: string;
+  checkin: string;
+  checkout: string;
+  adults: number;
+  children: number;
+  message: string;
+  note?: string;
+}
+
+const HTML_ESCAPES: Record<string, string> = {
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': "&quot;",
+  "'": "&#39;",
+};
+
+function escapeHtml(value: string): string {
+  return value.replace(/[&<>"']/g, (character) => HTML_ESCAPES[character]);
+}
+
+/** "Room B7 (Large Studio …)" → "B7". Returns null for venue/group/general options. */
+function roomCodeOf(label: string): string | null {
+  const match = label.match(ROOM_NUMBER_PATTERN);
+  return match ? match[1].toUpperCase() : null;
+}
+
+/** Pulls a human message out of either proxy errors or management API errors. */
+function apiErrorMessage(body: unknown, fallback: string): string {
+  if (!body || typeof body !== "object") return fallback;
+  const record = body as { error?: unknown; message?: unknown };
+  const error = record.error;
+  if (typeof error === "string" && error.trim()) return error.trim();
+  if (error && typeof error === "object") {
+    const nested = error as { message?: unknown; details?: unknown };
+    if (typeof nested.message === "string" && nested.message.trim())
+      return nested.message.trim();
+    if (typeof nested.details === "string" && nested.details.trim())
+      return nested.details.trim();
+  }
+  if (typeof record.message === "string" && record.message.trim())
+    return record.message.trim();
+  return fallback;
+}
+
+async function postJson(
+  path: string,
+  payload: unknown,
+): Promise<{ status: number; body: unknown }> {
+  const response = await fetch(path, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+    cache: "no-store",
+  });
+  let body: unknown = null;
+  try {
+    body = await response.json();
+  } catch {
+    body = null;
+  }
+  return { status: response.status, body };
+}
+
+async function fetchAvailableRoomTypes(
+  checkInDate: string,
+  checkOutDate: string,
+  adults: number,
+  children: number,
+): Promise<AvailableRoomType[]> {
+  const query = new URLSearchParams({
+    checkInDate,
+    checkOutDate,
+    adults: String(adults),
+    children: String(children),
+  });
+  const response = await fetch(`/api/live-availability?${query}`, {
+    cache: "no-store",
+  });
+  let body: { data?: AvailableRoomType[] } | null = null;
+  try {
+    body = (await response.json()) as { data?: AvailableRoomType[] };
+  } catch {
+    body = null;
+  }
+  if (!response.ok || !body) {
+    throw new Error(
+      apiErrorMessage(body, "Live availability could not be checked."),
+    );
+  }
+  return Array.isArray(body.data) ? body.data : [];
+}
+
+/**
+ * Turns the selected room (e.g. "B7") into the room type id the reservation
+ * system expects. Uses the id handed over by the availability search when it
+ * still matches, otherwise re-checks live availability for these dates.
+ */
+async function resolveRoomTypeId(
+  roomNumber: string,
+  checkInDate: string,
+  checkOutDate: string,
+  adults: number,
+  children: number,
+  cached: { id: string; roomNumber: string },
+): Promise<string | null> {
+  if (UUID_PATTERN.test(cached.id) && cached.roomNumber === roomNumber) {
+    return cached.id;
+  }
+  const types = await fetchAvailableRoomTypes(
+    checkInDate,
+    checkOutDate,
+    adults,
+    children,
+  );
+  const match = types.find((type) =>
+    (type.availableRooms || []).some(
+      (room) => String(room.number || "").toUpperCase() === roomNumber,
+    ),
+  );
+  return match && match.available ? match.id : null;
+}
+
+function openWhatsAppEnquiry(details: EnquiryDetails): void {
+  const guestLine = `${details.adults} adult${details.adults === 1 ? "" : "s"}${
+    details.children
+      ? `, ${details.children} child${details.children === 1 ? "" : "ren"}`
+      : ""
+  }`;
+  const whatsappMessage = `
+*Booking Inquiry - NS LUXURY VILLA*
+
+*Guest Information:*
+Name: ${details.name}
+Email: ${details.email}
+Phone: ${details.phone || "Not provided"}
+
+*Booking Details:*
+Suite: ${details.suite || "Not selected"}
+Check-in: ${details.checkin || "Not set"}
+Check-out: ${details.checkout || "Not set"}
+Number of Guests: ${guestLine}
+${details.note ? `\n*Note:*\n${details.note}\n` : ""}
+*Additional Message:*
+${details.message || "No additional message"}
+
+---
+Sent from NS LUXURY VILLA Booking Form
+  `.trim();
+
+  const encodedMessage = encodeURIComponent(whatsappMessage);
+  const waNumber = window.NsVilla?.contact?.waPrimary || PRIMARY_WHATSAPP;
+  window.open(`https://wa.me/${waNumber}?text=${encodedMessage}`, "_blank");
+}
+
+function renderBookingResult(
+  panel: HTMLElement,
+  booking: BookingConfirmation,
+  email: string,
+): void {
+  const confirmationNo = String(booking.confirmationNo || "");
+  const roomLabel =
+    booking.room?.name ||
+    booking.room?.number ||
+    booking.roomType?.name ||
+    "your room";
+  const currency = booking.currency || "GHS";
+  const formatMoney = (amount: number) => {
+    try {
+      return new Intl.NumberFormat("en-GH", {
+        style: "currency",
+        currency,
+        maximumFractionDigits: 0,
+      }).format(amount);
+    } catch {
+      return `${currency} ${amount.toFixed(0)}`;
+    }
+  };
+
+  const holdDate = booking.holdExpiresAt
+    ? new Date(booking.holdExpiresAt)
+    : null;
+  const holdText =
+    holdDate && !Number.isNaN(holdDate.getTime())
+      ? holdDate.toLocaleString(undefined, {
+          dateStyle: "medium",
+          timeStyle: "short",
+        })
+      : "";
+  const nights = Number(booking.nights || 0);
+  const adults = Number(booking.adults || 0);
+  const children = Number(booking.children || 0);
+
+  panel.innerHTML = `
+    <div class="booking-result">
+      <p class="booking-result-title">Your room is held for you</p>
+      <p class="booking-result-code">Confirmation <strong>${escapeHtml(confirmationNo)}</strong></p>
+      <ul class="booking-result-list">
+        <li><strong>Room:</strong> ${escapeHtml(roomLabel)}</li>
+        <li><strong>Dates:</strong> ${escapeHtml(String(booking.checkInDate || ""))} → ${escapeHtml(String(booking.checkOutDate || ""))} (${nights} night${nights === 1 ? "" : "s"})</li>
+        <li><strong>Guests:</strong> ${adults} adult${adults === 1 ? "" : "s"}${children ? `, ${children} child${children === 1 ? "" : "ren"}` : ""}</li>
+        <li><strong>Total:</strong> ${formatMoney(Number(booking.totalAmount || 0))} · <strong>Deposit due:</strong> ${formatMoney(Number(booking.depositAmount || 0))}</li>
+      </ul>
+      <p class="booking-result-payment">
+        Send the deposit to MoMo <strong>${escapeHtml(String(booking.momo?.number || ""))}</strong>
+        (${escapeHtml(String(booking.momo?.name || ""))}) and use payment reference
+        <strong>${escapeHtml(String(booking.paymentReference || confirmationNo))}</strong>.
+        ${holdText ? `Your hold expires <strong>${escapeHtml(holdText)}</strong>.` : ""}
+      </p>
+      <form id="payment-reference-form" class="booking-reference-form">
+        <label for="momo-reference">Already paid? Paste the MoMo transaction reference</label>
+        <div class="booking-reference-row">
+          <input id="momo-reference" name="momo-reference" placeholder="e.g. 1234567890" autocomplete="off" />
+          <button class="family-btn family-btn-primary" type="submit">Submit reference</button>
+        </div>
+        <p id="payment-reference-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  `;
+  panel.hidden = false;
+
+  const referenceForm = panel.querySelector<HTMLFormElement>(
+    "#payment-reference-form",
+  );
+  const referenceStatus = panel.querySelector<HTMLElement>(
+    "#payment-reference-status",
+  );
+  const referenceInput = panel.querySelector<HTMLInputElement>(
+    "#momo-reference",
+  );
+
+  referenceForm?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const reference = referenceInput?.value.trim() || "";
+    const button = referenceForm.querySelector<HTMLButtonElement>("button");
+    if (reference.length < 3) {
+      if (referenceStatus)
+        referenceStatus.textContent =
+          "Enter the MoMo transaction reference (3–120 characters).";
+      return;
+    }
+    if (button) {
+      button.disabled = true;
+      button.textContent = "Sending…";
+    }
+    if (referenceStatus) referenceStatus.textContent = "";
+    try {
+      const { status, body } = await postJson("/api/payment-reference", {
+        confirmationNo,
+        email,
+        reference,
+      });
+      if (status >= 200 && status < 300) {
+        if (referenceStatus)
+          referenceStatus.textContent =
+            "Reference received — reception will verify your payment and confirm your booking shortly.";
+        if (referenceInput) referenceInput.value = "";
+      } else if (referenceStatus) {
+        referenceStatus.textContent = apiErrorMessage(
+          body,
+          "The reference could not be submitted. Please try again.",
+        );
+      }
+    } catch {
+      if (referenceStatus)
+        referenceStatus.textContent =
+          "We could not reach the reservation system. Please try again in a moment.";
+    } finally {
+      if (button) {
+        button.disabled = false;
+        button.textContent = "Submit reference";
+      }
+    }
+  });
+
+  panel.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+// ════════════════════════════════════════════════════════════
 // Form Submission Handler
 // ════════════════════════════════════════════════════════════
 function initFormHandlers(): void {
@@ -234,12 +545,15 @@ function initFormHandlers(): void {
   if (!form) return;
 
   const today = new Date().toISOString().split("T")[0];
-  const checkinField = form.querySelector(
-    "#checkin",
-  ) as HTMLInputElement | null;
-  const checkoutField = form.querySelector(
-    "#checkout",
-  ) as HTMLInputElement | null;
+  const checkinField = form.querySelector<HTMLInputElement>("#checkin");
+  const checkoutField = form.querySelector<HTMLInputElement>("#checkout");
+  const suiteField = form.querySelector<HTMLSelectElement>("#suite");
+  const policyField = form.querySelector<HTMLInputElement>("#accept-policy");
+  const submitField = form.querySelector<HTMLButtonElement>("#booking-submit");
+  const roomTypeField = form.querySelector<HTMLInputElement>("#roomTypeId");
+  const resultPanel = form.querySelector<HTMLElement>("#booking-result");
+  const statusField = form.querySelector<HTMLElement>("#form-message");
+
   if (checkinField) checkinField.min = today;
   if (checkoutField) checkoutField.min = today;
   checkinField?.addEventListener("change", () => {
@@ -247,8 +561,47 @@ function initFormHandlers(): void {
       checkoutField.min = checkinField.value;
   });
 
-  form.addEventListener("submit", (e: SubmitEvent) => {
-    e.preventDefault();
+  const valueOf = (selector: string): string => {
+    const element = form.querySelector<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >(selector);
+    return element ? element.value.trim() : "";
+  };
+
+  const setStatus = (message: string): void => {
+    if (statusField) statusField.textContent = message;
+  };
+
+  // The policy checkbox and the button label depend on whether this submit
+  // will hit the reservation system or fall back to WhatsApp.
+  const syncSelectionUi = (): void => {
+    const suite = valueOf("#suite");
+    const roomNumber = roomCodeOf(suite);
+    const canBookOnline = Boolean(
+      roomNumber && valueOf("#checkin") && valueOf("#checkout"),
+    );
+    if (policyField) policyField.required = canBookOnline;
+    if (submitField && form.dataset.bookingComplete !== "true") {
+      submitField.textContent = canBookOnline
+        ? "Book this stay online"
+        : "Send your enquiry via WhatsApp";
+    }
+    // Changing the room invalidates a preloaded room type id.
+    if (roomTypeField && roomTypeField.dataset.roomNumber) {
+      const preloaded = roomTypeField.dataset.roomNumber;
+      if (!roomNumber || preloaded !== roomNumber) {
+        roomTypeField.value = "";
+        delete roomTypeField.dataset.roomNumber;
+      }
+    }
+  };
+  suiteField?.addEventListener("change", syncSelectionUi);
+  checkinField?.addEventListener("change", syncSelectionUi);
+  checkoutField?.addEventListener("change", syncSelectionUi);
+  syncSelectionUi();
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
 
     if (
       checkinField?.value &&
@@ -261,54 +614,202 @@ function initFormHandlers(): void {
     }
     checkoutField?.setCustomValidity("");
 
-    // Collect form data
-    const name = (form.querySelector("#name") as HTMLInputElement)?.value || "";
-    const email =
-      (form.querySelector("#email") as HTMLInputElement)?.value || "";
-    const suite =
-      (form.querySelector("#suite") as HTMLSelectElement)?.value || "";
-    const checkin =
-      (form.querySelector("#checkin") as HTMLInputElement)?.value || "";
-    const checkout =
-      (form.querySelector("#checkout") as HTMLInputElement)?.value || "";
-    const guests =
-      (form.querySelector("#guests") as HTMLInputElement)?.value || "1";
-    const message =
-      (form.querySelector("#message") as HTMLTextAreaElement)?.value || "";
+    if (form.dataset.bookingComplete === "true") {
+      setStatus(
+        "You already have a held booking above. Refresh the page to make another booking.",
+      );
+      return;
+    }
 
-    // Build WhatsApp message
-    const whatsappMessage = `
-*Booking Inquiry - NS LUXURY VILLA*
+    const suite = valueOf("#suite");
+    const roomNumber = roomCodeOf(suite);
+    const checkin = valueOf("#checkin");
+    const checkout = valueOf("#checkout");
+    const adults = Number(valueOf("#adults") || "1") || 1;
+    const children = Number(valueOf("#children") || "0") || 0;
+    const firstName = valueOf("#firstname");
+    const lastName = valueOf("#lastname");
+    const email = valueOf("#email");
+    const phone = valueOf("#phone");
+    const message = valueOf("#message");
 
-*Guest Information:*
-Name: ${name}
-Email: ${email}
+    const enquiry: EnquiryDetails = {
+      name: `${firstName} ${lastName}`.trim(),
+      email,
+      phone,
+      suite,
+      checkin,
+      checkout,
+      adults,
+      children,
+      message,
+    };
 
-*Booking Details:*
-Suite: ${suite}
-Check-in: ${checkin}
-Check-out: ${checkout}
-Number of Guests: ${guests}
+    // Venue hire, group bookings, general questions and dateless enquiries
+    // keep the existing WhatsApp path.
+    if (!roomNumber || !checkin || !checkout) {
+      setStatus("");
+      openWhatsAppEnquiry(enquiry);
+      return;
+    }
 
-*Additional Message:*
-${message || "No additional message"}
+    if (submitField) {
+      submitField.disabled = true;
+      submitField.textContent = "Holding your room…";
+    }
+    setStatus("");
 
----
-Sent from NS LUXURY VILLA Booking Form
-    `.trim();
+    try {
+      const roomTypeId = await resolveRoomTypeId(
+        roomNumber,
+        checkin,
+        checkout,
+        adults,
+        children,
+        { id: roomTypeField?.value || "", roomNumber: roomTypeField?.dataset.roomNumber || "" },
+      );
 
-    // Open WhatsApp with pre-filled message
-    const encodedMessage = encodeURIComponent(whatsappMessage);
-    const waNumber = window.NsVilla?.contact?.waPrimary || PRIMARY_WHATSAPP;
-    const whatsappUrl = `https://wa.me/${waNumber}?text=${encodedMessage}`;
+      if (!roomTypeId) {
+        openWhatsAppEnquiry({
+          ...enquiry,
+          note: `Those dates (${checkin} to ${checkout}) could not be booked online for ${suite}. Please check alternatives for us.`,
+        });
+        return;
+      }
 
-    window.open(whatsappUrl, "_blank");
+      const { status, body } = await postJson("/api/create-booking", {
+        roomTypeId,
+        checkInDate: checkin,
+        checkOutDate: checkout,
+        adults,
+        children,
+        firstName,
+        lastName,
+        email,
+        phone,
+        acceptPolicy: true,
+        specialRequests: message || undefined,
+      });
 
-    const confirmation =
-      document.getElementById("booking-confirmation") ||
-      document.getElementById("form-message");
-    if (confirmation) confirmation.hidden = false;
+      const data = (body as { data?: BookingConfirmation } | null)?.data;
+      if (status >= 200 && status < 300 && data?.confirmationNo) {
+        if (resultPanel) renderBookingResult(resultPanel, data, email);
+        form.dataset.bookingComplete = "true";
+        form.reset();
+        setStatus(
+          "Your room is held — send the deposit to confirm. Details are shown below.",
+        );
+        return;
+      }
+
+      setStatus(
+        apiErrorMessage(
+          body,
+          "Your booking could not be completed. Please try again.",
+        ),
+      );
+    } catch (error) {
+      setStatus(
+        error instanceof Error && error.message
+          ? error.message
+          : "We could not reach the reservation system. Please try again in a moment.",
+      );
+    } finally {
+      if (submitField) {
+        submitField.disabled = false;
+        syncSelectionUi();
+      }
+    }
   });
+}
+
+// ════════════════════════════════════════════════════════════
+// Booking pre-fill (from the availability search and room cards)
+// ════════════════════════════════════════════════════════════
+function initBookingPrefill(): void {
+  const form = document.getElementById("booking-form");
+  if (!form) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const roomLabel = (params.get("room") || "").trim();
+  const roomTypeId = (params.get("roomTypeId") || "").trim();
+  const checkin = (params.get("checkin") || "").trim();
+  const checkout = (params.get("checkout") || "").trim();
+  const adults = (params.get("adults") || "").trim();
+  const children = (params.get("children") || "").trim();
+  const roomNumberParam = (params.get("roomNo") || "").trim().toUpperCase();
+  const roomNumber = roomNumberParam || roomCodeOf(roomLabel);
+
+  const suiteField = form.querySelector<HTMLSelectElement>("#suite");
+  const checkinField = form.querySelector<HTMLInputElement>("#checkin");
+  const checkoutField = form.querySelector<HTMLInputElement>("#checkout");
+  const adultsField = form.querySelector<HTMLSelectElement>("#adults");
+  const childrenField = form.querySelector<HTMLSelectElement>("#children");
+  const roomTypeField = form.querySelector<HTMLInputElement>("#roomTypeId");
+  const messageField = form.querySelector<HTMLTextAreaElement>("#message");
+
+  if (suiteField && roomLabel) {
+    let matched = false;
+    if (roomNumber) {
+      for (const option of Array.from(suiteField.options)) {
+        if (roomCodeOf(option.value) === roomNumber) {
+          suiteField.value = option.value;
+          matched = true;
+          break;
+        }
+      }
+    }
+    if (!matched) {
+      const needle = roomLabel.toLowerCase();
+      for (const option of Array.from(suiteField.options)) {
+        if (
+          option.value.toLowerCase().includes(needle) ||
+          option.text.toLowerCase().includes(needle)
+        ) {
+          suiteField.value = option.value;
+          break;
+        }
+      }
+    }
+  }
+
+  if (checkinField && ISO_DATE_PATTERN.test(checkin))
+    checkinField.value = checkin;
+  if (checkoutField && ISO_DATE_PATTERN.test(checkout)) {
+    checkoutField.value = checkout;
+    if (checkinField?.value) checkoutField.min = checkinField.value;
+  }
+  if (
+    adultsField &&
+    /^\d+$/.test(adults) &&
+    Array.from(adultsField.options).some((option) => option.value === adults)
+  ) {
+    adultsField.value = adults;
+  }
+  if (
+    childrenField &&
+    /^\d+$/.test(children) &&
+    Array.from(childrenField.options).some(
+      (option) => option.value === children,
+    )
+  ) {
+    childrenField.value = children;
+  }
+
+  if (
+    roomTypeField &&
+    roomNumber &&
+    UUID_PATTERN.test(roomTypeId)
+  ) {
+    roomTypeField.value = roomTypeId;
+    roomTypeField.dataset.roomNumber = roomNumber;
+  }
+
+  // Dateless "Inquire" links only need a nudge; bookings that arrive with
+  // dates carry everything they need in the confirmation itself.
+  if (messageField && !messageField.value && roomLabel && !roomTypeId) {
+    messageField.value = `Hello, I would like to inquire about booking ${roomLabel}. Please confirm availability and dates.`;
+  }
 }
 
 // ════════════════════════════════════════════════════════════
@@ -720,26 +1221,6 @@ function initRoomCatalog(): void {
       });
     });
   });
-
-  // Pre-fill contact form if room parameter exists
-  const params = new URLSearchParams(window.location.search);
-  const selectedRoom = params.get("room");
-  if (selectedRoom) {
-    const msgInput = document.querySelector<HTMLTextAreaElement>('textarea[name="message"], #message');
-    if (msgInput && !msgInput.value) {
-      msgInput.value = `Hello, I would like to inquire about booking ${selectedRoom}. Please confirm availability and dates.`;
-    }
-    const suiteSelect = document.querySelector<HTMLSelectElement>('select[name="suite"], #suite');
-    if (suiteSelect) {
-      const roomLower = selectedRoom.toLowerCase().trim();
-      for (const option of Array.from(suiteSelect.options)) {
-        if (option.value.toLowerCase().includes(roomLower) || option.text.toLowerCase().includes(roomLower)) {
-          suiteSelect.value = option.value;
-          break;
-        }
-      }
-    }
-  }
 }
 
 export {
@@ -747,6 +1228,7 @@ export {
   initScrollReveals,
   initSmoothScroll,
   initFormHandlers,
+  initBookingPrefill,
   initFloatingWhatsApp,
   initVillaArchive,
   initImageViewer,

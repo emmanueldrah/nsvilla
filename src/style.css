@@ -2624,6 +2624,99 @@ details {
 @media (max-width: 900px) { .availability-form { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 520px) { .availability-form { grid-template-columns: 1fr; } .availability-card-footer { align-items: flex-start; flex-direction: column; } }
 
+/* ── Online booking card (website → management system) ─────── */
+.booking-policy {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  color: #4b554f;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  cursor: pointer;
+}
+.booking-policy input {
+  flex: none;
+  width: 1.05rem;
+  height: 1.05rem;
+  margin-top: 0.25rem;
+  accent-color: #173b36;
+}
+.booking-result {
+  padding: 1.5rem;
+  border: 1px solid rgba(23, 59, 54, 0.16);
+  border-radius: 1.1rem;
+  background: linear-gradient(145deg, #f6fbf8, #eef7f2);
+  box-shadow: 0 12px 30px rgba(23, 59, 54, 0.1);
+}
+.booking-result-title {
+  margin: 0 0 0.35rem;
+  font: 500 1.55rem Fraunces, Georgia, serif;
+  color: #173b36;
+}
+.booking-result-code {
+  margin: 0 0 1.1rem;
+  color: #4b554f;
+  font-size: 0.95rem;
+}
+.booking-result-code strong {
+  color: #173b36;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.04em;
+}
+.booking-result-list {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0 0 1.1rem;
+  padding: 0;
+  color: #3d4a44;
+  font-size: 0.95rem;
+  list-style: none;
+}
+.booking-result-list strong { color: #173b36; }
+.booking-result-payment {
+  margin: 0 0 1.2rem;
+  padding: 0.9rem 1.05rem;
+  border: 1px dashed rgba(23, 59, 54, 0.28);
+  border-radius: 0.85rem;
+  background: #fff;
+  color: #3d4a44;
+  font-size: 0.93rem;
+  line-height: 1.7;
+}
+.booking-result-payment strong { color: #173b36; }
+.booking-reference-form label {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: #173b36;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.booking-reference-row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.booking-reference-row input {
+  flex: 1 1 14rem;
+  min-height: 2.75rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid rgba(23, 59, 54, 0.22);
+  border-radius: 0.55rem;
+  background: #fff;
+  color: #173b36;
+  font: inherit;
+}
+.booking-reference-row .family-btn { min-height: 2.75rem; padding: 0.7rem 1.5rem; }
+#payment-reference-status { margin: 0.75rem 0 0; color: #173b36; font-size: 0.9rem; font-weight: 700; }
+#form-message:not(:empty) {
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(23, 59, 54, 0.18);
+  border-radius: 0.7rem;
+  background: #fff8ed;
+  color: #173b36;
+  font-size: 0.93rem;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
 .villa-room-card[hidden] {
   display: none;
 }
