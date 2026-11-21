@@ -11,7 +11,10 @@ function json(status, body) {
 }
 
 function managementApiBase() {
-  return (process.env.NSLV_MANAGEMENT_API_URL || "").replace(/\/+$/, "");
+  return (
+    process.env.NSLV_MANAGEMENT_API_URL ||
+    "https://nsluxury.vercel.app/api/v1"
+  ).replace(/\/+$/, "");
 }
 
 export async function GET(request) {

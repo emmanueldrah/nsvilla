@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   applyArtDirection();
   initNavigation();
   initSmoothScroll();
+  initBookingConfig();
   initBookingPrefill();
   initFormHandlers();
   initFloatingWhatsApp();
@@ -255,6 +256,61 @@ interface BookingConfirmation {
   paymentReference?: string;
 }
 
+interface PublicBookingConfig {
+  publicEnabled?: boolean;
+  depositPercent?: number;
+  cancellationHours?: number;
+  holdMinutes?: number;
+  momoConfigured?: boolean;
+  momo?: {
+    number?: string;
+    name?: string;
+  };
+}
+
+let activeBookingConfig: PublicBookingConfig = {
+  depositPercent: 60,
+  cancellationHours: 48,
+  holdMinutes: 60,
+  momoConfigured: true,
+  momo: {
+    number: "0530491143",
+    name: "NS Luxury Villa",
+  },
+};
+
+function applyBookingConfig(config: PublicBookingConfig): void {
+  const deposit = typeof config.depositPercent === "number" ? config.depositPercent : 60;
+  const hours = typeof config.cancellationHours === "number" ? config.cancellationHours : 48;
+
+  const depositEl = document.getElementById("policy-deposit-percent");
+  if (depositEl) depositEl.textContent = `${deposit}%`;
+
+  const hoursEl = document.getElementById("policy-cancellation-hours");
+  if (hoursEl) hoursEl.textContent = `${hours} hours`;
+
+  const policyTextEl = document.getElementById("booking-policy-text");
+  if (policyTextEl && !depositEl) {
+    policyTextEl.innerHTML = `I accept the booking &amp; cancellation policy: a <strong id="policy-deposit-percent">${deposit}%</strong> deposit confirms the room and the balance is settled on arrival, with free cancellation up to <strong id="policy-cancellation-hours">${hours} hours</strong> before arrival.`;
+  }
+}
+
+async function initBookingConfig(): Promise<void> {
+  applyBookingConfig(activeBookingConfig);
+  try {
+    const res = await fetch("/api/public-config", { cache: "no-cache" });
+    if (!res.ok) return;
+    const raw = await res.json();
+    const config = (raw && raw.data ? raw.data : raw) as PublicBookingConfig;
+    if (config && typeof config === "object") {
+      activeBookingConfig = { ...activeBookingConfig, ...config };
+      applyBookingConfig(activeBookingConfig);
+    }
+  } catch (err) {
+    console.debug("[config] Could not fetch public config", err);
+  }
+}
+
 interface EnquiryDetails {
   name: string;
   email: string;
@@ -463,8 +519,8 @@ function renderBookingResult(
         <li><strong>Total:</strong> ${formatMoney(Number(booking.totalAmount || 0))} · <strong>Deposit due:</strong> ${formatMoney(Number(booking.depositAmount || 0))}</li>
       </ul>
       <p class="booking-result-payment">
-        Send the deposit to MoMo <strong>${escapeHtml(String(booking.momo?.number || ""))}</strong>
-        (${escapeHtml(String(booking.momo?.name || ""))}) and use payment reference
+        Send the deposit to MoMo <strong>${escapeHtml(String(booking.momo?.number || activeBookingConfig.momo?.number || ""))}</strong>
+        (${escapeHtml(String(booking.momo?.name || activeBookingConfig.momo?.name || ""))}) and use payment reference
         <strong>${escapeHtml(String(booking.paymentReference || confirmationNo))}</strong>.
         ${holdText ? `Your hold expires <strong>${escapeHtml(holdText)}</strong>.` : ""}
       </p>

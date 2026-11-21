@@ -43,6 +43,7 @@ const MANAGEMENT_API_URL = (process.env.NSLV_MANAGEMENT_API_URL || "http://local
 if (!process.env.NSLV_MANAGEMENT_API_URL) process.env.NSLV_MANAGEMENT_API_URL = MANAGEMENT_API_URL;
 const { POST: createBooking } = await import("./api/create-booking.mjs");
 const { POST: submitPaymentReference } = await import("./api/payment-reference.mjs");
+const { GET: getPublicConfig } = await import("./api/public-config.mjs");
 
 function loadStore() {
   try {
@@ -192,6 +193,19 @@ async function handleApi(req, res, url) {
       return json(res, upstream.status, upstream.ok ? { data: payload?.data || [] } : { error: payload?.error?.message || "Availability could not be checked." });
     } catch {
       return json(res, 502, { error: "The reservation system could not be reached. Please try again shortly." });
+    }
+  }
+  if (url.pathname === "/api/public-config" && method === "GET") {
+    try {
+      const response = await getPublicConfig();
+      const text = await response.text();
+      res.writeHead(response.status, {
+        "Content-Type": "application/json; charset=utf-8",
+        "Cache-Control": "no-store, max-age=0",
+      });
+      return res.end(text);
+    } catch {
+      return json(res, 500, { error: "Failed to load public config." });
     }
   }
   if (url.pathname === "/api/create-booking" && method === "POST") {
