@@ -156,7 +156,7 @@ function applyArtDirection(): void {
       }
     });
     const film = document.querySelector<HTMLVideoElement>(".family-video");
-    if (film && !film.poster) film.poster = "/images/opt/nice-pool-1100.jpg";
+    if (film && !film.poster) film.poster = "/images/posters/full-video.jpg";
   }
 }
 
