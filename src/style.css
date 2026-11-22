@@ -1819,6 +1819,12 @@ nav a.active {
     0 0 0 3px rgba(23, 59, 54, 0.12),
     inset 1px 2px 4px rgba(23, 59, 54, 0.06) !important;
 }
+.family-form select option:disabled,
+select option:disabled {
+  color: #8c9792 !important;
+  background-color: #f3efe9 !important;
+  font-style: italic;
+}
 .family-form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

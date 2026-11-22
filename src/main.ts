@@ -654,11 +654,176 @@ function initFormHandlers(): void {
       }
     }
   };
-  suiteField?.addEventListener("change", syncSelectionUi);
+
+  let dateAvailabilitySeq = 0;
+
+  const updateSuiteAvailability = async (): Promise<void> => {
+    if (!suiteField) return;
+
+    const adminAvailability = window.NsVilla?.roomAvailability;
+    const adminDisabledRooms = new Set<string>();
+    if (Array.isArray(adminAvailability)) {
+      adminAvailability.forEach((r) => {
+        if (!r.available) adminDisabledRooms.add(r.id.toUpperCase());
+      });
+    }
+
+    const checkin = checkinField?.value.trim() || "";
+    const checkout = checkoutField?.value.trim() || "";
+    const adults = Number(valueOf("#adults") || "1") || 1;
+    const children = Number(valueOf("#children") || "0") || 0;
+
+    const hasValidDates = Boolean(
+      checkin && checkout && checkout > checkin,
+    );
+
+    if (!hasValidDates) {
+      let unselectedLabel: string | null = null;
+      Array.from(suiteField.options).forEach((option) => {
+        const code = roomCodeOf(option.value);
+        if (!code) return;
+        if (!option.dataset.originalLabel) {
+          option.dataset.originalLabel = option.textContent || "";
+        }
+        const isAdminUnavailable = adminDisabledRooms.has(code);
+        if (isAdminUnavailable) {
+          option.disabled = true;
+          option.textContent = `${option.dataset.originalLabel} (Unavailable)`;
+          if (suiteField.value === option.value) {
+            unselectedLabel = option.dataset.originalLabel;
+            suiteField.value = "";
+          }
+        } else {
+          option.disabled = false;
+          option.textContent = option.dataset.originalLabel;
+        }
+      });
+
+      if (unselectedLabel) {
+        if (roomTypeField) {
+          roomTypeField.value = "";
+          delete roomTypeField.dataset.roomNumber;
+        }
+        setStatus(
+          `${unselectedLabel} is currently unavailable. Please select another room or contact us on WhatsApp.`,
+        );
+        syncSelectionUi();
+      }
+      return;
+    }
+
+    const currentSeq = ++dateAvailabilitySeq;
+    try {
+      const types = await fetchAvailableRoomTypes(
+        checkin,
+        checkout,
+        adults,
+        children,
+      );
+      if (currentSeq !== dateAvailabilitySeq) return;
+
+      const availableRoomCodes = new Set<string>();
+      types.forEach((type) => {
+        if (type.available && Array.isArray(type.availableRooms)) {
+          type.availableRooms.forEach((r) => {
+            const num = String(r.number || "").toUpperCase();
+            if (num) availableRoomCodes.add(num);
+          });
+        }
+      });
+
+      let unselectedLabel: string | null = null;
+      Array.from(suiteField.options).forEach((option) => {
+        const code = roomCodeOf(option.value);
+        if (!code) return;
+        if (!option.dataset.originalLabel) {
+          option.dataset.originalLabel = option.textContent || "";
+        }
+
+        const isAdminUnavailable = adminDisabledRooms.has(code);
+        const isDateAvailable = availableRoomCodes.has(code);
+
+        if (isAdminUnavailable) {
+          option.disabled = true;
+          option.textContent = `${option.dataset.originalLabel} (Unavailable)`;
+          if (suiteField.value === option.value) {
+            unselectedLabel = option.dataset.originalLabel;
+            suiteField.value = "";
+          }
+        } else if (!isDateAvailable) {
+          option.disabled = true;
+          option.textContent = `${option.dataset.originalLabel} (Not available for dates)`;
+          if (suiteField.value === option.value) {
+            unselectedLabel = option.dataset.originalLabel;
+            suiteField.value = "";
+          }
+        } else {
+          option.disabled = false;
+          option.textContent = option.dataset.originalLabel;
+        }
+      });
+
+      if (unselectedLabel) {
+        if (roomTypeField) {
+          roomTypeField.value = "";
+          delete roomTypeField.dataset.roomNumber;
+        }
+        setStatus(
+          `${unselectedLabel} is not available for the selected dates. Please choose an available room or contact us on WhatsApp.`,
+        );
+        syncSelectionUi();
+      } else {
+        const currentCode = roomCodeOf(suiteField.value);
+        if (currentCode && roomTypeField) {
+          const match = types.find((t) =>
+            (t.availableRooms || []).some(
+              (r) => String(r.number || "").toUpperCase() === currentCode,
+            ),
+          );
+          if (match && match.available) {
+            roomTypeField.value = match.id;
+            roomTypeField.dataset.roomNumber = currentCode;
+          }
+        }
+      }
+    } catch (err) {
+      console.debug("[contact] live availability check failed", err);
+    }
+  };
+
+  suiteField?.addEventListener("change", () => {
+    const selected = suiteField.selectedOptions[0];
+    if (selected && selected.disabled) {
+      suiteField.value = "";
+    } else if (
+      statusField &&
+      (statusField.textContent.includes("not available") ||
+        statusField.textContent.includes("currently unavailable"))
+    ) {
+      setStatus("");
+    }
+    syncSelectionUi();
+  });
   emailField?.addEventListener("input", syncSelectionUi);
-  checkinField?.addEventListener("change", syncSelectionUi);
-  checkoutField?.addEventListener("change", syncSelectionUi);
+  checkinField?.addEventListener("change", () => {
+    syncSelectionUi();
+    updateSuiteAvailability();
+  });
+  checkoutField?.addEventListener("change", () => {
+    syncSelectionUi();
+    updateSuiteAvailability();
+  });
+  form.querySelector("#adults")?.addEventListener("change", () => {
+    updateSuiteAvailability();
+  });
+  form.querySelector("#children")?.addEventListener("change", () => {
+    updateSuiteAvailability();
+  });
+  window.addEventListener("nsvilla:room-availability-updated", () => {
+    updateSuiteAvailability();
+  });
   syncSelectionUi();
+  updateSuiteAvailability();
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -813,7 +978,9 @@ function initBookingPrefill(): void {
     if (roomNumber) {
       for (const option of Array.from(suiteField.options)) {
         if (roomCodeOf(option.value) === roomNumber) {
-          suiteField.value = option.value;
+          if (!option.disabled) {
+            suiteField.value = option.value;
+          }
           matched = true;
           break;
         }
@@ -826,7 +993,9 @@ function initBookingPrefill(): void {
           option.value.toLowerCase().includes(needle) ||
           option.text.toLowerCase().includes(needle)
         ) {
-          suiteField.value = option.value;
+          if (!option.disabled) {
+            suiteField.value = option.value;
+          }
           break;
         }
       }
@@ -867,7 +1036,7 @@ function initBookingPrefill(): void {
 
   // Dateless "Inquire" links only need a nudge; bookings that arrive with
   // dates carry everything they need in the confirmation itself.
-  if (messageField && !messageField.value && roomLabel && !roomTypeId) {
+  if (messageField && !messageField.value && roomLabel && !roomTypeId && suiteField?.value) {
     messageField.value = `Hello, I would like to inquire about booking ${roomLabel}. Please confirm availability and dates.`;
   }
 }

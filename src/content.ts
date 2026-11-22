@@ -2,11 +2,14 @@
 // Fetches site content + flyers from the admin API (/api/content) and applies
 // them live. If the API is unreachable (e.g. not deployed yet), the site
 // renders exactly as before — this module is entirely optional.
-import type { SiteContent, Flyer, ContactFields } from "./cms-types";
+import type { SiteContent, Flyer, ContactFields, RoomAvailability } from "./cms-types";
 
 declare global {
   interface Window {
-    NsVilla?: { contact?: ContactFields };
+    NsVilla?: {
+      contact?: ContactFields;
+      roomAvailability?: RoomAvailability[];
+    };
   }
 }
 
@@ -37,7 +40,7 @@ export async function initRemoteContent(): Promise<void> {
     const content = data.content;
     if (!content) return;
 
-    window.NsVilla = { contact: content.contact };
+    window.NsVilla = { contact: content.contact, roomAvailability: content.roomAvailability };
 
     applyContact(content);
     applyHero(content);
@@ -123,6 +126,8 @@ function applyRoomAvailability(c: SiteContent): void {
   if (!Array.isArray(availability) || !availability.length) return;
 
   let visibleCount = 0;
+  const codeMap = new Map(availability.map((room) => [room.id.toUpperCase(), room]));
+
   availability.forEach((room) => {
     const card = document.querySelector<HTMLElement>(`[data-room="${room.id}"]`);
     if (!card) return;
@@ -134,6 +139,30 @@ function applyRoomAvailability(c: SiteContent): void {
   if (count) {
     count.textContent = `${visibleCount} ${visibleCount === 1 ? "room" : "rooms"} available now`;
   }
+
+  // Update room selector on rooms.html
+  const roomNumberSelect = document.querySelector<HTMLSelectElement>('select[name="roomNumber"]');
+  if (roomNumberSelect) {
+    Array.from(roomNumberSelect.options).forEach((opt) => {
+      const code = opt.value.toUpperCase();
+      const r = codeMap.get(code);
+      if (r) {
+        if (!opt.dataset.originalLabel) opt.dataset.originalLabel = opt.textContent || "";
+        opt.disabled = !r.available;
+        opt.textContent = r.available
+          ? opt.dataset.originalLabel
+          : `${opt.dataset.originalLabel} (Unavailable)`;
+        if (!r.available && roomNumberSelect.value.toUpperCase() === code) {
+          roomNumberSelect.value = "";
+        }
+      }
+    });
+  }
+
+  // Notify active listeners (such as contact page form handlers)
+  window.dispatchEvent(
+    new CustomEvent("nsvilla:room-availability-updated", { detail: availability }),
+  );
 }
 
 function applyFooter(c: SiteContent): void {
