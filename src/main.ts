@@ -668,6 +668,9 @@ function initFormHandlers(): void {
       });
     }
 
+    const suiteContainer = form.querySelector<HTMLElement>("#suite-container");
+    const datesNote = form.querySelector<HTMLElement>("#dates-required-note");
+
     const checkin = checkinField?.value.trim() || "";
     const checkout = checkoutField?.value.trim() || "";
     const adults = Number(valueOf("#adults") || "1") || 1;
@@ -677,38 +680,18 @@ function initFormHandlers(): void {
       checkin && checkout && checkout > checkin,
     );
 
-    if (!hasValidDates) {
-      let unselectedLabel: string | null = null;
-      Array.from(suiteField.options).forEach((option) => {
-        const code = roomCodeOf(option.value);
-        if (!code) return;
-        if (!option.dataset.originalLabel) {
-          option.dataset.originalLabel = option.textContent || "";
-        }
-        const isAdminUnavailable = adminDisabledRooms.has(code);
-        if (isAdminUnavailable) {
-          option.disabled = true;
-          option.textContent = `${option.dataset.originalLabel} (Unavailable)`;
-          if (suiteField.value === option.value) {
-            unselectedLabel = option.dataset.originalLabel;
-            suiteField.value = "";
-          }
-        } else {
-          option.disabled = false;
-          option.textContent = option.dataset.originalLabel;
-        }
-      });
+    if (suiteContainer) suiteContainer.hidden = !hasValidDates;
+    if (datesNote) datesNote.hidden = hasValidDates;
 
-      if (unselectedLabel) {
-        if (roomTypeField) {
-          roomTypeField.value = "";
-          delete roomTypeField.dataset.roomNumber;
-        }
-        setStatus(
-          `${unselectedLabel} is currently unavailable. Please select another room or contact us on WhatsApp.`,
-        );
-        syncSelectionUi();
+    if (!hasValidDates) {
+      if (suiteField.value) {
+        suiteField.value = "";
       }
+      if (roomTypeField) {
+        roomTypeField.value = "";
+        delete roomTypeField.dataset.roomNumber;
+      }
+      syncSelectionUi();
       return;
     }
 
@@ -773,6 +756,27 @@ function initFormHandlers(): void {
         );
         syncSelectionUi();
       } else {
+        if (!suiteField.value && form.dataset.prefillRoom) {
+          const pending = form.dataset.prefillRoom;
+          const targetRoomNo = roomCodeOf(pending);
+          for (const opt of Array.from(suiteField.options)) {
+            const c = roomCodeOf(opt.value);
+            if (
+              (targetRoomNo && c === targetRoomNo) ||
+              opt.value.toLowerCase().includes(pending.toLowerCase()) ||
+              opt.text.toLowerCase().includes(pending.toLowerCase())
+            ) {
+              if (!opt.disabled) {
+                suiteField.value = opt.value;
+              } else {
+                setStatus(
+                  `${opt.dataset.originalLabel || pending} is not available for the selected dates. Please choose an available room or contact us on WhatsApp.`,
+                );
+              }
+              break;
+            }
+          }
+        }
         const currentCode = roomCodeOf(suiteField.value);
         if (currentCode && roomTypeField) {
           const match = types.find((t) =>
@@ -828,6 +832,21 @@ function initFormHandlers(): void {
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
+    const checkin = valueOf("#checkin");
+    const checkout = valueOf("#checkout");
+
+    if (!checkin || !checkout) {
+      if (!checkin && checkinField) {
+        checkinField.focus();
+        checkinField.reportValidity();
+      } else if (!checkout && checkoutField) {
+        checkoutField.focus();
+        checkoutField.reportValidity();
+      }
+      setStatus("Please select your arrival and departure dates to view and select available rooms.");
+      return;
+    }
+
     if (
       checkinField?.value &&
       checkoutField?.value &&
@@ -848,8 +867,6 @@ function initFormHandlers(): void {
 
     const suite = valueOf("#suite");
     const roomNumber = roomCodeOf(suite);
-    const checkin = valueOf("#checkin");
-    const checkout = valueOf("#checkout");
     const adults = Number(valueOf("#adults") || "1") || 1;
     const children = Number(valueOf("#children") || "0") || 0;
     const firstName = valueOf("#firstname");
@@ -973,7 +990,40 @@ function initBookingPrefill(): void {
   const roomTypeField = form.querySelector<HTMLInputElement>("#roomTypeId");
   const messageField = form.querySelector<HTMLTextAreaElement>("#message");
 
-  if (suiteField && roomLabel) {
+  if (checkinField && ISO_DATE_PATTERN.test(checkin))
+    checkinField.value = checkin;
+  if (checkoutField && ISO_DATE_PATTERN.test(checkout)) {
+    checkoutField.value = checkout;
+    if (checkinField?.value) checkoutField.min = checkinField.value;
+  }
+  if (
+    adultsField &&
+    /^\d+$/.test(adults) &&
+    Array.from(adultsField.options).some((option) => option.value === adults)
+  ) {
+    adultsField.value = adults;
+  }
+  if (
+    childrenField &&
+    /^\d+$/.test(children) &&
+    Array.from(childrenField.options).some(
+      (option) => option.value === children,
+    )
+  ) {
+    childrenField.value = children;
+  }
+
+  const hasValidDates = Boolean(
+    checkinField?.value &&
+      checkoutField?.value &&
+      checkoutField.value > checkinField.value,
+  );
+
+  if (roomLabel) {
+    form.dataset.prefillRoom = roomLabel;
+  }
+
+  if (hasValidDates && suiteField && roomLabel) {
     let matched = false;
     if (roomNumber) {
       for (const option of Array.from(suiteField.options)) {
@@ -1000,29 +1050,6 @@ function initBookingPrefill(): void {
         }
       }
     }
-  }
-
-  if (checkinField && ISO_DATE_PATTERN.test(checkin))
-    checkinField.value = checkin;
-  if (checkoutField && ISO_DATE_PATTERN.test(checkout)) {
-    checkoutField.value = checkout;
-    if (checkinField?.value) checkoutField.min = checkinField.value;
-  }
-  if (
-    adultsField &&
-    /^\d+$/.test(adults) &&
-    Array.from(adultsField.options).some((option) => option.value === adults)
-  ) {
-    adultsField.value = adults;
-  }
-  if (
-    childrenField &&
-    /^\d+$/.test(children) &&
-    Array.from(childrenField.options).some(
-      (option) => option.value === children,
-    )
-  ) {
-    childrenField.value = children;
   }
 
   if (

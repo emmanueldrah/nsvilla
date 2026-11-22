@@ -1833,6 +1833,26 @@ select option:disabled {
 .family-form .full {
   grid-column: 1 / -1;
 }
+.dates-prompt-box {
+  padding: 1rem 1.25rem;
+  border-radius: 0.85rem;
+  background: #fbf8f2;
+  border: 1.5px dashed rgba(23, 59, 54, 0.28);
+  margin: 0.25rem 0 0.25rem;
+}
+.dates-prompt-text {
+  margin: 0;
+  color: #173b36;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+.dates-prompt-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
 .family-form button {
   border: 0;
   cursor: pointer;

@@ -179,11 +179,11 @@
               </div>
               <div>
                 <label for="checkin">Arrival date</label
-                ><input id="checkin" name="checkin" type="date" />
+                ><input id="checkin" name="checkin" type="date" required />
               </div>
               <div>
                 <label for="checkout">Departure date</label
-                ><input id="checkout" name="checkout" type="date" />
+                ><input id="checkout" name="checkout" type="date" required />
               </div>
               <div>
                 <label for="adults">Adults</label
@@ -207,7 +207,13 @@
                 </select>
               </div>
               <input type="hidden" id="roomTypeId" name="roomTypeId" />
-              <div>
+              <div id="dates-required-note" class="full dates-prompt-box">
+                <p class="dates-prompt-text">
+                  <span class="dates-prompt-icon">📅</span>
+                  <span>Please select your <strong>arrival and departure dates</strong> above to view and select available rooms.</span>
+                </p>
+              </div>
+              <div id="suite-container" class="full" hidden>
                 <label for="suite">Select your preferred room</label
                 ><select id="suite" name="suite">
                   <option value="">Choose a room or service</option>
