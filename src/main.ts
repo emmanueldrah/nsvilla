@@ -7,6 +7,10 @@ import { initRemoteContent } from "./content";
 import {
   initLiveAvailability,
   type AvailableRoomType,
+  type LiveAvailabilityResponse,
+  formatShortDate,
+  formatDateList,
+  roomLabelOf,
 } from "./live-availability";
 
 const PRIMARY_WHATSAPP = "233535572774";
@@ -697,14 +701,29 @@ function initFormHandlers(): void {
 
     const currentSeq = ++dateAvailabilitySeq;
     try {
-      const types = await fetchAvailableRoomTypes(
-        checkin,
-        checkout,
-        adults,
-        children,
-      );
+      const currentSelectedRoom =
+        roomCodeOf(suiteField.value) ||
+        roomCodeOf(form.dataset.prefillRoom || "") ||
+        "";
+
+      const query = new URLSearchParams({
+        checkInDate: checkin,
+        checkOutDate: checkout,
+        adults: String(adults),
+        children: String(children),
+      });
+      if (currentSelectedRoom) {
+        query.set("roomNumber", currentSelectedRoom);
+        query.set("breakdown", "true");
+      }
+
+      const response = await fetch(`/api/live-availability?${query}`, {
+        cache: "no-store",
+      });
+      const body = (await response.json()) as LiveAvailabilityResponse;
       if (currentSeq !== dateAvailabilitySeq) return;
 
+      const types = Array.isArray(body.data) ? body.data : [];
       const availableRoomCodes = new Set<string>();
       types.forEach((type) => {
         if (type.available && Array.isArray(type.availableRooms)) {
@@ -716,6 +735,8 @@ function initFormHandlers(): void {
       });
 
       let unselectedLabel: string | null = null;
+      let unselectedCustomMessage: string | null = null;
+
       Array.from(suiteField.options).forEach((option) => {
         const code = roomCodeOf(option.value);
         if (!code) return;
@@ -735,10 +756,42 @@ function initFormHandlers(): void {
           }
         } else if (!isDateAvailable) {
           option.disabled = true;
-          option.textContent = `${option.dataset.originalLabel} (Not available for dates)`;
-          if (suiteField.value === option.value) {
-            unselectedLabel = option.dataset.originalLabel;
-            suiteField.value = "";
+
+          // Check if we have specific nightly breakdown for this room
+          if (
+            body.roomNumber?.toUpperCase() === code &&
+            Array.isArray(body.nightlyBreakdown) &&
+            body.nightlyBreakdown.length > 1
+          ) {
+            const unavailableDates = body.nightlyBreakdown
+              .filter((n) => !n.available)
+              .map((n) => n.date);
+            const availableDates = body.nightlyBreakdown
+              .filter((n) => n.available)
+              .map((n) => n.date);
+
+            if (unavailableDates.length > 0 && availableDates.length > 0) {
+              option.textContent = `${option.dataset.originalLabel} (Available on ${formatDateList(availableDates)} only)`;
+              if (
+                suiteField.value === option.value ||
+                form.dataset.prefillRoom?.toUpperCase() === code
+              ) {
+                unselectedCustomMessage = `${roomLabelOf(code)} is not available on ${formatDateList(unavailableDates)}, but on ${formatDateList(availableDates)} it is available as of the time of your search.`;
+                suiteField.value = "";
+              }
+            } else {
+              option.textContent = `${option.dataset.originalLabel} (Not available for dates)`;
+              if (suiteField.value === option.value) {
+                unselectedLabel = option.dataset.originalLabel;
+                suiteField.value = "";
+              }
+            }
+          } else {
+            option.textContent = `${option.dataset.originalLabel} (Not available for dates)`;
+            if (suiteField.value === option.value) {
+              unselectedLabel = option.dataset.originalLabel;
+              suiteField.value = "";
+            }
           }
         } else {
           option.disabled = false;
@@ -746,13 +799,14 @@ function initFormHandlers(): void {
         }
       });
 
-      if (unselectedLabel) {
+      if (unselectedCustomMessage || unselectedLabel) {
         if (roomTypeField) {
           roomTypeField.value = "";
           delete roomTypeField.dataset.roomNumber;
         }
         setStatus(
-          `${unselectedLabel} is not available for the selected dates. Please choose an available room or contact us on WhatsApp.`,
+          unselectedCustomMessage ||
+            `${unselectedLabel} is not available between ${formatShortDate(checkin)} and ${formatShortDate(checkout)}. Please choose an available room or contact us on WhatsApp.`,
         );
         syncSelectionUi();
       } else {

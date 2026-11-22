@@ -182,15 +182,106 @@ async function handleApi(req, res, url) {
   if (url.pathname === "/api/live-availability" && method === "GET") {
     const checkInDate = url.searchParams.get("checkInDate") || "";
     const checkOutDate = url.searchParams.get("checkOutDate") || "";
+    const adults = url.searchParams.get("adults") || "1";
+    const children = url.searchParams.get("children") || "0";
+    const roomNumber = (url.searchParams.get("roomNumber") || "").trim();
+    const requestBreakdown = url.searchParams.get("breakdown") === "true";
+
     if (!/^\d{4}-\d{2}-\d{2}$/.test(checkInDate) || !/^\d{4}-\d{2}-\d{2}$/.test(checkOutDate)) {
       return json(res, 400, { error: "Choose valid arrival and departure dates." });
     }
+
+    const isRoomAvailableIn = (data, roomNo) => {
+      const code = String(roomNo || "").trim().toUpperCase();
+      if (!code || !Array.isArray(data)) return false;
+      return data.some(
+        (type) =>
+          type.available &&
+          Array.isArray(type.availableRooms) &&
+          type.availableRooms.some(
+            (r) => String(r.number || "").trim().toUpperCase() === code,
+          ),
+      );
+    };
+
+    const getNightlyDates = (checkIn, checkOut) => {
+      const dates = [];
+      const start = new Date(checkIn + "T12:00:00Z");
+      const end = new Date(checkOut + "T12:00:00Z");
+      let curr = new Date(start);
+      while (curr < end) {
+        const next = new Date(curr);
+        next.setDate(next.getDate() + 1);
+        dates.push({
+          date: curr.toISOString().slice(0, 10),
+          nextDate: next.toISOString().slice(0, 10),
+        });
+        curr = next;
+        if (dates.length >= 31) break;
+      }
+      return dates;
+    };
+
     try {
       const target = new URL(`${MANAGEMENT_API_URL}/public/availability`);
-      target.search = new URLSearchParams({ checkInDate, checkOutDate, adults: url.searchParams.get("adults") || "1", children: url.searchParams.get("children") || "0" }).toString();
+      const q = { checkInDate, checkOutDate, adults, children };
+      if (roomNumber) q.roomNumber = roomNumber;
+      target.search = new URLSearchParams(q).toString();
       const upstream = await fetch(target, { signal: AbortSignal.timeout(8000) });
       const payload = await upstream.json();
-      return json(res, upstream.status, upstream.ok ? { data: payload?.data || [] } : { error: payload?.error?.message || "Availability could not be checked." });
+      if (!upstream.ok) {
+        return json(res, upstream.status, { error: payload?.error?.message || "Availability could not be checked." });
+      }
+
+      const data = payload?.data || [];
+      const fullStayAvailable = roomNumber
+        ? isRoomAvailableIn(data, roomNumber)
+        : data.some((t) => t.available);
+
+      const nights = getNightlyDates(checkInDate, checkOutDate);
+      let nightlyBreakdown = null;
+
+      if (roomNumber && nights.length > 1 && (requestBreakdown || !fullStayAvailable)) {
+        try {
+          nightlyBreakdown = await Promise.all(
+            nights.map(async (n) => {
+              try {
+                const subTarget = new URL(`${MANAGEMENT_API_URL}/public/availability`);
+                subTarget.search = new URLSearchParams({
+                  checkInDate: n.date,
+                  checkOutDate: n.nextDate,
+                  adults,
+                  children,
+                  roomNumber,
+                }).toString();
+                const subRes = await fetch(subTarget, { signal: AbortSignal.timeout(6000) });
+                const subBody = await subRes.json();
+                return {
+                  date: n.date,
+                  nextDate: n.nextDate,
+                  available: isRoomAvailableIn(subBody?.data, roomNumber),
+                };
+              } catch {
+                return {
+                  date: n.date,
+                  nextDate: n.nextDate,
+                  available: false,
+                };
+              }
+            }),
+          );
+        } catch {
+          nightlyBreakdown = null;
+        }
+      }
+
+      return json(res, 200, {
+        data,
+        roomNumber: roomNumber || null,
+        fullStayAvailable,
+        nightlyBreakdown,
+        searchTimestamp: new Date().toISOString(),
+      });
     } catch {
       return json(res, 502, { error: "The reservation system could not be reached. Please try again shortly." });
     }

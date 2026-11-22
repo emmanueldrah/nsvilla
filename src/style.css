@@ -1853,6 +1853,52 @@ select option:disabled {
   font-size: 1.25rem;
   flex-shrink: 0;
 }
+.availability-status-alert {
+  display: inline-block;
+  color: #8c3b12;
+  background: #fff8f0;
+  border: 1px solid rgba(140, 59, 18, 0.25);
+  border-radius: 0.65rem;
+  padding: 0.6rem 0.95rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  box-shadow: 0 1px 3px rgba(140, 59, 18, 0.08);
+}
+.availability-status-success {
+  display: inline-block;
+  color: #173b36;
+  background: #f1f8f5;
+  border: 1px solid rgba(23, 59, 54, 0.25);
+  border-radius: 0.65rem;
+  padding: 0.6rem 0.95rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.availability-card--partial {
+  border: 1.5px solid #d49e3b !important;
+  background: #fffdf9 !important;
+  box-shadow: 0 3px 8px rgba(212, 158, 59, 0.12);
+}
+.availability-badge-partial {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.4rem;
+  background: #fbf0d8;
+  color: #7a4d05;
+  margin-bottom: 0.6rem;
+}
+.availability-subhead {
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.3rem;
+  color: #173b36;
+  margin: 2rem 0 1rem;
+  grid-column: 1 / -1;
+  width: 100%;
+}
 .family-form button {
   border: 0;
   cursor: pointer;
